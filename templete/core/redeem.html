@@ -1,0 +1,75 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<section style="margin-top: 60px;">
+    <div class="redeem_store" id="redeem_store">
+        <div class="redeem_head">
+            <strong>Redeem</strong><strong> Points</strong>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="redeem_storeimage">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="redeem_storetext">
+                        <div class="redeem_para">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis harum
+                                eos
+                                eaque, dolores perferendis. Nemo alias animi autem tempora quod, laborum fugit, cum
+                                nostrum odio consequatur aliquam dolorem quis. alias animi autem tempora quod,
+                                laborum
+                                fugit, cum nostrum odio consequatur aliquam dolorem quis.</p>
+                            <!-- <div class="button">
+                                <a href="{% url 'core:redeem' %}">View Info...</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="card">
+    <div class="card-header redeem-heading">
+        <a class="navbar-brand"><img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}"></a>
+        <h1 class="redeem-username">Anurag singh</h1>
+        <div class="redeem-points">
+            <a href=""><span class="material-symbols-outlined" style="font-size: 1.8em;">redeem</span><span class="redeem-score">{{ totalpoints }}</span></a>
+        </div>
+    </div>
+    
+    <div class="container-fluid vouchers-contain">
+        <div class="row">
+            {% for voucher in vouchers %}
+            <div class="col-md-4">
+                <div class="card mb-4" style="border: none;">
+                    <div class="card-body">
+                        <div id="voucher">
+                            <div style="backdrop-filter: blur(3px);">
+                                <h2 class="text-center">Scratch Card</h2>
+                                <p><span id="voucher-code">{{ voucher.points }}+</span></p>
+                                <div style="display: flex;align-items: center;justify-content: center;gap: 4em;">
+                                    <p style="font-size: 2em;">Expiration Date: <span style="font-size: 1em;" id="expiration-date">{{ voucher.expiration_date }}</span></p>
+                                    <p style="font-size: 2em;">Issued Date: <span style="font-size: 1em;" id="terms">{{ voucher.issued_date }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

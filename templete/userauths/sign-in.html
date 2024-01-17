@@ -1,0 +1,33 @@
+{% extends 'partials/base-auths.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="storage" id="login-signup-form-container">
+    <div class="container-image">
+      <img src="{% static 'assets/images/registration_image.svg' %}" alt="">
+    </div>
+    <div class="contaning_forms">
+      <div class="login-signup-tab-container">
+        <a class="login-signup-tab active-login-signup-tab" href="{% url 'userauths:sign-in' %}">Login</a>
+        <a class="login-signup-tab" href="{% url 'userauths:sign-up' %}">Signup</a>
+    </div>
+      <div class="login-signup-form-content active-login-signup-content" id="login">
+        <form action="" method="POST">
+          {% csrf_token %}
+            
+            <label class="login-signup-label" for="login_username">Username:</label>
+            <input class="login-signup-input" type="text" name="email" maxlength="100" required=""
+                id="login_username">
+
+            <label class="login-signup-label" for="login_password">Password:</label>
+            <input class="login-signup-input" type="password" name="password"
+                autocomplete="current-password" required="" id="login_password">
+
+            <button style="margin-top: 1em;" class="login-signup-button" type="submit">Login</button>
+        </form>
+    </div>
+
+    </div>
+  </div>
+
+{% endblock content %}
