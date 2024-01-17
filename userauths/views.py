@@ -33,22 +33,30 @@ def login_view(request):
     if request.user.is_authenticated:
         messages.warning(request, "Hey, You are already logged in.")
         return redirect('core:index')
-    
+
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
+        optradio = request.POST.get("radio-selection")
 
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
-            login(request, user)
-            messages.success(request, "You are logged in.")
-            return redirect("core:index")
+            if optradio == "user-checked":
+                if user.verified:
+                    login(request, user)
+                    messages.success(request, "You are logged in.")
+                    return redirect("core:index")
+
+            elif optradio == "verifier-checked":
+                if not user.verified:
+                    return redirect("core:verifier")
+                else:
+                    messages.warning(request, "Your account is not verified.")
         else:
             messages.warning(request, "Invalid credentials. Please try again.")
 
     return render(request, "userauths/sign-in.html")
-
 
 def logout_view(request):
     logout(request)

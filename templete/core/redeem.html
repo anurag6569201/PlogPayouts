@@ -47,7 +47,7 @@
             <a href=""><span class="material-symbols-outlined" style="font-size: 1.8em;">redeem</span><span class="redeem-score">{{ totalpoints }}</span></a>
         </div>
     </div>
-    
+    <br>
     <div class="container-fluid vouchers-contain">
         <div class="row">
             {% for voucher in vouchers %}
@@ -56,7 +56,7 @@
                     <div class="card-body">
                         <div id="voucher">
                             <div style="backdrop-filter: blur(3px);">
-                                <h2 class="text-center">Scratch Card</h2>
+                                <h2 class="text-left">Scratch Card</h2>
                                 <p><span id="voucher-code">{{ voucher.points }}+</span></p>
                                 <div style="display: flex;align-items: center;justify-content: center;gap: 4em;">
                                     <p style="font-size: 2em;">Expiration Date: <span style="font-size: 1em;" id="expiration-date">{{ voucher.expiration_date }}</span></p>

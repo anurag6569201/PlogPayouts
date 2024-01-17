@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'core/index.html')
 
+def verifier(request):
+    return render(request,'core/verifier-index.html')
+
 
 def user_redeem(request):
     vouchers=ScratchCard.objects.filter(user=request.user)

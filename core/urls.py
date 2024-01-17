@@ -5,5 +5,6 @@ app_name="core"
 
 urlpatterns=[
     path('',views.index,name='index'),
+    path('verifier',views.verifier,name='verifier'),
     path('redeem', views.user_redeem, name='redeem'),
 ]

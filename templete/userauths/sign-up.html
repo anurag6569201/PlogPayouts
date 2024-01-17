@@ -54,31 +54,14 @@
                     var form = document.querySelector('#signup form');
 
                     form.addEventListener('submit', function (event) {
-                        // Perform additional client-side validations here
 
-                        // Example: Password length check
                         var password1 = document.getElementById('id_password1').value;
                         var password2 = document.getElementById('id_password2').value;
 
                         if (password1.length < 8) {
                             alert('Password should be at least 8 characters long.');
-                            event.preventDefault();
                         }
-
-                        if (!isPasswordComplex(password1)) {
-                            alert('Password should have numeric and alphabets.');
-                            event.preventDefault();
-                        }
-
-                        // Additional validations can be added based on your requirements
                     });
-
-                    function isPasswordComplex(password) {
-                        // Implement your password complexity check logic
-                        // For example, check for at least one numeric and one alphabet character
-                        var regex = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
-                        return regex.test(password);
-                    }
                 });
             </script>
 

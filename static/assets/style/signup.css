@@ -89,7 +89,31 @@
   font-size: 1.8em;
   font-weight: 600;
 }
-
+.check-buttons{
+  margin-top: 1em;
+}
+.form-check,
+.check-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.form-check input{
+  width: 2.3em;
+  height: 2.3em;
+  cursor: pointer;
+}
+.form-check-label{
+  font-size: 1.8em;
+  margin-left: .5em;
+}
+.form-check:first-child{
+  padding-left: 0;
+}
+.form-check-btn:checked{
+  fill: #d9e565;
+  background-color: #d9e565;
+}
 @media (max-width: 600px) {
   .container-image {
       display: none;
