@@ -9,10 +9,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'core/index.html')
 
+@login_required(login_url='userauths:sign-in') 
 def verifier(request):
-    return render(request,'core/verifier-index.html')
+    return render(request,'core/verifier.html')
 
-
+@login_required(login_url='userauths:sign-in') 
 def user_redeem(request):
     vouchers=ScratchCard.objects.filter(user=request.user)
     totalpoints = ScratchCard.objects.filter(user=request.user).aggregate(Sum('points'))['points__sum'] or 0

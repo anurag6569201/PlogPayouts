@@ -1,0 +1,52 @@
+.verifier-profile{
+    background-image: url(../images/layered-waves-haikei\ \(1\).svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.verifier-profile input{
+    background-color: #cbd477;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-color: rgb(214, 230, 74);
+}
+
+.profile-button {
+    background: rgb(214, 230, 74);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #d9e565;
+}
+
+.profile-button:focus {
+    background: #d9e565;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #d9e565;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #d9e565;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #dce493;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #dce493
+}
