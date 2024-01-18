@@ -30,3 +30,17 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+    mobile_number = models.CharField(max_length=15)
+    address = models.CharField(max_length=255)
+    postcode = models.CharField(max_length=20)
+    area = models.CharField(max_length=100)
+    email = models.EmailField()
+    education = models.CharField(max_length=255)
+    country = models.CharField(max_length=100)
+    state_region = models.CharField(max_length=100)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)

@@ -10,15 +10,25 @@
 .verifier-profile input{
     background-color: #cbd477;
 }
+.verifier-profile input::placeholder{
+    color: #f6fad1;
+    font-weight: 600;
+}
+.verifier-profile label{
+    color: rgb(151, 151, 151);
+    font-weight: 600;
+    font-size: 1.6em;
+}
 .form-control:focus {
     box-shadow: none;
     border-color: rgb(214, 230, 74);
 }
 
 .profile-button {
-    background: rgb(214, 230, 74);
+    background: #cbd477;
     box-shadow: none;
-    border: none
+    border: none;
+    font-size: 1.6em;
 }
 
 .profile-button:hover {

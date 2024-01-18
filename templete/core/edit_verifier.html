@@ -1,0 +1,125 @@
+{% extends 'partials/base-verifier.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid rounded bg-white mt-5 mb-5 verifier-profile">
+    <form method="post" id="profileForm" action="{% url 'core:save_verifier' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="{{ user_profile.profile_image.url }}"
+                        alt="Profile Image">
+                    <span class="font-weight-bold" style="font-size: 2.5em;font-weight: 700;">{{ user_profile.name }} {{ user_profile.surname }}</span>
+                    <span class="text-black-600" style="font-size: 1.8em;">{{ user_profile.email }}</span>
+                </div>
+                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right" style="font-size: 5em; font-weight: 600;color: #9aa62d;">Profile Settings
+                        </h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="labels">Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name"
+                                    value="{{ user_profile.name }}" name="name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="labels">Surname</label>
+                                <input type="text" class="form-control" value="{{ user_profile.surname }}"
+                                    name="surname" placeholder="Enter Surname">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 border-right">
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Mobile Number</label>
+                                        <input type="text" class="form-control" placeholder="Enter Phone Number"
+                                            value="{{user_profile.mobile_number}}" name="contact">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Address</label>
+                                        <input type="text" class="form-control" placeholder="Enter Address"
+                                            value="{{user_profile.address}}" name="address">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Postcode</label>
+                                        <input type="text" class="form-control" placeholder="Enter Postcode"
+                                            value="{{user_profile.postcode}}" name="postcode">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Area</label>
+                                        <input type="text" class="form-control" placeholder="Enter Area"
+                                            value="{{user_profile.area}}" name="area">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Email ID</label>
+                                        <input type="text" class="form-control" placeholder="Enter Email-Id"
+                                            value="{{user_profile.email}}" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labels">Education</label>
+                                        <input type="text" class="form-control" placeholder="Enter Education"
+                                            value="{{user_profile.education}}" name="education">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="labels">Country</label>
+                                        <input type="text" class="form-control" placeholder="Enter Country"
+                                            value="{{ user_profile.country }}" name="country">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="labels">State/Region</label>
+                                        <input type="text" class="form-control" value="{{ user_profile.state_region }}"
+                                            name="state_region" placeholder="Enter State">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="mb-3 d-flex justify-content-between align-items-center experience">
+                        <span style="font-size: 5em; font-weight: 600;color: #9aa62d;">Requests</span>
+                    </div>
+                </div>
+            </div>
+            <!-- ... other fields without readonly attribute -->
+        </div>
+</div>
+</div>
+<!-- ... remaining code -->
+</div>
+</form>
+</div>
+
+
+
+{% endblock content %}
