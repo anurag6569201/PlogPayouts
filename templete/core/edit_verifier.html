@@ -4,18 +4,23 @@
 {% block content %}
 
 <div class="container-fluid rounded bg-white mt-5 mb-5 verifier-profile">
-    <form method="post" id="profileForm" action="{% url 'core:save_verifier' %}">
+    <form method="post" enctype="multipart/form-data" id="profileForm">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5" width="150px" src="{{ user_profile.profile_image.url }}"
                         alt="Profile Image">
+                    <div class="form-group" style="margin-top: 1em;">
+                        <input style="padding: .3em 1em;font-size: 1.2em;width: 200px;color: #f6fad1;" type="file" name="profile_image" accept="image/*" id="id_profile_image">
+                    </div>
                     <span class="font-weight-bold" style="font-size: 2.5em;font-weight: 700;">{{ user_profile.name }} {{ user_profile.surname }}</span>
                     <span class="text-black-600" style="font-size: 1.8em;">{{ user_profile.email }}</span>
+                    <button style="margin-top: 2em;" type="submit" class="btn btn-primary profile-button">Save Profile</button>
                 </div>
-                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
             </div>
+
+
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -26,60 +31,52 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="labels">Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name"
-                                    value="{{ user_profile.name }}" name="name">
+                                {{ form.name }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="labels">Surname</label>
-                                <input type="text" class="form-control" value="{{ user_profile.surname }}"
-                                    name="surname" placeholder="Enter Surname">
+                                {{ form.surname }}
                             </div>
                         </div>
-
                         <div class="col-md-12 border-right">
+
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Mobile Number</label>
-                                        <input type="text" class="form-control" placeholder="Enter Phone Number"
-                                            value="{{user_profile.mobile_number}}" name="contact">
+                                        {{ form.mobile_number }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Address</label>
-                                        <input type="text" class="form-control" placeholder="Enter Address"
-                                            value="{{user_profile.address}}" name="address">
+                                        {{ form.address }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Postcode</label>
-                                        <input type="text" class="form-control" placeholder="Enter Postcode"
-                                            value="{{user_profile.postcode}}" name="postcode">
+                                        {{ form.postcode }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Area</label>
-                                        <input type="text" class="form-control" placeholder="Enter Area"
-                                            value="{{user_profile.area}}" name="area">
+                                        {{ form.area }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Email ID</label>
-                                        <input type="text" class="form-control" placeholder="Enter Email-Id"
-                                            value="{{user_profile.email}}" name="email">
+                                        {{ form.email }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="labels">Education</label>
-                                        <input type="text" class="form-control" placeholder="Enter Education"
-                                            value="{{user_profile.education}}" name="education">
+                                        {{ form.education }}
                                     </div>
                                 </div>
                             </div>
@@ -87,15 +84,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="labels">Country</label>
-                                        <input type="text" class="form-control" placeholder="Enter Country"
-                                            value="{{ user_profile.country }}" name="country">
+                                        {{ form.country }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="labels">State/Region</label>
-                                        <input type="text" class="form-control" value="{{ user_profile.state_region }}"
-                                            name="state_region" placeholder="Enter State">
+                                        {{ form.state_region }}
                                     </div>
                                 </div>
                             </div>
@@ -111,15 +106,10 @@
                     </div>
                 </div>
             </div>
-            <!-- ... other fields without readonly attribute -->
         </div>
-</div>
-</div>
-<!-- ... remaining code -->
-</div>
-</form>
-</div>
 
+    </form>
+</div>
 
 
 {% endblock content %}

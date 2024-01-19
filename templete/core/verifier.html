@@ -2,24 +2,29 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .verifier-profile input{
+        background-color: #cbd477;
+        pointer-events: none;
+}
+</style>
 <div class="container-fluid rounded bg-white mt-5 mb-5 verifier-profile">
-    <form method="post" id="profileForm" {% if edit_mode %}action="{% url 'core:save_verifier' %}" {% endif %}>
+    <form method="post" id="profileForm">
         {% csrf_token %}
         <div class="row">
-            <div class="col-md-3 border-right">
+            <div class="col-md-3 border-right profile-image-section">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5" width="150px" src="{{ user_profile.profile_image.url }}"
                         alt="Profile Image">
                     <span class="font-weight-bold" style="font-size: 2.5em;font-weight: 700;">{{ user_profile.name }} {{ user_profile.surname }}</span>
                     <span class="text-black-600" style="font-size: 1.8em;">{{ user_profile.email }}</span>
                 </div>
-                {% if not edit_mode %}
-                <a class="btn btn-primary profile-button" href="{% url 'core:edit_verifier' %}">Edit Profile</a>
-                {% endif %}
-                {% if edit_mode %}
-                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
-                {% endif %}
+                <div class="profile-edit-btn">
+                    <a class="btn btn-primary profile-button" href="{% url 'core:verifier_edit' %}">Edit Profile</a>
+                </div>
+               
             </div>
+
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -31,14 +36,14 @@
                             <div class="form-group">
                                 <label class="labels">Name</label>
                                 <input type="text" class="form-control" placeholder="Enter First Name"
-                                    value="{{ user_profile.name }}" name="name" { % if not edit_mode % } readonly { % endif %}>
+                                    value="{{ user_profile.name }}" name="name" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="labels">Surname</label>
                                 <input type="text" class="form-control" value="{{ user_profile.surname }}"
-                                    name="surname" { % if not edit_mode % } readonly { % endif %}
+                                    name="surname" readonly
                                     placeholder="Enter Surname">
                             </div>
                         </div>
@@ -49,20 +54,20 @@
                                         <div class="form-group">
                                             <label class="labels">Mobile Number</label>
                                             <input type="text" class="form-control" placeholder="Enter Phone Number"
-                                                value="{{user_profile.mobile_number}}" { % if not edit_mode % } readonly { % endif % } name="contact">
+                                                value="{{user_profile.mobile_number}}" readonly name="contact">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="labels">Address</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control" placeholder="Enter Address"
+                                            <input readonly type="text" class="form-control" placeholder="Enter Address"
                                                 value="{{user_profile.address}}" name="address">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="labels">Postcode</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control"
+                                            <input readonly type="text" class="form-control"
                                                 placeholder="Enter Postcode" value="{{user_profile.postcode}}"
                                                 name="postcode">
                                         </div>
@@ -70,14 +75,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="labels">Area</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control" placeholder="Enter Area"
+                                            <input readonly type="text" class="form-control" placeholder="Enter Area"
                                                 value="{{user_profile.area}}" name="area">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="labels">Email ID</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control"
+                                            <input readonly type="text" class="form-control"
                                                 placeholder="Enter Email-Id" value="{{user_profile.email}}"
                                                 name="email">
                                         </div>
@@ -85,7 +90,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="labels">Education</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control"
+                                            <input readonly type="text" class="form-control"
                                                 placeholder="Enter Education" value="{{user_profile.education}}"
                                                 name="education">
                                         </div>
@@ -95,14 +100,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="labels">Country</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control" placeholder="Enter Country"
+                                            <input readonly type="text" class="form-control" placeholder="Enter Country"
                                                 value="{{ user_profile.country }}" name="country">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="labels">State/Region</label>
-                                            <input { % if not edit_mode % } readonly { % endif % } type="text" class="form-control"
+                                            <input readonly type="text" class="form-control"
                                                 value="{{ user_profile.state_region }}" name="state_region"
                                                 placeholder="Enter State">
                                         </div>
@@ -125,71 +130,4 @@
     </form>
 </div>
 
-
-
-<section class="contact" class="py-5" id="contact">
-    <div class="contact_head revealUp">
-        <strong>Contact</strong>
-    </div>
-    <div class="container">
-        <div class="row revealUp">
-            <div class="col-md-6 mx-auto">
-                <form action="contact.php" method="post">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" name="msg" rows="4"
-                            placeholder="Your Message"></textarea>
-                    </div>
-                    <button style="margin-top: 1em;" type="submit" class="button">Submit</button>
-
-                    <legend style="padding-top: 20px; margin: 0; font-size: 15px;" class="text-center">Tap the
-                        desired app to Contact</legend>
-
-                    <ul style="display: flex; justify-content: center; padding: 0%;" class="text-center py-3">
-                        <a href="https://wa.me/919098691543"><img width="32" height="32"
-                                src="https://img.icons8.com/material-outlined/32/whatsapp--v1.png"
-                                alt="whatsapp--v1" /></a>
-                        <a href="https://instagram.com/anurag_singh__0__0__?utm_source=qr&igshid=NGExMmI2YTkyZg%3D%3D"><img
-                                width="32" height="32"
-                                src="https://img.icons8.com/material-outlined/32/instagram-new--v1.png"
-                                alt="instagram-new--v1" /></a>
-                        <a href="https://www.facebook.com/profile.php?id=100025792005909"><img width="32" height="32"
-                                src="https://img.icons8.com/material-outlined/32/facebook-new.png"
-                                alt="facebook-new" /></a>
-                        <a
-                            href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJTJnsjzfmgQrCZnjXXFmDmzXNKlgJDpdPNlGlwnFQpfSVVQPnDVTCxpqfFrkQXNQCJpSwL"><img
-                                width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/32/gmail.png"
-                                alt="gmail" /></a>
-                        <a href="https://www.linkedin.com/in/anurag-singh-b90439282"><img width="32" height="32"
-                                src="https://img.icons8.com/ios/32/linkedin.png" alt="linkedin" /></a>
-                    </ul>
-                </form>
-                <script>
-                    document.getElementById("contact").addEventListener("submit", function () {
-                        alert("Form submitted successfully!");
-                    });
-                </script>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-white text-center py-3">
-
-        <div class="container">
-            <p>&copy; 2023 lorem ipsum</p>
-            <p class="mb-0">Designed and crafted with <img width="48" height="48"
-                    src="https://img.icons8.com/color/48/hearts.png" alt="hearts" /> by <span
-                    class="text-primary">Anurag Singh </span>&<span class="text-primary"> Yuvraj Singh</span></p>
-        </div>
-    </footer>
-</section>
 {% endblock content %}

@@ -32,7 +32,7 @@
 
     <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand"><img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}"></a>
+            <a class="navbar-brand"><img class="logo" src="{{ user_profile.profile_image.url }}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,14 +47,14 @@
                             <a class="nav-link" href="#blogs">Blogs</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#redeem_store">Store</a>
+                            <a class="nav-link" href="{% url 'core:verifier' %}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contact Us</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#contribution">Contribution</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -105,11 +105,11 @@
         <hr>
         <div class="profile_hero">
             <div class="profile_user">
-                <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}">
+                <img class="logo" src="{{ user_profile.profile_image.url }}">
             </div>
             <div class="profile_user_detail">
-                <h2>Anurag Singh</h2>
-                <p>anuragsingh6569201@gmail.com <br><a href="pages/profile.html">Manage account</a></p>
+                <h2>{{ user_profile.name }} {{ user_profile.surname }}</h2>
+                <p>{{ user_profile.email }} <br><a href="{% url 'core:profile' %}">Manage account</a></p>
             </div>
         </div>
     </div>
