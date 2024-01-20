@@ -11,7 +11,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 
-
 @login_required(login_url='userauths:sign-in') 
 def index(request):
     return render(request,'core/index.html')
@@ -28,7 +27,6 @@ def verifier(request):
     return render(request, 'core/index_verifier.html', context)
 
 
-
 def user_profile(request):
     user_profile = UserProfile.objects.first()
     context = {
@@ -36,9 +34,6 @@ def user_profile(request):
         "edit_mode": False,
     }
     return render(request, 'core/verifier.html',context)
-
-
-
 
 
 @login_required(login_url='userauths:sign-in') 
