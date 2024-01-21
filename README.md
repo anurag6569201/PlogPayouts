@@ -1,6 +1,6 @@
 # Green Plog Platform
 
-![Green Plog Logo](https://github.com/anurag6569201/greenprj/blob/main/static/assets/images/logo.png)
+![Green Plog Logo](https://github.com/anurag6569201/PlogPayouts/blob/master/static/assets/images/logo.png)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/yourusername/GreenPlog.svg)](https://github.com/yourusername/GreenPlog/stargazers)
