@@ -134,10 +134,10 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    'site_header':"Green-plog",
-    'site_brand':"Green-plog",
+    'site_header':"Plog-Payouts",
+    'site_brand':"Plog-Payouts",
     'site_logo':'assets/images/logo.png',
-    'copyright':"greenplog.com",
+    'copyright':"PlogPayouts.com",
 }
 
 

@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponse, redirect
 from core.models import ScratchCard
 from django.db.models import Sum
 
-# Create your views here.
 from userauths.models import UserProfile
 from userauths.forms import UserProfileForm
 from django.views.generic.edit import FormView
@@ -96,7 +95,6 @@ class UserProfileUpdateView(FormView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        # Check if the user is verified
         if not self.request.user.verified:
             self.template_name = 'core/edit_user.html'
             self.success_url = reverse_lazy('core:mainuser_profile')

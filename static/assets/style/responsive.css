@@ -8,6 +8,11 @@
     .hero_text{
         font-size: .6em;
     }
+    .verifier-header {
+        background-size: contain;
+        background-position: left bottom;
+    }
+    
     .hero_text p{
         font-size: 2em;
         padding-left: 3em;
