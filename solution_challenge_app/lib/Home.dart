@@ -150,10 +150,10 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //       colors: [Colors.orangeAccent, Colors.greenAccent],
-        //       begin: Alignment.topLeft,
-        //       end: Alignment.bottomRight),
+        //   gradient: LinearGradient(colors: [
+        //     Colors.orangeAccent,
+        //     Colors.greenAccent,
+        //   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         // ),
         padding: const EdgeInsets.all(40),
         // margin: const EdgeInsets.all(80),
@@ -166,6 +166,7 @@ class _HomeState extends State<Home> {
             // Padding(
             //   padding: EdgeInsets.all(20),
             // ),
+            Image.asset('assets/images/logo.png'),
             ElevatedButton.icon(
               onPressed: _MaskandGloveScreen,
               icon: const Icon(Icons.add_to_photos),

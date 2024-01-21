@@ -27,8 +27,8 @@ class _resetValueGlovesAndMaskState extends State<resetValueGlovesAndMask> {
         title: const Text('Thank your for your time!'),
       ),
       body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(20),
+        alignment: Alignment(0, 0.25),
+        padding: EdgeInsets.all(70),
         margin: EdgeInsets.all(20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
