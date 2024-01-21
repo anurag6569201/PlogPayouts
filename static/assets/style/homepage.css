@@ -488,16 +488,13 @@
 }
 
 .blogs .card:nth-child(1) .card-front {
-    background-image: url(../images/r1.png);
+    background-image: url(../images/Readingglasses-rafiki.png);
 }
 
 .blogs .card:nth-child(2) .card-front {
-    background-image: url(../images/r2.png);
+    background-image: url(../images/Writeblock-bro.png);
 }
 
-.blogs .card:nth-child(3) .card-front {
-    background-image: url(../images/r3.png);
-}
 
 .blogs .button {
     position: absolute;

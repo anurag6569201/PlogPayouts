@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="light">
+    <div class="container py-4">
+        <div class="blogs_head" style="margin-top: 3em;">
+            <strong>Blogs</strong>
+        </div>
+        {% for p in read %}
+        <article class="postcard light blue" style="margin-top: 1em;">
+            <a class="postcard__img_link" href="#">
+                <img class="postcard__img" src="{{ p.blog_image.url }}" alt="Image Title" />
+            </a>
+            <div class="postcard__text">
+                <h1 class="postcard__title blue"><a href="#">{{ p.title }}</a></h1>
+                <div class="postcard__subtitle small">
+                    <time datetime="{{ p.date_posted }}" style="font-size: 1.2em;">
+                        <i class="fas fa-calendar-alt mr-2"></i>{{ p.date_posted }}
+                    </time>
+                </div>
+                <div class="postcard__bar"></div>
+                <div class="postcard__preview-txt">{{ p.content }}</div>
+                <ul class="postcard__tagbox">
+                    <li class="tag__item" style="font-size: 1.3em;"><i class="fas fa-tag mr-2"></i>Blogpost</li>
+                    <li class="tag__item"style="font-size: 1.3em;"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                    <li class="tag__item play blue">
+                        <a href="#"><i class="fas fa-play mr-2"></i>Read Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock content %}
