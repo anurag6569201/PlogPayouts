@@ -48,7 +48,9 @@ class _AuthState extends State<Auth> {
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(error.message ?? 'Authentication failed!'),
+              content: Text(
+                error.message ?? 'Authentication failed!',
+              ),
             ),
           );
         }
@@ -94,125 +96,134 @@ class _AuthState extends State<Auth> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 30,
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.orangeAccent, Colors.greenAccent],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  // padding: const EdgeInsets.only(
+                  //   top: 30,
+                  //   bottom: 20,
+                  //   left: 20,
+                  //   right: 20,
+                  // ),
+                  width: double.infinity,
+                  height: 290,
+                  child: Image.asset('assets/images/logo.png'),
                 ),
-                width: 200,
-                child: Image.asset('assets/images/chat.png'),
-              ),
-              Card(
-                margin: const EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (!_isLogin)
-                          UserImage((pickedImage) {
-                            _selectedImage = pickedImage;
-                          }),
-                        TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            labelText: 'Your Email',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          validator: (value) {
-                            if (value == null ||
-                                value.trim().isEmpty ||
-                                !value.contains('@')) {
-                              return 'Please enter a valid email address';
-                            }
-                            return null;
-                          },
-                          onSaved: (newValue) {
-                            _enteredEmail = newValue!;
-                          },
-                        ),
-                        if (!_isLogin)
+                Card(
+                  margin: const EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (!_isLogin)
+                            UserImage((pickedImage) {
+                              _selectedImage = pickedImage;
+                            }),
                           TextFormField(
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.black),
                             decoration: const InputDecoration(
-                              labelText: 'Your Username',
+                              labelText: 'Your Email',
                             ),
-                            // keyboardType: TextInputType.emailAddress,
-                            // autocorrect: false,
-                            // textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.emailAddress,
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
                             validator: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
-                                  value.trim().length <= 4) {
-                                return 'Please enter a valid user name';
+                                  !value.contains('@')) {
+                                return 'Please enter a valid email address';
                               }
                               return null;
                             },
                             onSaved: (newValue) {
-                              _enteredUserName = newValue!;
+                              _enteredEmail = newValue!;
                             },
                           ),
-                        TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            labelText: 'Your Password',
-                          ),
-                          validator: (value) {
-                            if (value == null || value.trim().length <= 6) {
-                              return 'Please enter a valid password atle  ast 6 characters';
-                            }
-                            return null;
-                          },
-                          onSaved: (newValue) {
-                            _enteredPassword = newValue!;
-                          },
-                          // keyboardType: TextInputType.emailAddress,
-                          // autocorrect: false,
-                          // textCapitalization: TextCapitalization.none,
-                          obscureText: true,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        if (_isAuthenticating)
-                          const CircularProgressIndicator(),
-                        if (!_isAuthenticating)
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer),
-                            onPressed: _saveForm,
-                            child: Text(_isLogin ? 'Login' : 'Sign Up'),
-                          ),
-                        if (!_isAuthenticating)
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _isLogin = !_isLogin;
-                              });
+                          if (!_isLogin)
+                            TextFormField(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
+                                labelText: 'Your Username',
+                              ),
+                              // keyboardType: TextInputType.emailAddress,
+                              // autocorrect: false,
+                              // textCapitalization: TextCapitalization.none,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.trim().isEmpty ||
+                                    value.trim().length <= 4) {
+                                  return 'Please enter a valid user name';
+                                }
+                                return null;
+                              },
+                              onSaved: (newValue) {
+                                _enteredUserName = newValue!;
+                              },
+                            ),
+                          TextFormField(
+                            style: const TextStyle(color: Colors.black),
+                            decoration: const InputDecoration(
+                              labelText: 'Your Password',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.trim().length <= 6) {
+                                return 'Please enter a valid password atle  ast 6 characters';
+                              }
+                              return null;
                             },
-                            child: Text(_isLogin
-                                ? 'Create one!'
-                                : 'I have an account already'),
+                            onSaved: (newValue) {
+                              _enteredPassword = newValue!;
+                            },
+                            // keyboardType: TextInputType.emailAddress,
+                            // autocorrect: false,
+                            // textCapitalization: TextCapitalization.none,
+                            obscureText: true,
                           ),
-                      ],
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          if (_isAuthenticating)
+                            const CircularProgressIndicator(),
+                          if (!_isAuthenticating)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer),
+                              onPressed: _saveForm,
+                              child: Text(_isLogin ? 'Login' : 'Sign Up'),
+                            ),
+                          if (!_isAuthenticating)
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isLogin = !_isLogin;
+                                });
+                              },
+                              child: Text(_isLogin
+                                  ? 'Create one!'
+                                  : 'I have an account already'),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

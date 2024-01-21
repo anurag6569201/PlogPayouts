@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:solution_challenge_app/auth.dart';
+import 'package:solution_challenge_app/previews/preview_home.dart';
 import 'package:solution_challenge_app/splash_screen.dart';
 import 'package:solution_challenge_app/tabs_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,11 +11,12 @@ import 'firebase_options.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.dark,
-    seedColor: const Color.fromARGB(255, 131, 57, 0),
-  ),
   textTheme: GoogleFonts.latoTextTheme(),
+  colorScheme: ColorScheme.fromSeed(
+    // brightness: Brightness.dark,
+    seedColor: Color.fromARGB(255, 91, 236, 144),
+  ),
+  appBarTheme: AppBarTheme(color: Color.fromARGB(255, 127, 242, 186)),
 );
 
 void main() async {
@@ -65,7 +67,8 @@ class MyApp extends StatelessWidget {
 
           // }
           else {
-            return Auth();
+            // return Auth();
+            return previewScreen();
           }
         },
       ),

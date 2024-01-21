@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/data/display_location_cards_data.dart';
 import 'package:solution_challenge_app/gloves_detector.dart';
@@ -72,19 +71,37 @@ class _HomeState extends State<Home> {
     // }
   }
 
-  void _storeData() {
-    var count = 0;
-    for (final category in availableCategories) {
-      FirebaseFirestore.instance.collection('locations').doc('L${count}').set({
-        'id': category.id,
-        'title': category.title,
-        // 'color': category.color,
-        'coordinates': category.coordinates,
-      });
-      count = count + 1;
-    }
-    print(availableCategories.length);
-  }
+  // List<Category> _updatedAvailableCatgories = [];
+  // void _storeData() async {
+  //   // deleteCollection('locations');
+
+  //   var count = 0;
+  //   for (final category in availableCategories) {
+  //     await FirebaseFirestore.instance
+  //         .collection('locations')
+  //         .doc('L${count}')
+  //         .set(
+  //       {
+  //         'id': category.id,
+  //         'title': category.title,
+  //         'color': category.color.value,
+  //         'coordinates': category.coordinates,
+  //       },
+  //     );
+  //     count = count + 1;
+  //   }
+
+  //   // setState(() {
+  //   //   _updatedAvailableCatgories = availableCategories;
+  //   // });
+  //   for (final category in availableCategories) {
+  //     print(category.color);
+  //     print(category.coordinates);
+  //     print(category.id);
+  //     print(category.title);
+  //   }
+  //   // print(availableCategories.length);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +140,21 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.exit_to_app),
           ),
         ],
-        title: const Text('Welcome WasteWarrior!'),
+        title: const Text(
+          'Welcome to PlogPayouts!',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 5, 125, 67)),
+        ),
       ),
       body: Container(
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //       colors: [Colors.orangeAccent, Colors.greenAccent],
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight),
+        // ),
         padding: const EdgeInsets.all(40),
         // margin: const EdgeInsets.all(80),
         alignment: Alignment.center,
@@ -140,24 +169,23 @@ class _HomeState extends State<Home> {
             ElevatedButton.icon(
               onPressed: _MaskandGloveScreen,
               icon: const Icon(Icons.add_to_photos),
-              label: const Text('Check'),
+              label: const Text('Health Check First!'),
               style: ElevatedButton.styleFrom(
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer),
             ),
 
-            ElevatedButton.icon(
-              onPressed: () {
-                setState(() {
-                  _storeData();
-                });
-              },
-              icon: const Icon(Icons.add_to_photos),
-              label: const Text('Load Data'),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer),
-            ),
+            // ElevatedButton.icon(
+            //   onPressed: () {
+            //     // deleteCollection('locations');
+            //     _storeData();
+            //   },
+            //   icon: const Icon(Icons.add_to_photos),
+            //   label: const Text('Load Data'),
+            //   style: ElevatedButton.styleFrom(
+            //       backgroundColor:
+            //           Theme.of(context).colorScheme.primaryContainer),
+            // ),
           ],
         ),
       ),

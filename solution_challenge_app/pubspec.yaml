@@ -45,6 +45,14 @@ dependencies:
   image_picker: ^1.0.7
   cloud_firestore: ^4.14.0
   firebase_messaging: ^14.7.10
+  uuid: ^4.3.3
+  firebase_database: ^10.4.0
+  location: ^5.0.3
+  flutter_map: ^6.1.0
+  latlng: ^1.0.0
+  latlong2: ^0.9.0
+  google_polyline_algorithm: ^3.1.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -55,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,6 +79,44 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/chat.png
+    - assets/images/trash.avif
+    - assets/images/origin.jpg
+    - assets/images/0.png
+    - assets/images/1.png
+    - assets/images/2.png
+    - assets/images/3.png
+    - assets/images/4.png
+    - assets/images/analyse.jpg
+    - assets/images/click_1.jpg
+    - assets/images/click_2.webp
+    - assets/images/collect.avif
+    - assets/images/jogging.png
+    - assets/images/logo.png
+    - assets/images/repeat.jpg
+    - assets/images/rewards.avif
+    - assets/images/share.avif
+    - assets/images/trash.avif
+    - assets/images/verify.jpg
+    - assets/images/jogging-removebg-preview.png
+    - assets/images/pick_up_garbage-removebg-preview.png
+    - assets/images/click_2-1-removebg-preview.png
+    - assets/images/analyse-removebg-preview.png
+    - assets/images/verify-removebg-preview.png
+    - assets/images/repeat-removebg-preview.png
+    - assets/images/repeat-removebg-preview_1.png
+    - assets/images/rewards-0-removebg-preview.png
+    - assets/images/share-1-removebg-preview.png
+    - assets/images/logo.png
+
+   
+    
+    
+   
+    
+   
+    
+    
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
