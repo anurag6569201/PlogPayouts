@@ -1,11 +1,18 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:solution_challenge_app/contribute_locations.dart';
 import 'package:solution_challenge_app/data/display_location_cards_data.dart';
 import 'package:solution_challenge_app/data/location_categories.dart';
 import 'package:solution_challenge_app/location_grid_item.dart';
 import 'package:flutter/material.dart';
 // import 'package:geocoding/geocoding.dart';
 // import 'package:geolocator/geolocator.dart';
+import 'package:solution_challenge_app/location_grid_view.dart';
 
 class displayLocations extends StatefulWidget {
   const displayLocations({super.key});
@@ -15,140 +22,94 @@ class displayLocations extends StatefulWidget {
 }
 
 class _displayLocationsState extends State<displayLocations> {
-  late Category category;
   // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   // category.id = 'null';
-  //   // category.color = Colors.black;
-  //   // category.title = 'None';
-  //   // category.coordinates = [];
-  //   _chosenLocationAndFetchData();
-  // }
-  List<Category> _colectedData = [];
-  void _chosenLocationAndFetchData() async {
-    List<Category> _fetchedData = [];
 
-    final _noOfItems =
-        await FirebaseFirestore.instance.collection('locations').count().get();
-    print(_noOfItems.count);
-
-    if (_noOfItems.count != null) {
-      for (int i = 0; i < _noOfItems.count!.toInt(); i++) {
-        final _userData = await FirebaseFirestore.instance
-            .collection('locations')
-            .doc('L' + i.toString())
-            .get();
-
-        // Create a new instance of Category for each location data
-        Category category = Category(
-          id: _userData.data()!['id'],
-          title: _userData.data()!['title'],
-          color: Colors.orange, // You can set the desired color here
-          coordinates: [20.289392134840174, 85.74188592015321],
-        );
-        print(category);
-        _fetchedData.add(category);
-      }
-    }
-
-    // setState(() {
-    //   _fetchedData.isEmpty ? _fetchedData : [];
-    // });
-
-    setState(() {
-      _colectedData = _fetchedData;
-    });
-    print(_fetchedData);
+  List<Category> _collectedData = [];
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadItems();
+    // _collectedData = [];
   }
-  // void _chosenLocationAndFetchData() async {
-  //   final _noOfItems =
-  //       await FirebaseFirestore.instance.collection('locations').count().get();
-  //   print(_noOfItems.count);
-  //   // (_noOfItems.count == null) ? 0 : _noOfItems.count;
-  //   if (_noOfItems.count != null) {
-  //     for (int i = 0; i < _noOfItems.count!.toInt(); i++) {
 
-  //       final _userData = await FirebaseFirestore.instance
-  //           .collection('locations')
-  //           .doc('L' + i.toString())
-  //           .get();
-  //       category.id = _userData.data()!['id'];
-  //       category.title = _userData.data()!['title'];
-  //       category.coordinates = _userData.data()!['coordinates'];
-  //       _fetchedData.add(category);
-  //       print(category);
-  //     }
-  //   }
+  final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
+  List<Category> fetchedItem = [];
+  void _loadItems() async {
+    final url = Uri.https(
+        'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+        'solution-challenge/${userUid}.json');
 
-  //   print(_fetchedData);
+    final response = await http.get(url);
+    print(response.body);
+    final listData = json.decode(response.body);
 
-  //   // local.id = id;
-  //   // print(userName);
-  //   //    String? _currentAddress;
-  //   // Position? _currentPosition;
+    for (final data in listData.entries) {
+      double lat = data.value['latitude'];
+      double lng = data.value['longitude'];
+      List<double> coordinates = [];
+      coordinates.add(lat);
+      coordinates.add(lng);
+      fetchedItem.add(
+        Category(
+            Id: data.value['Id'].toString(),
+            title: data.value['name'].toString(),
+            color: Color(data.value['color']),
+            coordinates: coordinates,
+            imageUrl: data.value['image_url'].toString(),
+            uuid: data.key.toString()),
+      );
+      print("The unique id is ${data.key.toString()}");
+    }
+    // setState(() {
+    //   _collectedData = fetchedItem;
+    // });
+    print("The data is ${fetchedItem}");
+  }
 
-  //   // Future<bool> _handleLocationPermission() async {
-  //   //   bool serviceEnabled;
-  //   //   LocationPermission permission;
-
-  //   //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   //   if (!serviceEnabled) {
-  //   //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //   //         content: Text(
-  //   //             'Location services are disabled. Please enable the services')));
-  //   //     return false;
-  //   //   }
-  //   //   permission = await Geolocator.checkPermission();
-  //   //   if (permission == LocationPermission.denied) {
-  //   //     permission = await Geolocator.requestPermission();
-  //   //     if (permission == LocationPermission.denied) {
-  //   //       ScaffoldMessenger.of(context).showSnackBar(
-  //   //           const SnackBar(content: Text('Location permissions are denied')));
-  //   //       return false;
-  //   //     }
-  //   //   }
-  //   //   if (permission == LocationPermission.deniedForever) {
-  //   //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //   //         content: Text(
-  //   //             'Location permissions are permanently denied, we cannot request permissions.')));
-  //   //     return false;
-  //   //   }
-  //   //   return true;
-  //   // }
+  void _addItems() async {
+    final results = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => newItems(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Choose a location!',
+          'TrashTracker',
           style: TextStyle(fontSize: 16),
         ),
-        actions: [
-          ElevatedButton.icon(
-            onPressed: _chosenLocationAndFetchData,
-            icon: const Icon(Icons.location_city),
-            label: const Text('Detect my location'),
-          ),
-          ElevatedButton.icon(
-            onPressed: _chosenLocationAndFetchData,
-            icon: const Icon(Icons.refresh),
-            label: const Text('Refesh'),
-          ),
-        ],
       ),
-      body: GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
-        padding: const EdgeInsets.all(10),
-        children: [
-          for (final item in _colectedData) locationGridItem(item),
-        ],
+      body: Container(
+        padding: const EdgeInsets.all(70),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton.icon(
+              onPressed: _addItems,
+              icon: const Icon(Icons.add_card),
+              label: const Text('Contribute! (Add a location)'),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => locationGridView(fetchedItem),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.view_agenda),
+              label: const Text('View Stored Locations'),
+            ),
+          ],
+        ),
       ),
     );
   }

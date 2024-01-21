@@ -4,21 +4,27 @@ import 'package:solution_challenge_app/data/location_categories.dart';
 // Constants in Dart should be written in lowerCamelcase.
 final availableCategories = [
   Category(
-    id: '1',
-    title: 'Zage 3 Restro Cafe',
-    color: Colors.purple,
-    coordinates: [20.289392134840174, 85.74188592015321],
-  ),
+      Id: '1',
+      title: 'Zage 3 Restro Cafe',
+      color: Colors.purple,
+      coordinates: [20.289392134840174, 85.74188592015321],
+      imageUrl: 'Null',
+      uuid: 'Null'),
   Category(
-      id: '2',
+      Id: '2',
       title: 'Bowlful Bites',
       color: Colors.red,
-      coordinates: [20.28595147758, 85.75135547779522]),
+      coordinates: [20.28595147758, 85.75135547779522],
+      imageUrl: 'Null',
+      uuid: 'Null'),
+
   Category(
-      id: '3',
+      Id: '3',
       title: 'ROTI (Revenue Officers Training Institute)',
       color: Colors.orange,
-      coordinates: [20.293225116208706, 85.73277612608766]),
+      coordinates: [20.293225116208706, 85.73277612608766],
+      imageUrl: 'Null',
+      uuid: 'Null'),
   // Category(
   //   id: 'c4',
   //   title: 'German',
