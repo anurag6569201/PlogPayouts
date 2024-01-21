@@ -1,4 +1,4 @@
-{% extends 'partials/base-verifier.html' %}
+{% extends 'partials/base-user.html' %}
 {% load static %}
 
 {% block content %}
@@ -11,7 +11,7 @@
 <div class="container-fluid rounded bg-white mt-5 mb-5 verifier-profile">
     <form method="post" id="profileForm">
         {% csrf_token %}
-        <div class="row">
+        <div class="row" style="margin-top: 4em;">
             <div class="col-md-3 border-right profile-image-section">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     {% if user_profile.profile_image.url is not null %}
@@ -28,7 +28,7 @@
                
             </div>
 
-            <div class="col-md-5 border-right">
+            <div class="col-md-9 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right" style="font-size: 5em; font-weight: 600;color: #9aa62d;">Profile Settings
@@ -120,15 +120,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="mb-3 d-flex justify-content-between align-items-center experience">
-                        <span style="font-size: 5em; font-weight: 600;color: #9aa62d;">Requests</span>
-                    </div>
-                </div>
-            </div>
-            <!-- ... remaining code -->
         </div>
     </form>
 </div>

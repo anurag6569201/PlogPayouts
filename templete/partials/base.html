@@ -31,7 +31,13 @@
 
     <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand"><img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}"></a>
+            <a class="navbar-brand">
+                {% if user_profile.profile_image.url is not null %}
+                    <img class="logo" src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +46,10 @@
                 <div class="li-container">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#Map-Points">Map-Points</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'core:index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Map-Points">Map-Points</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#blogs">Blogs</a>
@@ -81,7 +90,11 @@
     <div class="profile">
         <div class="profile_main">
             <div class="company">
-                <img src="{% static 'assets/images/logo.png' %}" alt="">
+                {% if user_profile.profile_image.url is not null %}
+                    <img src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
                 <h1>Green-Plog</h1>
             </div>
             <div class="profile_button">
@@ -104,11 +117,15 @@
         <hr>
         <div class="profile_hero">
             <div class="profile_user">
-                <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}">
+                {% if user_profile.profile_image.url is not null %}
+                    <img class="logo" src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
             </div>
             <div class="profile_user_detail">
-                <h2>Anurag Singh</h2>
-                <p>anuragsingh6569201@gmail.com <br><a href="pages/profile.html">Manage account</a></p>
+                <h2>{{ user_profile.name }} {{ user_profile.surname }}</h2>
+                <p>{{ user_profile.email }}<br><a href="{% url 'core:mainuser_profile' %}">Manage account</a></p>
             </div>
         </div>
     </div>

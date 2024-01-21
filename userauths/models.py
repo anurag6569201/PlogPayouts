@@ -11,7 +11,6 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-    # Add related_name to avoid clashes with auth.User
     groups = models.ManyToManyField(
         "auth.Group",
         related_name="userauths_user_set",
@@ -32,15 +31,18 @@ class User(AbstractUser):
         return self.username
     
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-    mobile_number = models.CharField(max_length=15)
-    address = models.CharField(max_length=255)
-    postcode = models.CharField(max_length=20)
-    area = models.CharField(max_length=100)
-    email = models.EmailField()
-    education = models.CharField(max_length=255)
-    country = models.CharField(max_length=100)
-    state_region = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, default="user")
+    surname = models.CharField(max_length=100, default="1234")
+    mobile_number = models.CharField(max_length=15, default="XXXXXXXXXX")
+    address = models.CharField(max_length=255, default="No Address Provided")
+    postcode = models.CharField(max_length=20, default="XXXXXX")
+    area = models.CharField(max_length=100, default="Unknown Area")
+    email = models.EmailField(default="example@example.com")
+    education = models.CharField(max_length=255, default="No Education Information")
+    country = models.CharField(max_length=100, default="Unknown Country")
+    state_region = models.CharField(max_length=100, default="Unknown Region")
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username

@@ -41,8 +41,8 @@
 
 <div class="card">
     <div class="card-header redeem-heading">
-        <a class="navbar-brand"><img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}"></a>
-        <h1 class="redeem-username">Anurag singh</h1>
+        <a class="navbar-brand"><img class="logo" src="{{ user_profile.profile_image.url }}"></a>
+        <h1 class="redeem-username">{{ user_profile.name }} {{ user_profile.surname }}</h1>
         <div class="redeem-points">
             <a href=""><span class="material-symbols-outlined" style="font-size: 1.8em;">redeem</span><span class="redeem-score">{{ totalpoints }}</span></a>
         </div>
