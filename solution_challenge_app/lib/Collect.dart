@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:solution_challenge_app/Analyse.dart';
 import 'package:uuid/uuid.dart';
 
 class Collect extends StatefulWidget {
@@ -80,6 +81,7 @@ class _CollectState extends State<Collect> {
 
   void _saveGarbageImage() async {
     // print(fetchedUid);
+    final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
     var uuid = Uuid().v6();
     final _storeImage = FirebaseStorage.instance
         .ref()
@@ -90,6 +92,32 @@ class _CollectState extends State<Collect> {
 
     await _storeImage.putFile(_pickedImageFile!);
     final _imageUrl = await _storeImage.getDownloadURL();
+
+    final url = 'http://10.0.2.2:5000/garbage?query=' + _imageUrl.toString();
+
+    print("url is: ${Uri.parse(url)}");
+    http.Response response = await http.get(Uri.parse(url));
+    print(response.body);
+    var pred = jsonDecode(response.body)['prediction'];
+    var counting = jsonDecode(response.body)['count'];
+
+    // print(userUid);
+    final url_db = Uri.https(
+        'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+        'solution-challenge/${userUid}/collected-garbage.json');
+
+    final response_db = await http.post(
+      url_db,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(
+        {
+          'name': pred,
+          'count': counting,
+          'image_url': _imageUrl,
+        },
+      ),
+    );
+
     if (_imageUrl.isNotEmpty) saved = true;
 
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -104,6 +132,7 @@ class _CollectState extends State<Collect> {
               content: Text('Try again'),
             ),
           );
+
     // FirebaseFirestore.instance.collection('users').doc(userUid).update({
     //   // 'username': _enteredUserName,
     //   // 'email': _enteredEmail,
@@ -149,8 +178,8 @@ class _CollectState extends State<Collect> {
               margin: EdgeInsets.all(10),
               width: double.infinity,
               height: 400,
-              // foregroundDecoration:
-              //     BoxDecoration(border: Border.all(color: Colors.greenAccent)),
+              foregroundDecoration:
+                  BoxDecoration(border: Border.all(color: Colors.greenAccent)),
               child: _pickedImageFile != null
                   ? Image(
                       image: FileImage(_pickedImageFile!),
@@ -171,7 +200,7 @@ class _CollectState extends State<Collect> {
                 ),
                 ElevatedButton.icon(
                   onPressed: _saveGarbageImage,
-                  icon: const Icon(Icons.add_to_photos),
+                  icon: const Icon(Icons.save),
                   label: const Text('Save'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor:
@@ -179,11 +208,17 @@ class _CollectState extends State<Collect> {
                 ),
               ],
             ),
-
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton.icon(
-              onPressed: _pickImageGallery,
-              icon: const Icon(Icons.add_to_photos),
-              label: const Text('Gallery(Testing only)'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Analyse(),
+                ));
+              },
+              icon: const Icon(Icons.analytics),
+              label: const Text('Analyse'),
               style: ElevatedButton.styleFrom(
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer),
