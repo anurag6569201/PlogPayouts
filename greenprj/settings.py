@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
     'site_header':"Plog-Payouts",
     'site_brand':"Plog-Payouts",
-    'site_logo':'assets/images/logoo.png',
+    'site_logo':'assets/images/logo.png',
     'copyright':"PlogPayouts.com",
 }
 

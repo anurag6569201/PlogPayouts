@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-@login_required(login_url='userauths:sign-in') 
+@login_required
 def index(request):
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
@@ -22,7 +22,7 @@ def index(request):
     else:
         raise Http404("Page not found")
 
-@login_required(login_url='userauths:sign-in') 
+@login_required
 def user_redeem(request):
     user_profile = UserProfile.objects.get(user=request.user)
     vouchers = ScratchCard.objects.filter(user=request.user)
@@ -38,7 +38,7 @@ def user_redeem(request):
     else:
         raise Http404("Page not found")
 
-@login_required(login_url='userauths:sign-in') 
+@login_required
 def mainuser_profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
@@ -50,7 +50,7 @@ def mainuser_profile(request):
     else:
         raise Http404("Page not found")
 
-@login_required(login_url='userauths:sign-in') 
+@login_required
 def verifier(request):
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
@@ -62,7 +62,7 @@ def verifier(request):
     else:
         raise Http404("Page not found")
 
-@login_required(login_url='userauths:sign-in') 
+@login_required
 def user_profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
     context = {

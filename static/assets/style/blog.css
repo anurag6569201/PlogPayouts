@@ -53,9 +53,9 @@ a, a:hover {
   font-size: 1.75em;
 }
 .postcard .postcard__img {
-  max-height: 180px;
+  max-height: 150px;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   position: relative;
 }
 .postcard .postcard__img_link {
@@ -118,13 +118,6 @@ a, a:hover {
   width: 100px;
 }
 
-  .postcard.dark .postcard__text:before {
-    background: #18151f;
-  }
-
-  .postcard.light .postcard__text:before {
-    background: #cfde65;
-  }
 @media screen and (min-width: 769px) {
   .postcard {
     flex-wrap: inherit;
@@ -141,7 +134,7 @@ a, a:hover {
     transition: transform 0.3s ease;
   }
   .postcard .postcard__text {
-    padding: 3rem;
+    padding: 3em;
     width: 100%;
   }
   .postcard .media.postcard__text:before {

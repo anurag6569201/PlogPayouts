@@ -8,13 +8,17 @@
         <div class="blogs_head" style="margin-top: 3em;">
             <strong>Blogs</strong>
         </div>
-        {% for p in read %}
-        <article class="postcard light blue" style="margin-top: 1em;">
+        {% for p in posts %}
+        <article class="postcard light blue col-md-12" style="margin-top: 1em;height: 30em;">
             <a class="postcard__img_link" href="#">
-                <img class="postcard__img" src="{{ p.blog_image.url }}" alt="Image Title" />
+                {% if p.blog_image.url is not null %}
+                    <img class="mt-5 postcard__img" src="{{ p.blog_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img class="mt-5 postcard__img" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
             </a>
             <div class="postcard__text">
-                <h1 class="postcard__title blue"><a href="#">{{ p.title }}</a></h1>
+                <h1 class="postcard__title blue"><a href="{% url 'blog:blog-detail' p.id %}"><img src="{{ p.author.url }}" alt=""><img src="{{ p.authorProfile.profile_image.url }}" style="width: 50px;height: 50px;border-radius: 50%;border: 1px solid #9aa62d;"> {{ p.title }}</a></h1>
                 <div class="postcard__subtitle small">
                     <time datetime="{{ p.date_posted }}" style="font-size: 1.2em;">
                         <i class="fas fa-calendar-alt mr-2"></i>{{ p.date_posted }}
@@ -23,10 +27,10 @@
                 <div class="postcard__bar"></div>
                 <div class="postcard__preview-txt">{{ p.content }}</div>
                 <ul class="postcard__tagbox">
-                    <li class="tag__item" style="font-size: 1.3em;"><i class="fas fa-tag mr-2"></i>Blogpost</li>
-                    <li class="tag__item"style="font-size: 1.3em;"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                    <li class="tag__item" style="font-size: 1.3em;"><i class="fas fa-tag mr-2"></i>like</li>
+                    <li class="tag__item"style="font-size: 1.3em;"><i class="fas fa-clock mr-2"></i>comment</li>
                     <li class="tag__item play blue">
-                        <a href="#"><i class="fas fa-play mr-2"></i>Read Blog</a>
+                        <a href="{% url 'blog:blog-detail' p.id %}"><i class="fas fa-play mr-2"></i>Read Blog</a>
                     </li>
                 </ul>
             </div>
