@@ -1,18 +1,13 @@
 {
-    "builds": [
+    "builds":[{
+        "scr":"greenprj/wsgi.py",
+        "use":"@vercel/python",
+        "config":{"maxLambdaSize":"15mb","runtime":"python3.12.0"}
+    }],
+    "routes":[
         {
-            "src": "greenprj/wsgi.py",
-            "use": "@vercel/python",
-            "config": {
-                "maxLambdaSize": "15mb",
-                "runtime": "python3.9"
-            }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "greenprj/wsgi.py"
+            "src":"/(.*)",
+            "dest":"greenprj/wsgi.py"
         }
     ]
 }
