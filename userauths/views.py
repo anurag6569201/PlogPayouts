@@ -32,9 +32,9 @@ def register_view(request):
 def login_view(request):
     if request.user.is_authenticated:
         messages.warning(request, "Hey, You are already logged in.")
-        if not user.verified:
+        if not request.user.verified:
             return redirect('core:index')
-        if user.verified:
+        if request.user.verified:
             return redirect("core:verifier")
 
     if request.method == "POST":

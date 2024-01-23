@@ -13,3 +13,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
+
+    def like(self, user):
+        if user in self.likes.all():
+            self.likes.remove(user)
+        else:
+            self.likes.add(user)
+    
+    comments = models.ManyToManyField('Comment', related_name='post_comments', blank=True)
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

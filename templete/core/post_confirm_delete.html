@@ -29,8 +29,11 @@
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{ object.content }}</div>
                     <ul class="postcard__tagbox">
-                        <li class="tag__item" style="font-size: 1.3em;"><i class="fas fa-tag mr-2"></i>Blogpost</li>
-                        <li class="tag__item"style="font-size: 1.3em;"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                        <li class="tag__item">
+                            <a>
+                                <i class="fas fa-thumbs-up mr-2"></i><span style="font-size:1.2em;" class="material-symbols-outlined">thumb_up</span><span style="margin-left: .2em;font-size: 1.2em;">{{ object.likes.count }}</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </article>

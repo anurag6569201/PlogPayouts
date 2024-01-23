@@ -31,7 +31,7 @@ class User(AbstractUser):
         return self.username
     
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userprofile')
     name = models.CharField(max_length=100, default="user")
     surname = models.CharField(max_length=100, default="1234")
     mobile_number = models.CharField(max_length=15, default="XXXXXXXXXX")

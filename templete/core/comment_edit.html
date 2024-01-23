@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <section class="light">
+        <div class="container py-4">
+            <div class="container-fluid" style="margin-top: 6.5em;">
+                <div class="be-comment-block">
+                    <h1 class="comments-title"
+                        style="font-size: 3em;color: white;border-radius: .2em;font-weight: 700; padding: .5em;background-color: #cbd477;">
+                        Edit Your Comment</h1>
+                    <div class="be-comment" style="padding: 1em 0;">
+                        <div class="be-img-comment">
+                            <a>
+                                <img src="{{ post.authorProfile.profile_image.url }}" alt="" class="be-ava-comment">
+                            </a>
+                        </div>
+                        <div class="be-comment-content">
+
+                            <span class="be-comment-name">
+                                <a>{{ comment.author }}</a>
+                            </span>
+                            <span class="be-comment-time">
+                                <i class="fa fa-clock-o"></i>
+                                {{ comment.created_at }}
+                            </span>
+
+                            <p class="be-comment-text" style="border: 2px solid #cbd477;">
+                                {{ form.text }}
+                            </p>
+                            <script>
+                                var inputTest = document.getElementById('id_text');
+                                if (inputTest) {
+                                    inputTest.focus();
+                                }
+                            </script>
+                            <button class="comment-btn" type="submit">Save Changes</button>
+                        </div>
+                        <style>
+                            #id_text{
+                                width: 100%;
+                                height: 6em;
+                                font-size: 1.2em;
+                                overflow-y: auto;
+                                border-radius: .5em;
+                                padding: .3em;
+                                border: none;
+                                background-color: transparent;
+                            }
+                            .comment-btn{
+                                font-size: 1.8em;
+                                background: #cbd477;
+                                padding: .2em 2em;
+                                box-shadow: none;
+                                border: none;
+                                border-radius: .4em;
+                            }
+                            .comment-btn:hover {
+                                background: #d9e565;
+                            }
+                            .comment-btn:focus{
+                                background: #d9e565;
+                                box-shadow: none
+                            }
+                            .comment-btn:active {
+                                background: #d9e565;
+                                box-shadow: none
+                            }
+                        </style>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</form>
+
+{% endblock %}
