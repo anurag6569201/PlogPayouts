@@ -8,6 +8,7 @@ import 'package:solution_challenge_app/Store.dart';
 import 'package:solution_challenge_app/locations.dart';
 
 import 'package:solution_challenge_app/main_drawer.dart';
+import 'package:solution_challenge_app/qr_code.dart';
 
 class TabsScreen extends StatefulWidget {
   final String uid;
@@ -27,10 +28,7 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
-
-
   void _setScreen(String identifier) async {
-
     if (identifier == 'Instructions') {
       Navigator.of(context).pop();
       final results = await Navigator.of(context).push(
@@ -67,6 +65,15 @@ class _TabsScreenState extends State<TabsScreen> {
       final results = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => displayLocations(),
+        ),
+      );
+    }
+
+    if (identifier == 'QR Code') {
+      Navigator.of(context).pop();
+      final results = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => QRCodeGeneratorScreen(),
         ),
       );
     }

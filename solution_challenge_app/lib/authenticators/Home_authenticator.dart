@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/authenticators/authenticator_drawer.dart';
+import 'package:solution_challenge_app/authenticators/reward.dart';
+import 'package:solution_challenge_app/authenticators/scan.dart';
 import 'package:solution_challenge_app/authenticators/status.dart';
 import 'package:solution_challenge_app/data/display_location_cards_data.dart';
 import 'package:solution_challenge_app/gloves_detector.dart';
@@ -26,33 +28,29 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
   }
 
   void _setScreen(String identifier) async {
-    // if (identifier == 'Instructions') {
-    //   Navigator.of(context).pop();
-    //   final results = await Navigator.of(context).push(
-    //     MaterialPageRoute(
-    //       builder: (ctx) => Instructions(),
-    //     ),
-    //   );
-    // }
-    // //else {
-    // //   Navigator.of(context).pop();
-    // // }
-    // if (identifier == 'Collect') {
-    //   Navigator.of(context).pop();
-    //   final results = await Navigator.of(context).push(
-    //     MaterialPageRoute(
-    //       builder: (ctx) => Collect(),
-    //     ),
-    //   );
-    // }
-    //else {
-    //   Navigator.of(context).pop();
-    // }
     if (identifier == 'Status') {
       Navigator.of(context).pop();
       final results = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => collectedTrashStatus(),
+        ),
+      );
+    }
+
+    if (identifier == 'Scan QR Code') {
+      Navigator.of(context).pop();
+      final results = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => QRScreen(),
+        ),
+      );
+    }
+
+    if (identifier == 'Rewards Calculation') {
+      Navigator.of(context).pop();
+      final results = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => reward(),
         ),
       );
     }
