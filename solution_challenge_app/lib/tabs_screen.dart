@@ -27,54 +27,10 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
-  // final List<Meal> favouriteMeals = [];
-  // void _showMessage(String text) {
-  //   ScaffoldMessenger.of(context).clearSnackBars();
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       duration: const Duration(seconds: 2),
-  //       content: Text(text),
-  //     ),
-  //   );
-  // }
 
-  // void _togglefavourite(Meal meal) {
-  //   final _isToggle = favouriteMeals.contains(meal);
-
-  //   if (_isToggle) {
-  //     setState(() {
-  //       favouriteMeals.remove(meal);
-
-  //       _showMessage("Removed as favourite!");
-  //     });
-  //   } else {
-  //     setState(() {
-  //       favouriteMeals.add(meal);
-
-  //       _showMessage("Marked as favourite!");
-  //     });
-  //   }
-  // }
 
   void _setScreen(String identifier) async {
-    // Widget _seletedIdentifier = Home();
 
-    // if (identifier == 'Status') {
-    //   _seletedIdentifier = Status();
-    // }
-    // if (identifier == 'Store') {
-    //   _seletedIdentifier = Store();
-    // }
-    // Navigator.of(context).pop();
-    // final results = await Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (ctx) => _seletedIdentifier,
-    //   ),
-    // );
-
-    // } else {
-    //   Navigator.of(context).pop();
-    // }
     if (identifier == 'Instructions') {
       Navigator.of(context).pop();
       final results = await Navigator.of(context).push(

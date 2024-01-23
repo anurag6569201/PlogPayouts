@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/data/display_location_cards_data.dart';
 import 'package:solution_challenge_app/gloves_detector.dart';
@@ -13,25 +14,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var fetchedUid;
+  // var fetchedUid;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchedUid = widget._uid;
+    // fetchedUid = widget._uid;
   }
-  // var _usernameRetrieved = '';
 
-  // void _getUsername() async {
-  //   final user = await FirebaseAuth.instance.currentUser;
-
-  //   final _userdata = await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(user!.uid)
-  //       .get();
-
-  //   _usernameRetrieved = _userdata.data()!['username'];
-  // }
+  final fetchedUid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   void _MaskandGloveScreen() async {
     // if (identifier == 'filters') {
@@ -47,61 +38,7 @@ class _HomeState extends State<Home> {
         builder: (ctx) => glovesDetector(fetchedUid),
       ),
     );
-    // Navigator.of(context).pop();
-    // } else {
-    // Navigator.of(context).pop();
-
-//Maybe add a Snackbar?
-    // ScaffoldMessenger.of(context).clearSnackBars();
-
-    // if (mask_result == true && gloves_result == true) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       content: Text('Security Check Successfull'),
-    //     ),
-    //   );
-    // } else {
-    //   print(mask_result);
-    //   print(gloves_result);
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       content: Text('Please go through the check again'),
-    //     ),
-    //   );
-    // }
   }
-
-  // List<Category> _updatedAvailableCatgories = [];
-  // void _storeData() async {
-  //   // deleteCollection('locations');
-
-  //   var count = 0;
-  //   for (final category in availableCategories) {
-  //     await FirebaseFirestore.instance
-  //         .collection('locations')
-  //         .doc('L${count}')
-  //         .set(
-  //       {
-  //         'id': category.id,
-  //         'title': category.title,
-  //         'color': category.color.value,
-  //         'coordinates': category.coordinates,
-  //       },
-  //     );
-  //     count = count + 1;
-  //   }
-
-  //   // setState(() {
-  //   //   _updatedAvailableCatgories = availableCategories;
-  //   // });
-  //   for (final category in availableCategories) {
-  //     print(category.color);
-  //     print(category.coordinates);
-  //     print(category.id);
-  //     print(category.title);
-  //   }
-  //   // print(availableCategories.length);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -110,32 +47,11 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             onPressed: () {
-              // FirebaseFirestore.instance
-              //     .collection('users')
-              //     .doc(fetchedUid)
-              //     .update({
-              //   // 'username': _enteredUserName,
-              //   // 'email': _enteredEmail,
-              //   'gloves_ok': false
-              // });
-              // FirebaseFirestore.instance
-              //     .collection('users')
-              //     .doc(fetchedUid)
-              //     .update({
-              //   // 'username': _enteredUserName,
-              //   // 'email': _enteredEmail,
-              //   'mask_ok': false
-              // });
-
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (ctx) => resetValueGlovesAndMask(fetchedUid),
                 ),
               );
-
-              // FirebaseAuth.instance.signOut();
-
-              // Navigator.of(context).pop();
             },
             icon: const Icon(Icons.exit_to_app),
           ),
@@ -149,24 +65,12 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Container(
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(colors: [
-        //     Colors.orangeAccent,
-        //     Colors.greenAccent,
-        //   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-        // ),
         padding: const EdgeInsets.all(40),
-        // margin: const EdgeInsets.all(80),
         alignment: Alignment.center,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Padding(
-            //   padding: EdgeInsets.all(20),
-            // ),
-            Image.asset('assets/images/logo.png'),
+            Image.asset('assets/images/logo_2.jpg'),
             ElevatedButton.icon(
               onPressed: _MaskandGloveScreen,
               icon: const Icon(Icons.add_to_photos),
@@ -175,18 +79,6 @@ class _HomeState extends State<Home> {
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer),
             ),
-
-            // ElevatedButton.icon(
-            //   onPressed: () {
-            //     // deleteCollection('locations');
-            //     _storeData();
-            //   },
-            //   icon: const Icon(Icons.add_to_photos),
-            //   label: const Text('Load Data'),
-            //   style: ElevatedButton.styleFrom(
-            //       backgroundColor:
-            //           Theme.of(context).colorScheme.primaryContainer),
-            // ),
           ],
         ),
       ),

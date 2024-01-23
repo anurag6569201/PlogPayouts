@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:solution_challenge_app/auth.dart';
+import 'package:solution_challenge_app/authenticators/Home_authenticator.dart';
 import 'package:solution_challenge_app/previews/preview_home.dart';
 import 'package:solution_challenge_app/splash_screen.dart';
 import 'package:solution_challenge_app/tabs_screen.dart';
@@ -27,19 +28,14 @@ void main() async {
   runApp(MyApp());
 }
 
+bool isCompanyEmail(String email) {
+  // Replace "company.com" with your company's email domain
+  return email.endsWith("plogpayouts.com");
+}
+
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  var _userName = 'Welcome';
 
-  void _getUserName(String uid) async {
-    var _userData =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
-
-    _userName = _userData.data()!['username'];
-    print(_userName);
-  }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,26 +46,24 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SplashScreen();
           }
-
           if (snapshot.hasData) {
             final userUid = FirebaseAuth.instance.currentUser!.uid;
+            var userEmail = FirebaseAuth.instance.currentUser!.email;
 
-            // var username = snapshot.data!.displayName;
-            // print(snapshot);
-            // final userData = await FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
-            // if (username == null) {
-            // _getUserName(userUid);
-            //   return TabsScreen(username);
-            return TabsScreen(userUid);
+            if (isCompanyEmail(userEmail!)) {
+              return homeAuthenticator(userUid);
+            } else {
+              return TabsScreen(userUid);
+            }
           }
           // else {
           //   return TabsScreen(username);
 
           // }
-          else {
-            // return Auth();
-            return previewScreen();
-          }
+          // else {
+          return previewScreen();
+          //   return previewScreen();
+          // }
         },
       ),
     );

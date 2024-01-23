@@ -133,7 +133,7 @@ class _newItemsState extends State<newItems> {
                 // initialValue: _enteredName,
                 maxLength: 50,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 decoration: const InputDecoration(
                   label: Text('Name of the place'),
@@ -152,7 +152,7 @@ class _newItemsState extends State<newItems> {
                 },
               ),
               TextFormField(
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                   label: Text(
                     'Id',
@@ -178,7 +178,7 @@ class _newItemsState extends State<newItems> {
                 children: [
                   Expanded(
                     child: TextFormField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                       decoration: const InputDecoration(
                         label: Text(
                           'Latitudes',
@@ -202,7 +202,7 @@ class _newItemsState extends State<newItems> {
                   ),
                   Expanded(
                     child: TextFormField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                       decoration: const InputDecoration(
                         label: Text('Longitudes'),
                       ),

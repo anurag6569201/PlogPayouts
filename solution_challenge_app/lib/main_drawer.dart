@@ -13,9 +13,20 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> {
-  String userName = 'Welcome';
-  bool mask_ok = false;
-  bool gloves_ok = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userName = 'Welcome';
+    mask_ok = false;
+    gloves_ok = false;
+    profileImageUrl = '';
+  }
+
+  var userName;
+  var mask_ok;
+  var gloves_ok;
+  var profileImageUrl;
 
   Future<String> _getUserName(String uid) async {
     var _userData =
@@ -46,6 +57,16 @@ class _MainDrawerState extends State<MainDrawer> {
     // print(userName);
   }
 
+  Future<String> _getProfileImageUrl(String uid) async {
+    var _userData =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+    profileImageUrl = _userData.data()!['image_url'];
+    // gloves_ok = _userData.data()!['gloves_ok'];
+    return profileImageUrl;
+    // print(userName);
+  }
+
   @override
   Widget build(BuildContext context) {
     String _uid = widget.uid;
@@ -69,6 +90,12 @@ class _MainDrawerState extends State<MainDrawer> {
       });
     });
 
+    _getProfileImageUrl(_uid).then((String result) {
+      setState(() {
+        profileImageUrl = result;
+      });
+    });
+
     print(userName);
     return Drawer(
       child: Column(
@@ -83,10 +110,10 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             child: Row(
               children: [
-                Icon(
-                  Icons.fastfood,
-                  size: 48,
-                  color: Theme.of(context).colorScheme.primary,
+                CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(profileImageUrl),
+                  backgroundColor: Colors.transparent,
                 ),
                 const SizedBox(
                   width: 13,

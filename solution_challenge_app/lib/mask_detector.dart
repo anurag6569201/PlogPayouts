@@ -150,7 +150,10 @@ class _maskDetectorState extends State<maskDetector> {
               children: [
                 const Text(
                   'Click a pick of you wearing a mask.',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 6, 134, 72),
+                  ),
                 ),
                 const SizedBox(height: 50),
                 CircleAvatar(

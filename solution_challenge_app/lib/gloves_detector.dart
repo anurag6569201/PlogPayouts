@@ -151,8 +151,12 @@ class glovesDetectorState extends State<glovesDetector> {
                 ),
                 const Text(
                   'Click a pick of you wearing a pair of gloves.',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 6, 134, 72),
+                  ),
                 ),
+
                 const SizedBox(height: 50),
                 CircleAvatar(
                   // backgroundColor: Theme.of(context).colorScheme.background,
