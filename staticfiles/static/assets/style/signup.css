@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+:focus {
+  outline: none;
+}
+.btn:focus,
+.btn:active {
+  outline: none; 
+  box-shadow: none;
+  background-color: #d9e565!important;
+}
+
+.storage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: url("../images/registration.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+::selection{
+  color: #fff;
+  background: #d9e565;
+}
+.contaning_forms,
+.container-image{
+  width: 400px;
+  min-height: 80vh;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+}
+.contaning_forms form input{
+  height: 100%;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 15px;
+  padding: .3em;
+}
+.login-signup-tab,
+.contaning_forms form button{
+  width: 100%;
+  box-shadow: none!important;
+  border: none;
+  background: black;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: .3em;
+  transition: 0.2s ease;
+}
+.login-signup-tab:hover,
+.contaning_forms form button:hover{
+  background: #d9e565;
+  color: black;
+}
+.login-signup-tab-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5em;
+  margin-bottom: 1em;
+}
+#signup input::placeholder{
+  background: rgba(255, 255, 255, 0.2);
+  color: grey;
+}
+.storage .helptext{
+  color: #444242;
+  font-size: 1.4em;
+  font-weight: 500;
+}
+.storage label{
+  color: #444242;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+.check-buttons{
+  margin-top: 1em;
+}
+.form-check,
+.check-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.form-check input{
+  width: 2.3em;
+  height: 2.3em;
+  cursor: pointer;
+}
+.form-check-label{
+  font-size: 1.8em;
+  margin-left: .5em;
+}
+.form-check:first-child{
+  padding-left: 0;
+}
+.form-check-btn:checked{
+  fill: #d9e565;
+  background-color: #d9e565;
+}
+@media (max-width: 600px) {
+  .container-image {
+      display: none;
+  }
+}
