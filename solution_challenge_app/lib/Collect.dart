@@ -191,9 +191,9 @@ class _CollectState extends State<Collect> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
-                  onPressed: _pickImageCamera,
+                  onPressed: _pickImageGallery,
                   icon: const Icon(Icons.add_to_photos),
-                  label: const Text('Camera'),
+                  label: const Text('Gallery'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.primaryContainer),

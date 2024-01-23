@@ -62,17 +62,17 @@ class _routesScreenState extends State<routesScreen> {
           // alignment: Alignment.center,
           Column(
         // mainAxisAlignment: MainAxisAlignment.,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,d
         children: [
           Container(
-            height: 200,
-            width: double.infinity,
-            foregroundDecoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onPrimaryContainer),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-            ),
-          ),
+              // backgroundColor: Theme.of(context).colorScheme.background,
+              // padding: EdgeInsets.all(20),
+              // margin: EdgeInsets.all(10),
+              width: double.infinity,
+              height: 400,
+              // foregroundDecoration: BoxDecoration(
+              //     border: Border.all(color: Colors.greenAccent)),
+              child: Image.asset('assets/images/map.jpg')),
 
           const SizedBox(
             height: 20,

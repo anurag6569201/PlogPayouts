@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:solution_challenge_app/Home.dart';
 import 'package:solution_challenge_app/auth.dart';
 
 class previewScreen extends StatefulWidget {
@@ -318,6 +320,10 @@ class _previewScreenState extends State<previewScreen> {
                 _onLastPage
                     ? TextButton(
                         onPressed: () {
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //   builder: (context) => Auth(),
+                          // ));
+                          
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Auth(),
                           ));

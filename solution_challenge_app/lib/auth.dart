@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:solution_challenge_app/garbage_collector_auth.dart';
 import 'package:solution_challenge_app/user_image_picker.dart';
 
 final _firebase = FirebaseAuth.instance;
@@ -94,6 +95,7 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
+    bool isChanged = false;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
@@ -117,7 +119,7 @@ class _AuthState extends State<Auth> {
                   // ),
                   width: double.infinity,
                   height: 290,
-                  child: Image.asset('assets/images/logo.png'),
+                  child: Image.asset('assets/images/logo_1.png'),
                 ),
                 Card(
                   margin: const EdgeInsets.all(16),
@@ -154,7 +156,7 @@ class _AuthState extends State<Auth> {
                           ),
                           if (!_isLogin)
                             TextFormField(
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.black),
                               decoration: const InputDecoration(
                                 labelText: 'Your Username',
                               ),
@@ -217,6 +219,27 @@ class _AuthState extends State<Auth> {
                                   ? 'Create one!'
                                   : 'I have an account already'),
                             ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Text(
+                                'Authenticator?',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  // fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 5, 134, 10),
+                                ),
+                              ),
+                              Switch(
+                                value: isChanged,
+                                onChanged: (value) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => collectorAuth(),
+                                  ));
+                                },
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
