@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-@login_required
+@login_required(login_url='userauths:sign-in')
 def index(request):
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
