@@ -76,14 +76,7 @@ class _newItemsState extends State<newItems> {
 
       final _imageUrl = await _storeImage.getDownloadURL();
 
-      // FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(_userCredentials.user!.uid)
-      //     .set({
-      //   'username': _enteredUserName,
-      //   'email': _enteredEmail,
-      //   'image_url': _imageUrl
-      // });
+ 
 
       final response = await http.post(
         url,
@@ -104,13 +97,7 @@ class _newItemsState extends State<newItems> {
         return;
       }
       Navigator.of(context).pop();
-      // Navigator.of(context).pop(
-      //   GroceryItem(
-      //       id: DateTime.now().toString(),
-      //       name: _enteredName,
-      //       quantity: _enteredQuantity,
-      //       category: _selectedCategory),
-      // );
+
     }
   }
 

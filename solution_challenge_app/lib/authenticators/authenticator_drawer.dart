@@ -116,7 +116,45 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
             onTap: () {
               //function here
 
-              widget.selectedScreen('Locations');
+              widget.selectedScreen('Status');
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.location_city,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'QR Code Scanner',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {
+              //function here
+
+              widget.selectedScreen('Scan QR Code');
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.location_city,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Rewards Calculation',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {
+              //function here
+
+              widget.selectedScreen('Rewards Calculation');
             },
           ),
         ],

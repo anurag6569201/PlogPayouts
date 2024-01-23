@@ -221,6 +221,25 @@ class _MainDrawerState extends State<MainDrawer> {
               widget.selectedScreen('Locations');
             },
           ),
+          ListTile(
+            leading: Icon(
+              Icons.qr_code,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'QR Code',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {
+              //function here
+
+              widget.selectedScreen('QR Code');
+            },
+          ),
         ],
       ),
     );
