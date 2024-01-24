@@ -11,18 +11,24 @@ from django.http import HttpResponseRedirect
 from .models import Post, Comment
 from .forms import CommentForm
 
+from django.views import View
 
-class PostListView(LoginRequiredMixin,ListView):
-    
-    model=Post
-    template_name='core/blog.html'
-    context_object_name='posts'
-    ordering=['date_posted']
+class PostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'core/blog.html'
+    context_object_name = 'posts'
+    ordering = ['-likes']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        unique_posts = list(set(queryset))
+        return sorted(unique_posts, key=lambda post: post.likes.count(), reverse=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user_profile'] = UserProfile.objects.get(user=self.request.user)
         return context
+    
 
 class PostDetailView(LoginRequiredMixin,DetailView):
     model=Post
@@ -90,7 +96,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
             return True
         return False
     
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin,DeleteView):
     model=Post
     template_name = 'core/post_confirm_delete.html'
         
@@ -111,20 +117,14 @@ class PostDeleteView(DeleteView):
         return False
     
 
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views import View
-from .models import Post
-
-class LikePostView(View):
+class LikePostView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=self.kwargs['pk'])
         post.like(request.user)
         return HttpResponseRedirect(reverse('blog:blog-detail', args=[str(post.id)]))
 
 
-class CommentCreateView(View):
+class CommentCreateView(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=self.kwargs['pk'])
         form = CommentForm(request.POST)
@@ -136,7 +136,7 @@ class CommentCreateView(View):
             comment.save()
         return redirect('blog:blog-detail', pk=post.id)
 
-class CommentUpdateView(View):
+class CommentUpdateView(LoginRequiredMixin,View):
     template_name = 'core/comment_edit.html'
 
     def get(self, request, *args, **kwargs):
@@ -159,7 +159,7 @@ class CommentUpdateView(View):
             return render(request, self.template_name, {'form': form, 'comment': comment})
         
 
-class CommentDeleteView(View):
+class CommentDeleteView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         comment = get_object_or_404(Comment, pk=self.kwargs['comment_pk'])
         post_id = comment.post.id

@@ -8,17 +8,23 @@
         <div class="blogs_head" style="margin-top: 3em;">
             <strong>Blogs</strong>
         </div>
+
         {% for p in posts %}
         <article class="postcard light blue col-md-12" style="margin-top: 1em;height: 30em;">
             <a class="postcard__img_link" href="#">
-                {% if p.blog_image.url is not null %}
-                    <img class="mt-5 postcard__img" src="{{ p.blog_image.url }}" alt="User Profile Image">
+                {% if p.blog_image.url %}
+                    <img class="mt-5 postcard__img" src="{{ p.blog_image.url }}" alt="Blog Image">
                 {% else %}
                     <img class="mt-5 postcard__img" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
                 {% endif %}
             </a>
             <div class="postcard__text">
-                <h1 class="postcard__title blue"><a href="{% url 'blog:blog-detail' p.id %}"><img src="{{ p.author.url }}" alt=""><img src="{{ p.authorProfile.profile_image.url }}" style="width: 50px;height: 50px;border-radius: 50%;border: 1px solid #9aa62d;"> {{ p.title }}</a></h1>
+                <h1 class="postcard__title blue">
+                    <a href="{% url 'blog:blog-detail' p.id %}">
+                        <img src="{{ p.authorProfile.profile_image.url }}" style="width: 50px;height: 50px;border-radius: 50%;border: 1px solid #9aa62d;">
+                        {{ p.title }}
+                    </a>
+                </h1>
                 <div class="postcard__subtitle small">
                     <time datetime="{{ p.date_posted }}" style="font-size: 1.2em;">
                         <i class="fas fa-calendar-alt mr-2"></i>{{ p.date_posted }}
@@ -29,16 +35,22 @@
                 <ul class="postcard__tagbox">
                     <li class="tag__item">
                         <a href="{% url 'blog:like-post' pk=p.id %}">
-                            <i class="fas fa-thumbs-up mr-2"></i><span style="font-size:1.2em;" class="material-symbols-outlined">thumb_up</span><span style="margin-left: .2em;font-size: 1.2em;">{{ p.likes.count }}</span>
+                            <i class="fas fa-thumbs-up mr-2"></i>
+                            <span style="font-size:1.2em;" class="material-symbols-outlined">thumb_up</span>
+                            <span style="margin-left: .2em;font-size: 1.2em;">{{ p.likes.count }}</span>
                         </a>
                     </li>
                     <li class="tag__item">
-                        <a href="">
-                            <i class="fas fa-comment mr-2"></i><span style="font-size:1.2em;" class="material-symbols-outlined">comment</span><span style="margin-left: .2em;font-size: 1.2em;"></span>
+                        <a href="{% url 'blog:blog-detail' p.id %}">
+                            <i class="fas fa-comment mr-2"></i>
+                            <span style="font-size:1.2em;" class="material-symbols-outlined">comment</span>
+                            <span style="margin-left: .2em;font-size: 1.2em;">{{ comments.count }}</span>
                         </a>
                     </li>
                     <li class="tag__item play blue">
-                        <a href="{% url 'blog:blog-detail' p.id %}"><i class="fas fa-play mr-2"></i>Read Blog</a>
+                        <a href="{% url 'blog:blog-detail' p.id %}">
+                            <i class="fas fa-play mr-2"></i>Read Blog
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -46,6 +58,5 @@
         {% endfor %}
     </div>
 </section>
-
 
 {% endblock content %}

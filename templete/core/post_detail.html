@@ -31,6 +31,11 @@
                             <i class="fas fa-thumbs-up mr-2"></i><span style="font-size:1.2em;" class="material-symbols-outlined">thumb_up</span><span style="margin-left: .2em;font-size: 1.2em;">{{ post.likes.count }}</span>
                         </a>
                     </li>
+                    <li class="tag__item">
+                        <a>
+                            <i class="fas fa-comment mr-2"></i><span style="font-size:1.2em;" class="material-symbols-outlined">comment</span><span style="margin-left: .2em;font-size: 1.2em;">{{ comments.count }}</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </article>
@@ -42,7 +47,7 @@
                 <div class="be-comment" style="padding: 1em 0;">
                     <div class="be-img-comment">	
                         <a>
-                            <img src="{{ user_profile.profile_image.url }}" alt="" class="be-ava-comment">
+                            <img src="{{ comment.author.userprofile.profile_image.url }}" alt="" class="be-ava-comment">
                         </a>
                     </div>
                     <div class="be-comment-content">
