@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:solution_challenge_app/authenticators/status.dart';
 
 class MainDrawerAuthneticator extends StatefulWidget {
   MainDrawerAuthneticator(this.selectedScreen, this.uid, {super.key});
@@ -100,25 +99,25 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
               ],
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.location_city,
-              size: 26,
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
-            title: Text(
-              'Status',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    fontSize: 24,
-                  ),
-            ),
-            onTap: () {
-              //function here
+          // ListTile(
+          //   leading: Icon(
+          //     Icons.location_city,
+          //     size: 26,
+          //     color: Theme.of(context).colorScheme.onBackground,
+          //   ),
+          //   title: Text(
+          //     'Status',
+          //     style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          //           color: Theme.of(context).colorScheme.onBackground,
+          //           fontSize: 24,
+          //         ),
+          //   ),
+          //   onTap: () {
+          //     //function here
 
-              widget.selectedScreen('Status');
-            },
-          ),
+          //     widget.selectedScreen('Status');
+          //   },
+          // ),
           ListTile(
             leading: Icon(
               Icons.location_city,
