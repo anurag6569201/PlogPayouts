@@ -25,7 +25,7 @@ var dummyData = [
     money_icon: const Icon(Icons.currency_rupee, color: Colors.white),
     url:
         'https://ci3.googleusercontent.com/meips/ADKq_Nb38T5FVwp-gYi01dP2miqart7TVQfL7KkfwFZHrzbzc37-w8BKAeXW8VfdCJLF9KFUjRcMWyWobNfj8_8mpqGoQUk6McApSA6wWjL1xSXDZ3lWel-xJOnXl22tx7p1QzdiFitgIGJkXnSC9ydd23hzM3L6Q1iNJjF9MPoLr8w=s0-d-e1-ft#https://m.media-amazon.com/images/G/31/gc/designs/livepreview/congratulations_greatwin_noto_email_in-main',
-    code: ' RJ4X-PUPNGB-7UJD',
+    code: 'RJ4X-PUPNGB-7UJD',
   ),
   rewards_data(
       name: 'Flipkart Gift Card',

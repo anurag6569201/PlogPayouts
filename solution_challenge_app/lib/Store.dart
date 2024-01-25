@@ -19,25 +19,49 @@ class _StoreState extends State<Store> {
     // TODO: implement initState
     super.initState();
     fetchedPointsnew = 0;
+    _showPointsDialogBox(context);
     fetchPoints();
+    fetchedData = [];
   }
 
   var fetchedPointsnew;
+  var fetchedData;
+
   void fetchPoints() async {
     var pointsTemp;
-    final uuid = FirebaseAuth.instance.currentUser!.uid;
-    final data =
-        await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+    var tempData = [];
 
-    pointsTemp = data.data()!['points'];
+    final uuid = FirebaseAuth.instance.currentUser!.uid;
+    final data = await FirebaseFirestore.instance
+        .collection('cards')
+        .doc('Details')
+        .get();
+
+    final fetched = data.data();
+
+    final data2 =
+        await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+    final fetched_points = data2.data();
+
+    pointsTemp = fetched_points!['points'];
+    for (final points in fetched!.entries) {
+      tempData.add(points.value);
+    }
+    print(tempData);
 
     setState(() {
       fetchedPointsnew = pointsTemp;
+      fetchedData = tempData;
     });
   }
 
-  void _showPointsDialogBox(BuildContext context) {
-    String rewarded_points = widget.fetchedPoints.toString();
+  void _showPointsDialogBox(BuildContext context) async {
+    // final uid = FirebaseAuth.instance.currentUser!.uid;
+    // final data =
+    //     await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    // final temp = data.data();
+    // final fetchedPoints = temp!['points'];
+    // String rewarded_points = widget.fetchedPoints.toString();
 
     showDialog(
       context: context,
@@ -82,43 +106,75 @@ class _StoreState extends State<Store> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          // Image.asset(),
-          TextButton.icon(
-            onPressed: () {
-              _showPointsDialogBox(context);
-            },
-            icon: const Icon(
-              Icons.monetization_on,
-              size: 20,
-            ),
-            label: const Text(
-              'PlogPoints',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 5, 134, 10),
+    Widget content = (fetchedData.length == 0)
+        ? Center(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.all(25),
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Uh oh...Nothing here :(",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 6, 134, 72)),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    "Try going through Analysis and Collection Screen first!",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 6, 134, 72)),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-        title: const Text(
-          'Welcome to the Store!',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 5, 134, 10),
+          )
+        : ListView.builder(
+            itemCount: fetchedData.length,
+            itemBuilder: (ctx, index) => rewardsDetails(
+              fetchedData[index],
+            ),
+          );
+    return Scaffold(
+        appBar: AppBar(
+          actions: [
+            // Image.asset(),
+            TextButton.icon(
+              onPressed: () {
+                _showPointsDialogBox(context);
+              },
+              icon: const Icon(
+                Icons.monetization_on,
+                size: 20,
+              ),
+              label: const Text(
+                'PlogPoints',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 5, 134, 10),
+                ),
+              ),
+            ),
+          ],
+          title: const Text(
+            'Welcome to the Store!',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 5, 134, 10),
+            ),
           ),
         ),
-      ),
-      body: ListView.builder(
-        itemCount: dummyData.length,
-        itemBuilder: (ctx, index) => rewardsDetails(
-          dummyData[index],
-        ),
-      ),
-    );
+        body: content);
   }
 }

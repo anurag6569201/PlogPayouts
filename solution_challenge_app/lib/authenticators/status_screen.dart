@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/Store.dart';
@@ -27,8 +28,18 @@ class statusScreenState extends State<statusScreen> {
   final uuid = FirebaseAuth.instance.currentUser!.uid;
 
   void receivedPoints() async {
+    var data =
+        await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+    var tempData = data.data();
+    reward_points = tempData!['points'];
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uuid)
+        .update({'points': reward_points, 'trash_deposited': false});
+
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => Store(widget.points),
+      builder: (context) => Store(reward_points),
     ));
   }
 
