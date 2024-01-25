@@ -29,3 +29,8 @@ class UserProfileForm(forms.ModelForm):
             'state_region': forms.TextInput(attrs={'class': 'form-control'}),
             'profile_image': ClearableFileInput(attrs={'class': 'form-control', 'type': 'file'}),
         }
+
+class ContactForm(forms.Form):
+    name=forms.CharField(max_length=255)
+    email=forms.EmailField()
+    content=forms.CharField(widget=forms.Textarea)

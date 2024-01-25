@@ -70,6 +70,10 @@
 
 .profile_user_detail {
     align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin-left: 2em;
     overflow: hidden;
 }
@@ -77,7 +81,6 @@
     color: grey;
 }
 .profile_user_detail p{
-    height: 5em;
     overflow: hidden;
     color: grey;
     font-size: 1.3em;

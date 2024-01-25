@@ -197,21 +197,31 @@
     <div class="container">
         <div class="row revealUp">
             <div class="col-md-6 mx-auto">
-                <form action="contact.php" method="post">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
+                        <label for="{{ form.name.id_for_label }}" class="form-label">Name</label><br>
+                        {{ form.name }}
+                        <div class="invalid-feedback">
+                            {{ form.name.errors }}
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label><br>
+                        {{ form.email }}
+                        <div class="invalid-feedback">
+                            {{ form.email.errors }}
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" name="msg" rows="4"
-                            placeholder="Your Message"></textarea>
+                        <label for="{{ form.content.id_for_label }}" class="form-label">Message</label><br>
+                        {{ form.content }}
+                        <div class="invalid-feedback">
+                            {{ form.content.errors }}
+                        </div>
                     </div>
-                    <button style="margin-top: 1em;" type="submit" class="button">Submit</button>
+                    <button style="margin-top: 1em;" type="submit" class="btn btn-primary">Submit</button>
+                </form>
 
                     <legend style="padding-top: 20px; margin: 0; font-size: 15px;" class="text-center">Tap the
                         desired app to Contact</legend>
@@ -234,12 +244,11 @@
                         <a href="https://www.linkedin.com/in/anurag-singh-b90439282"><img width="32" height="32"
                                 src="https://img.icons8.com/ios/32/linkedin.png" alt="linkedin" /></a>
                     </ul>
-                </form>
-                <script>
+                <!-- <script>
                     document.getElementById("contact").addEventListener("submit", function () {
                         alert("Form submitted successfully!");
                     });
-                </script>
+                </script> -->
             </div>
         </div>
     </div>

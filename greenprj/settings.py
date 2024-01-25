@@ -29,6 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_HOST_USER = 'anurag6569201@gmail.com'
+EMAIL_HOST_PASSWORD = 'BG3KhIQHmgYZzbja'
+EMAIL_PORT = '587'
 
 # Application definition
 

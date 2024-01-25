@@ -10,13 +10,42 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
+from userauths.views import ContactForm
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 @login_required(login_url='userauths:sign-in')
 def index(request):
-    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            content = form.cleaned_data['content']
+
+            html = render_to_string('core/email.html', {
+                'name': name,
+                'email': email,
+                'content': content,
+            })
+
+            send_mail("The contact form subject", 'this is the message', email, ['anurag6569201@gmail.com'], html_message=html)
+            return redirect("core:index")
+    else:
+        form = ContactForm()
+
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        raise Http404("User profile not found")
+
     context = {
+        'form': form,
         "user_profile": user_profile,
         "edit_mode": False,
     }
+
     if not request.user.verified:
         return render(request, 'core/index.html', context)
     else:

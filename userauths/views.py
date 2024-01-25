@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth import logout
 # from userauths.models import User
+from .forms import ContactForm
 
 User=settings.AUTH_USER_MODEL
 
@@ -70,3 +71,4 @@ def logout_view(request):
     logout(request)
     messages.success(request,"You Logged-Out ,successfully")
     return redirect("userauths:sign-in")
+
