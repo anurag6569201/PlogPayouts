@@ -103,7 +103,16 @@ class _maskDetectorState extends State<maskDetector> {
     FirebaseFirestore.instance.collection('users').doc(fetchedUid).update({
       // 'username': _enteredUserName,
       // 'email': _enteredEmail,
-      'mask_ok': prediciton_mask
+      'mask_ok': prediciton_mask,
+      // 'Redeemed_Cards': [[]],
+    });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(fetchedUid)
+        .collection('redeemed_codes')
+        .doc('List')
+        .set({
+      'codes': [],
     });
 
     // setState(() {

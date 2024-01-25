@@ -90,14 +90,14 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo_2.jpg'),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add_to_photos),
-              label: const Text('Dunno!'),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer),
-            ),
+            // ElevatedButton.icon(
+            //   onPressed: () {},
+            //   icon: const Icon(Icons.add_to_photos),
+            //   label: const Text('Dunno!'),
+            //   style: ElevatedButton.styleFrom(
+            //       backgroundColor:
+            //           Theme.of(context).colorScheme.primaryContainer),
+            // ),
           ],
         ),
       ),

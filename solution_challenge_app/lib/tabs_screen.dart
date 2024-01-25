@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/Analyse.dart';
 import 'package:solution_challenge_app/Collect.dart';
@@ -9,6 +10,7 @@ import 'package:solution_challenge_app/locations.dart';
 
 import 'package:solution_challenge_app/main_drawer.dart';
 import 'package:solution_challenge_app/qr_code.dart';
+import 'package:solution_challenge_app/redeemed_codes_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   final String uid;
@@ -83,17 +85,46 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    points = 0;
+    fetchPoints();
+  }
+
+  var points;
+  void fetchPoints() async {
+    var temp;
+    var _userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.uid)
+        .get();
+
+    temp = _userData.data()!['points'];
+
+    setState(() {
+      points = temp;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     var _uid = widget.uid;
 
     Widget activeScreen = Home(_uid);
     // var activePageTitle = 'About';
     if (indexPage == 1) {
-      activeScreen = Store();
+      print(points);
+      activeScreen = Store(points);
       // activePageTitle = 'Your Favourites';
     }
     if (indexPage == 2) {
       activeScreen = Status();
+    }
+
+    if (indexPage == 3) {
+      activeScreen = redeemedCodesScreen();
     }
 
     return Scaffold(
@@ -108,9 +139,22 @@ class _TabsScreenState extends State<TabsScreen> {
         },
         currentIndex: indexPage,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.set_meal), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.start), label: 'Store'),
-          BottomNavigationBarItem(icon: Icon(Icons.start), label: 'Status')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Color.fromARGB(255, 91, 217, 156)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.store),
+              label: 'Store',
+              backgroundColor: Color.fromARGB(255, 91, 217, 156)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.lock_clock),
+              label: 'Status',
+              backgroundColor: Color.fromARGB(255, 91, 217, 156)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.start),
+              label: 'Redeemed Codes',
+              backgroundColor: Color.fromARGB(255, 91, 217, 156))
         ],
       ),
     );
