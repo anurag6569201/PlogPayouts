@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:solution_challenge_app/Store.dart';
 import 'package:solution_challenge_app/authenticators/reward.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -24,27 +25,43 @@ class statusScreenState extends State<statusScreen> {
 
   var reward_points;
   final uuid = FirebaseAuth.instance.currentUser!.uid;
+
+  void receivedPoints() async {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Store(widget.points),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          // title: const Text("Your Groceries"),
-          // actions: [
-          //   IconButton(
-          //     onPressed: _addItem,
-          //     icon: const Icon(Icons.add),
-          //   ),
-          // ],
+        title: const Text(
+          "Your Reward Points",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 5, 134, 10),
           ),
+        ),
+        // actions: [
+        //   IconButton(
+        //     onPressed: _addItem,
+        //     icon: const Icon(Icons.add),
+        //   ),
+        // ],
+      ),
       body: Dismissible(
         key: ValueKey(uuid),
-        onDismissed: (direction) {},
+        onDismissed: (direction) {
+          receivedPoints();
+        },
         child: Stack(
           children: [
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
               image: const NetworkImage(
-                  'https://ci3.googleusercontent.com/meips/ADKq_NZwgOwFTkB0kNGuIYR60_wFbJmuBx43tdyr-MPFeBkeP4_TsyvBiBQVcTN6U0BJNkRSDLeI6RIRdbZx67CD_--8rVHKz5SKaOwaJJpp4UQ8s4huhHhb8Q8ibtkDf-UERm-fXRPdUOSssAJqYgRWkCpzVlj9-VwoyhMZ=s0-d-e1-ft#https://m.media-amazon.com/images/G/31/gc/designs/livepreview/a_generic_orange_in_noto_email_in-main'),
+                  'https://ci3.googleusercontent.com/meips/ADKq_Nb38T5FVwp-gYi01dP2miqart7TVQfL7KkfwFZHrzbzc37-w8BKAeXW8VfdCJLF9KFUjRcMWyWobNfj8_8mpqGoQUk6McApSA6wWjL1xSXDZ3lWel-xJOnXl22tx7p1QzdiFitgIGJkXnSC9ydd23hzM3L6Q1iNJjF9MPoLr8w=s0-d-e1-ft#https://m.media-amazon.com/images/G/31/gc/designs/livepreview/congratulations_greatwin_noto_email_in-main'),
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -61,13 +78,13 @@ class statusScreenState extends State<statusScreen> {
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'SUCCESS!',
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -78,8 +95,8 @@ class statusScreenState extends State<statusScreen> {
                     ),
                     Row(
                       children: [
-                        Icon(
-                          Icons.money,
+                        const Icon(
+                          Icons.monetization_on,
                           size: 17,
                           color: Colors.white,
                         ),
