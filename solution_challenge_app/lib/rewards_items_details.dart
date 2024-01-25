@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart';
 
 class rewardsDetails extends StatefulWidget {
   rewardsDetails(this.cardData, {super.key});
-  rewards_data cardData;
+  var cardData;
 
   @override
   State<rewardsDetails> createState() => _rewardsDetailsState();
@@ -45,23 +45,23 @@ class _rewardsDetailsState extends State<rewardsDetails> {
     // print(widget.cardData.points_required);
     // print(dummyData[1].points_required);
     final uid = Uuid().v6();
-    if (points_available >= widget.cardData.points_required) {
+    if (points_available >= widget.cardData[1]) {
       // redeemed_card.add(widget.cardData.code);
-      points_available -= widget.cardData.points_required;
+      points_available -= widget.cardData[1];
       purchased = true;
-      dummyData.remove(widget.cardData);
+      // dummyData.remove(widget.cardData);
       collectedData.add([
         // redeemed_card.length,
         // redeemed_card,
-        widget.cardData.name,
-        widget.cardData.points_required,
-        widget.cardData.money,
+        widget.cardData[0],
+        widget.cardData[1],
+        widget.cardData[2],
         // widget.cardData.money_icon,
-        widget.cardData.url,
-        widget.cardData.code,
+        widget.cardData[3],
+        widget.cardData[4],
         uid,
       ]);
-
+      print("Points: ${points_available}");
       await FirebaseFirestore.instance
           .collection('users')
           .doc(uuid)
@@ -165,7 +165,7 @@ class _rewardsDetailsState extends State<rewardsDetails> {
           children: [
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(widget.cardData.url),
+              image: NetworkImage(widget.cardData[3]),
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -182,7 +182,7 @@ class _rewardsDetailsState extends State<rewardsDetails> {
                 child: Column(
                   children: [
                     Text(
-                      widget.cardData.name,
+                      widget.cardData[0],
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       softWrap: true,
@@ -198,12 +198,26 @@ class _rewardsDetailsState extends State<rewardsDetails> {
                     ),
                     Row(
                       children: [
-                        widget.cardData.money_icon,
+                        const Icon(
+                          Icons.money,
+                          color: Colors.white,
+                        ),
                         const SizedBox(
                           height: 25,
                         ),
                         Text(
-                          '${widget.cardData.money}',
+                          '${widget.cardData[2]}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.point_of_sale,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          '${widget.cardData[1]}',
                           style: const TextStyle(
                             color: Colors.white,
                           ),

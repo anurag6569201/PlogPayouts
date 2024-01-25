@@ -112,7 +112,13 @@ class _maskDetectorState extends State<maskDetector> {
         .collection('redeemed_codes')
         .doc('List')
         .set({
-      'codes': [],
+      'codes': [
+        "Welcome Gift Card",
+        10,
+        10,
+        "https://ci3.googleusercontent.com/meips/ADKq_NZwgOwFTkB0kNGuIYR60_wFbJmuBx43tdyr-MPFeBkeP4_TsyvBiBQVcTN6U0BJNkRSDLeI6RIRdbZx67CD_--8rVHKz5SKaOwaJJpp4UQ8s4huhHhb8Q8ibtkDf-UERm-fXRPdUOSssAJqYgRWkCpzVlj9-VwoyhMZ=s0-d-e1-ft#https://m.media-amazon.com/images/G/31/gc/designs/livepreview/a_generic_orange_in_noto_email_in-main",
+        "Already Added",
+      ],
     });
 
     // setState(() {

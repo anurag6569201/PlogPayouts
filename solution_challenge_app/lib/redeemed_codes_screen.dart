@@ -50,22 +50,21 @@ class _redeemedCodesScreenState extends State<redeemedCodesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Your Redeemable Codes',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 5, 134, 10),
+        appBar: AppBar(
+          title: const Text(
+            'Your Redeemable Codes',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 5, 134, 10),
+            ),
           ),
         ),
-      ),
-      body: ListView.builder(
-        itemCount: collectedCodesData.length,
-        itemBuilder: (ctx, index) => redeemedCodesDetailsScreen(
-          collectedCodesData[index],
-        ),
-      ),
-    );
+        body: ListView.builder(
+          itemCount: collectedCodesData.length,
+          itemBuilder: (ctx, index) => redeemedCodesDetailsScreen(
+            collectedCodesData[index],
+          ),
+        ));
   }
 }
