@@ -43,12 +43,12 @@ class _rankingDetailsState extends State<rankingDetails> {
                     placeholder: MemoryImage(kTransparentImage),
                     image: NetworkImage(widget.ranks[3]),
                     fit: BoxFit.cover,
-                    height: 200,
+                    height: 210,
                     width: double.infinity,
                   ),
                   Positioned(
                     bottom: 0,
-                    top: 115,
+                    top: 130,
                     left: 0,
                     right: 0,
                     child: Container(
@@ -56,6 +56,8 @@ class _rankingDetailsState extends State<rankingDetails> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 44),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             widget.ranks[1],
@@ -69,18 +71,19 @@ class _rankingDetailsState extends State<rankingDetails> {
                               color: Colors.white,
                             ),
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
+                          // const SizedBox(
+                          //   height: 12,
+                          // ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Icon(
                                 Icons.money,
                                 color: Colors.white,
                               ),
-                              const SizedBox(
-                                height: 25,
-                              ),
+                              // const SizedBox(
+                              //   height: 25,
+                              // ),
                               Text(
                                 '${widget.ranks[2]}',
                                 style: const TextStyle(
@@ -88,18 +91,18 @@ class _rankingDetailsState extends State<rankingDetails> {
                                 ),
                               ),
                               const Spacer(),
-                              // const Icon(
-                              //   Icons.point_of_sale,
-                              //   color: Colors.white,
-                              // ),
-                              // Text(
-                              //   '${widget.cardData[1]}',
-                              //   style: const TextStyle(
-                              //     color: Colors.white,
-                              //   ),
-                              // ),
+                              CircleAvatar(
+                                radius: 15.0,
+                                backgroundImage: NetworkImage(widget.ranks[0]),
+                                backgroundColor: Colors.transparent,
+                              ),
                             ],
                           ),
+                          // const Spacer(),
+                          // const Icon(
+                          //   Icons.point_of_sale,
+                          //   color: Colors.white,
+                          // ),
                         ],
                       ),
                     ),
