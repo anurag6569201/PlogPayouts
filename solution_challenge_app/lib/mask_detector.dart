@@ -104,7 +104,7 @@ class _maskDetectorState extends State<maskDetector> {
       // 'username': _enteredUserName,
       // 'email': _enteredEmail,
       'mask_ok': prediciton_mask,
-      // 'Redeemed_Cards': [[]],
+      'points': 0,
     });
     await FirebaseFirestore.instance
         .collection('users')
