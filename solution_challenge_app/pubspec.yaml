@@ -120,6 +120,12 @@ flutter:
     - assets/images/exit.jpg
     - assets/images/map.jpg
     - assets/images/success.jpg
+    - assets/images/winner.jpg
+    - assets/images/trophies.jpg
+    - assets/images/first.png
+    - assets/images/second.jpg
+    - assets/images/third.jpg
+    - assets/images/others.jpg
     
 
    
