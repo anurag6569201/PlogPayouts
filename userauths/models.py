@@ -46,3 +46,9 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+
+class Contribution(models.Model):
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    image = models.ImageField(upload_to='contributions/', null=True, blank=True)

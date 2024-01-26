@@ -49,7 +49,11 @@ INSTALLED_APPS = [
     'core',
     'blog',
     'userauths',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'Bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

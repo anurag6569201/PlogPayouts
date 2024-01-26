@@ -540,11 +540,20 @@
     font-size: 1em;
 }
 
+#id_namee,
+#id_amount,
+#id_name,
+#id_email,
+#id_content,
 .form-control {
     border: 2px solid transparent;
+    font-size: 1.6em;
+    width: 100%;
     background-color: rgba(255, 255, 255, .2);
 }
-
+#id_name:focus,
+#id_email:focus,
+#id_content:focus,
 .form-control:focus {
     background-color: rgba(217, 229, 101, .6);
     border: 2px solid #d9e565;

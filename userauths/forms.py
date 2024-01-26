@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from userauths.models import User
 from .models import UserProfile
 from django.forms.widgets import ClearableFileInput
+from .models import Contribution
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -34,3 +35,8 @@ class ContactForm(forms.Form):
     name=forms.CharField(max_length=255)
     email=forms.EmailField()
     content=forms.CharField(widget=forms.Textarea)
+
+class ContributionForm(forms.ModelForm):
+    class Meta:
+        model = Contribution
+        fields = ['latitude', 'longitude', 'image']
