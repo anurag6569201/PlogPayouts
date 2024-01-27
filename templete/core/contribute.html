@@ -9,11 +9,20 @@
       <div class="container image-contro">
         <div class="money_head revealUp">
           <strong>Contribution</strong>
-      </div>
-          <h1 class="display-4">Contribute Images and Location Data to the Green Plog</h1><hr><br>
-          <p class="lead">Help make a positive impact on our environment by contributing images and location data to the
-              Green Plog Project! Your contributions will assist in identifying areas that need attention for a cleaner
-              and greener world. Follow the simple steps below to make your contribution:</p><br>
+      </div><br><br>
+          <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-4">Contribute Images and Location Data to the Green Plog</h1><hr><br>
+                    <p class="lead">Help make a positive impact on our environment by contributing images and location data to the
+                        Green Plog Project! Your contributions will assist in identifying areas that need attention for a cleaner
+                        and greener world. Follow the simple steps below to make your contribution:</p>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" style="border-radius: 30%;" src="{% static 'assets/images/waste2.svg' %}">
+                </div>
+            </div>
+          </div>
           <!-- How to Contribute Section -->
           <div class="container"><br>
               <h1>How to Contribute?</h1><hr><br>
@@ -67,17 +76,17 @@
                                   and greener environment through plogging.</p>
 
                               <label class="login-signup-label">Latitude:</label>
-                              {{ form.latitude }} <br><br>
+                              {{ contribute_form.latitude }} <br><br>
 
                               <label class="login-signup-label">Longitude:</label>
-                              {{ form.longitude }} <br><br>
+                              {{ contribute_form.longitude }} <br><br>
 
                               <label class="login-signup-label">Image Upload:</label>
-                              {{ form.image }}
+                              {{ contribute_form.image }}
                               <button class="donate-btn" style="margin-top: 1em;display: flex;align-items: center;justify-content: center;"
                                   class="login-signup-button" type="submit"><span class="material-symbols-outlined"
                                       style="margin-right: .4em;">volunteer_activism</span>Submit Contribution</button>
-                          </form>
+                          </form><br><br>
                       </div>
                       <!-- End Login/Signup Form -->
                   </div>
@@ -91,11 +100,15 @@
               <strong>1- Privacy:</strong>
               <ul>Ensure that you do not share private or sensitive information in your images. Focus on the
                   environmental aspects that need attention.</ul>
+                  
           </div>
           <div class="col-md-6">
               <strong>2- Responsible Contribution:</strong>
               <ul>Only contribute images and data from public spaces or areas where you have permission to
                   do so.</ul>
+          </div>
+          <div class="col-md-12" style="display: flex;align-items: center;justify-content: center;">
+            <img src="{% static 'assets/images/waste3.svg' %}" alt="" class="img-fluid" style="max-width: 45em;">
           </div>
       </div>
   </div>
@@ -117,8 +130,13 @@
                       <strong>3- Inspire Action:</strong>
                       <ul>Inspire others to take action and participate in the collective effort to create a cleaner
                           and healthier planet.</ul>
-                  </div>
-              </div><br>
+                  </div><hr>
+                  <div class="col-md-12">
+                    <br><br>
+                    <p style="font-weight: 600;font-size: 2.5em;color: black;">Together, we can create a significant impact on the environment. Thank you for being a part of the Green Plog Project!</p>
+                    <br><br>
+                </div>
+              </div>
 
           
           </div>

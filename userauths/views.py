@@ -6,7 +6,9 @@ from django.conf import settings
 from django.contrib.auth import logout
 # from userauths.models import User
 from .forms import ContactForm
+from django.contrib.auth.decorators import login_required
 from .forms import ContributionForm
+from userauths.models import UserProfile
 
 User=settings.AUTH_USER_MODEL
 
@@ -73,13 +75,18 @@ def logout_view(request):
     messages.success(request,"You Logged-Out ,successfully")
     return redirect("userauths:sign-in")
 
+@login_required
 def contribute(request):
     if request.method == 'POST':
-        form = ContributionForm()
+        form = ContributionForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('core:index')
     else:
         form = ContributionForm()
-
-    return render(request, 'core/contribute.html', {'form': form})
+    user_profile = UserProfile.objects.get(user=request.user)
+    context = {
+        "user_profile": user_profile,
+        'contribute_form': form,
+    }
+    return render(request, 'core/contribute.html', context)
