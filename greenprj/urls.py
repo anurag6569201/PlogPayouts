@@ -24,6 +24,7 @@ urlpatterns = [
     path('',include('core.urls')),
     path('user/',include('userauths.urls')),
     path('blog/',include('blog.urls')),
+    path('map/', include('map_app.urls')),
 ]
 
 if settings.DEBUG:

@@ -44,6 +44,8 @@ class UserProfile(models.Model):
     state_region = models.CharField(max_length=100, default="Unknown Region")
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
+    captcha_score=models.FloatField(default=0.0)
+
     def __str__(self):
         return self.user.username
     

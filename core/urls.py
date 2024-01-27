@@ -13,4 +13,5 @@ urlpatterns=[
     path('verifier-index',views.verifier,name='verifier'),
     path('profile/verifier', views.user_profile, name='profile'),
     path('profile/veus/edit', UserProfileUpdateView.as_view(), name='verifier_edit'),
+
 ]

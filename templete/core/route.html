@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>Django MapmyIndia API Course - Routing</h3>
+
+<div class="container" style="margin-top: 10em;">
+
+   <label for="id-mapmyindia-address-a">Start Address</label>
+   <input type="text" placeholder="*Begin typing address" id="id-mapmyindia-address-a" name="mapmyindia_address_a">
+   
+   <label for="id-mapmyindia-address-c">Way point 1</label>
+   <input type="text" placeholder="*Begin typing address" id="id-mapmyindia-address-c" name="mapmyindia_address_c">
+
+   <label for="id-mapmyindia-address-d">Way point 2</label>
+   <input type="text" placeholder="*Begin typing address" id="id-mapmyindia-address-d" name="mapmyindia_address_d">
+
+   <label for="id-mapmyindia-address-b">Destination Address</label>
+   <input type="text" placeholder="*Begin typing address" id="id-mapmyindia-address-b" name="mapmyindia_address_b">
+
+   
+
+
+   <input type="hidden" class="geo" id="id-lat-a" value="">
+   <input type="hidden" class="geo" id="id-long-a" value="">
+   <input type="hidden" class="geo" id="id-lat-b" value="">
+   <input type="hidden" class="geo" id="id-long-b" value="">
+   <input type="hidden" class="geo" id="id-lat-c" value="">
+   <input type="hidden" class="geo" id="id-long-c" value="">
+   <input type="hidden" class="geo" id="id-lat-d" value="">
+   <input type="hidden" class="geo" id="id-long-d" value="">
+
+
+</div>
+
+<script type="text/javascript">
+
+   var mapmyindia_api_key = "{{mapmyindia_api_key|safe}}";
+   var base_country = "{{base_country|safe}}";
+
+ </script>
+
+<script src="{% static 'assets/script/mapmyindia_places_waypoints.js' %}"></script>
+
+{% endblock content %}

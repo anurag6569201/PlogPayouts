@@ -1,0 +1,23 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>Django MapmyIndia API Course - Routing</h3>
+
+<div class="container" style="margin-top: 10em;">
+
+    <!-- Add your HTML form or other content here -->
+
+</div>
+
+<script type="text/javascript">
+
+   var mapmyindia_api_key = "{{mapmyindia_api_key|safe}}";
+   var base_country = "{{base_country|safe}}";
+
+ </script>
+
+<script src="{% static 'assets/script/mapmyindia_places_waypoints.js' %}"></script>
+
+{% endblock content %}

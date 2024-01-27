@@ -56,14 +56,6 @@ gsap.utils.toArray(".revealUp").forEach(function (elem) {
 });
 
 
-// loader
-const loader = document.getElementById("loader");
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    loader.style.display = "none";
-  },);
-});
-
 // profile section
 let show_profile = document.querySelector(".navbar-brand img");
 let profile = document.querySelector(".profile");

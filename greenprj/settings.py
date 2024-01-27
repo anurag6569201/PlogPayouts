@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'blog',
     'userauths',
     'crispy_forms',
+    'map_app',
 ]
 
 CRISPY_TEMPLATE_PACK = 'Bootstrap4'

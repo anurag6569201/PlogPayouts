@@ -14,6 +14,11 @@ from userauths.views import ContactForm
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
+
+from django.shortcuts import render, redirect
+
+
+
 @login_required(login_url='userauths:sign-in')
 def index(request):
     if request.method == "POST":
@@ -132,6 +137,3 @@ class UserProfileUpdateView(FormView):
             self.success_url = reverse_lazy('core:profile')
 
         return super(UserProfileUpdateView, self).dispatch(request, *args, **kwargs)
-
-
-

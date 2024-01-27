@@ -1,0 +1,23 @@
+<!-- map_app/templates/map_app/show_path_with_route.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Path with Route</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show Path with Route</h1>
+    {% if map_html %}
+        <div id="map">{{ map_html|safe }}</div>
+    {% endif %}
+    <a href="{% url 'home' %}">Go back to Home</a>
+</body>
+</html>
