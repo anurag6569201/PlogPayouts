@@ -7,7 +7,7 @@ import 'package:location/location.dart';
 import 'package:solution_challenge_app/data/location_categories.dart';
 import 'package:solution_challenge_app/favourites_screen.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:transparent_image/transparent_image.dart';
 // class localStoreLocations {
 //   localStoreLocations(this.id, this.title, this.coordinates);
 
@@ -40,10 +40,8 @@ class _locationDetailsState extends State<locationDetails> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog<String>(
-        
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          
           // backgroundColor: Theme.of(context).colorScheme.onBackground,
           title: const Text("IMPORTANT!"),
           content: const Text(
@@ -56,7 +54,6 @@ class _locationDetailsState extends State<locationDetails> {
               },
             ),
           ],
-          
         ),
       );
     });
@@ -186,56 +183,76 @@ class _locationDetailsState extends State<locationDetails> {
         // ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(40),
-          margin: EdgeInsets.all(40),
-          child: Column(
-            children: [
-              //Add map here
+        // child: Container(
+        // alignment: Alignment.center,
+        // padding: EdgeInsets.all(40),
+        // margin: EdgeInsets.all(40),
+        child: Column(
+          children: [
+            //Add map here
 
-              // Image.network(
-              //   meal.imageUrl,
-              //   height: 300,
-              //   width: double.infinity,
-              //   fit: BoxFit.cover,
-              // ),
-              const SizedBox(
-                height: 16,
+            Card(
+              margin: const EdgeInsets.all(8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
-
-              Text(
-                "Id: ${widget.category.Id}",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+              clipBehavior: Clip.hardEdge,
+              elevation: 2,
+              child: InkWell(
+                onTap: () {
+                  // buyCardDialogBox(context);
+                },
+                child: Stack(
+                  children: [
+                    FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: NetworkImage(widget.category.imageUrl),
+                      fit: BoxFit.cover,
+                      height: 200,
+                      width: double.infinity,
                     ),
+                  ],
+                ),
               ),
-              // const Spacer(),
-              const SizedBox(
-                height: 16,
-              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
 
-              Text(
-                "Time: ",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-              // const Spacer(),
-              const SizedBox(
-                height: 16,
-              ),
+            Text(
+              "Id: ${widget.category.Id}",
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 6, 134, 72)),
+            ),
+            // const Spacer(),
+            const SizedBox(
+              height: 16,
+            ),
 
-              Text(
-                "Distance: ",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-            ],
-          ),
+            // Text(
+            //   "Time: ",
+            //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            //         color: Theme.of(context).colorScheme.primary,
+            //       ),
+            // ),
+            // const Spacer(),
+            const SizedBox(
+              height: 16,
+            ),
+
+            Text(
+              "Distance: ${double.parse(widget.category.distance.toStringAsFixed(2))} km",
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 6, 134, 72)),
+            ),
+          ],
         ),
       ),
     );
+    // );
   }
 }

@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:solution_challenge_app/data/location_categories.dart';
 import 'package:solution_challenge_app/favourites_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:solution_challenge_app/show_map_favourites.dart';
 
 // class localStoreLocations {
 //   localStoreLocations(this.id, this.title, this.coordinates);
@@ -32,6 +35,8 @@ class _locationDetailsFavouriteState extends State<locationDetailsFavourite> {
   void initState() {
     // TODO: implement initState
     super.initState();
+ 
+    // _loadItems();
     // fetchCurrentLocation();
   }
 
@@ -104,51 +109,52 @@ class _locationDetailsFavouriteState extends State<locationDetailsFavourite> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          alignment: Alignment.center,
+          // alignment: Alignment(0.5, 1),
           padding: EdgeInsets.all(40),
           margin: EdgeInsets.all(40),
+          alignment: Alignment.center,
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //Add map here
-
-              // Image.network(
-              //   meal.imageUrl,
-              //   height: 300,
-              //   width: double.infinity,
-              //   fit: BoxFit.cover,
-              // ),
-              const SizedBox(
-                height: 16,
-              ),
-
               Text(
                 "Id: ${widget.category.Id}",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 6, 134, 72)),
               ),
               // const Spacer(),
+
               const SizedBox(
                 height: 16,
               ),
 
               Text(
-                "Time: ",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                "Distance: ${double.parse(widget.category.distance.toStringAsFixed(2))} km",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 6, 134, 72)),
               ),
-              // const Spacer(),
               const SizedBox(
-                height: 16,
+                height: 40,
               ),
 
-              Text(
-                "Distance: ",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
+              ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => showMapFavourites(widget.category),
+                    ));
+                  },
+                  icon: Icon(Icons.map),
+                  label: const Text(
+                    'Show on Map!',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 6, 134, 72)),
+                  ))
             ],
           ),
         ),

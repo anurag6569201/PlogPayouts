@@ -39,6 +39,14 @@ class _favouritesScreenState extends State<favouritesScreen> {
     print(response.body);
     final listData = json.decode(response.body);
 
+    final url_dist = 'http://10.0.2.2:5000/timeDistance?query=' + userUid;
+    // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
+    // print("url is: ${Uri.parse(url_dist)}");
+    final response_dist = await http.get(Uri.parse(url_dist));
+    print(response_dist.body);
+    // final response = await http.get(url);
+    var fetchedDistance = jsonDecode(response_dist.body)['distance'];
+
     for (final data in listData.entries) {
       double lat = data.value['latitude'];
       double lng = data.value['longitude'];
@@ -47,13 +55,13 @@ class _favouritesScreenState extends State<favouritesScreen> {
       coordinates.add(lng);
       fetchedItem.add(
         Category(
-          Id: data.value['Id'].toString(),
-          title: data.value['name'].toString(),
-          color: Color(data.value['color']),
-          coordinates: coordinates,
-          imageUrl: data.value['image_url'].toString(),
-          uuid: data.key.toString(),
-        ),
+            Id: data.value['Id'].toString(),
+            title: data.value['name'].toString(),
+            color: Color(data.value['color']),
+            coordinates: coordinates,
+            imageUrl: data.value['image_url'].toString(),
+            uuid: data.key.toString(),
+            distance: fetchedDistance),
       );
       // print(data.value['name']);
     }
@@ -127,22 +135,22 @@ class _favouritesScreenState extends State<favouritesScreen> {
             left: 18,
             right: 18,
             child: ElevatedButton.icon(
-                    onPressed: () {
-                      // _routeOptimization();
-                      // setState(() {
-                      //   _isLoading = false;
-                        //   // if (routes.isEmpty == false) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (ctx) => routesScreen(),
-                              ),
-                            );
-                        //   // }
-                      // });
-                    },
-                    icon: const Icon(Icons.map),
-                    label: const Text('Plan Your Route'),
+              onPressed: () {
+                // _routeOptimization();
+                // setState(() {
+                //   _isLoading = false;
+                //   // if (routes.isEmpty == false) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => routesScreen(),
                   ),
+                );
+                //   // }
+                // });
+              },
+              icon: const Icon(Icons.map),
+              label: const Text('Plan Your Route'),
+            ),
           )
         ],
       ),
