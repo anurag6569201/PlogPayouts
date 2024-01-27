@@ -7,7 +7,8 @@ class Category {
       required this.color,
       required this.coordinates,
       required this.imageUrl,
-      required this.uuid});
+      required this.uuid,
+      required this.distance});
 
   String Id;
   String title;
@@ -15,4 +16,6 @@ class Category {
   List<double> coordinates;
   String imageUrl;
   String uuid;
+
+  double distance;
 }

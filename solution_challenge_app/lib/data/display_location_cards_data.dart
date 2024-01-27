@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/data/location_categories.dart';
+import 'package:solution_challenge_app/locations.dart';
 
 // Constants in Dart should be written in lowerCamelcase.
 final availableCategories = [
@@ -9,14 +10,17 @@ final availableCategories = [
       color: Colors.purple,
       coordinates: [20.289392134840174, 85.74188592015321],
       imageUrl: 'Null',
-      uuid: 'Null'),
+      uuid: 'Null',
+      distance: 0),
+      
   Category(
       Id: '2',
       title: 'Bowlful Bites',
       color: Colors.red,
       coordinates: [20.28595147758, 85.75135547779522],
       imageUrl: 'Null',
-      uuid: 'Null'),
+      uuid: 'Null',
+      distance: 0),
 
   Category(
       Id: '3',
@@ -24,7 +28,8 @@ final availableCategories = [
       color: Colors.orange,
       coordinates: [20.293225116208706, 85.73277612608766],
       imageUrl: 'Null',
-      uuid: 'Null'),
+      uuid: 'Null',
+      distance: 0),
   // Category(
   //   id: 'c4',
   //   title: 'German',

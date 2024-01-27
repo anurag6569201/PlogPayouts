@@ -39,6 +39,14 @@ class _displayLocationsState extends State<displayLocations> {
         'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
         'solution-challenge/${userUid}.json');
 
+  final url_dist = 'http://10.0.2.2:5000/timeDistance?query=' + userUid;
+    // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
+    // print("url is: ${Uri.parse(url_dist)}");
+    final response_dist = await http.get(Uri.parse(url_dist));
+    print(response_dist.body);
+    // final response = await http.get(url);
+    var fetchedDistance = jsonDecode(response_dist.body)['distance'];
+
     final response = await http.get(url);
     print(response.body);
     final listData = json.decode(response.body);
@@ -56,7 +64,8 @@ class _displayLocationsState extends State<displayLocations> {
             color: Color(data.value['color']),
             coordinates: coordinates,
             imageUrl: data.value['image_url'].toString(),
-            uuid: data.key.toString()),
+            uuid: data.key.toString(),
+            distance: fetchedDistance),
       );
       print("The unique id is ${data.key.toString()}");
     }
