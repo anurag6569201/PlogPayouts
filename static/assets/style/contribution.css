@@ -1,5 +1,5 @@
 .contro-outer{
-    background: url(../images/registration.svg);
+    background: url(../images/layered-waves-haikei\ \(1\).svg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@
     font-size: 1.8em;
     font-family: 'atomic', sans-serif;
     text-align: left;
-    color: #f8f8f8;
+    color: #aebb36;
 }
 
 .image-contro .row strong{
@@ -32,7 +32,7 @@
     font-size: 1.8em;
     font-family: 'atomic', sans-serif;
     text-align: left;
-    color: #f8f8f8;
+    color: #aebb36;
 }
 .image-contro label{
     font-size: 1.8em;
@@ -41,7 +41,7 @@
 #id_latitude,
 #id_longitude,
 #id_image{
-    border: 2px solid transparent;
+    border: 2px solid #aebb36;
     font-size: 1.6em;
     width: 100%;
     background-color: rgba(255, 255, 255, .2);
