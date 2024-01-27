@@ -29,12 +29,16 @@ from keras.applications.vgg19 import preprocess_input
 
 
 from ultralytics import YOLO
-from autodistill_yolov8 import YOLOv8
+# from autodistill_yolov8 import YOLOv8
 
 import json
 import googlemaps
 from datetime import datetime
 
+
+MAPBOX_API_KEY = 'pk.eyJ1IjoieXV2cmFqc2luZ2gtbWlzdCIsImEiOiJjbHJoa2l6cG0wcTNlMnFwOWlrNDl5cDZ6In0.5mYZ0IGOQEub0fAOgML9qg'
+    
+    
 
 from geopy.distance import geodesic as GD
 from geopy.geocoders import Nominatim
@@ -186,6 +190,97 @@ def location_data():
     return planned_route
 
 def cal_dist(place1, place2):
+    return GD(place1,place2).km
+
+def calculate_duration(start_point, end_point, profile='walking'):
+        base_url = f'https://api.mapbox.com/directions/v5/mapbox/{profile}'
+        access_token = f'access_token={MAPBOX_API_KEY}'
+        
+        coordinates = f'{start_point[0]},{start_point[1]};{end_point[0]},{end_point[1]}'
+        
+       
+        url = f'{base_url}/{coordinates}?{access_token}'
+        print(url)
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            print(data)
+            duration = data['routes'][0]['duration']
+            
+    
+            duration = duration / 3600
+
+@app.route('/timeDistance', methods=['GET', 'POST'])
+def time_and_distance() :
+    full_path = request.full_path
+    print(full_path)
+    query_parameter = full_path.split('query=')[1]
+    print(query_parameter)
+    
+    # print(f'/chosen-locations')
+    print(f'https://solution-challenge-app-409f6-default-rtdb.firebaseio.com/solution-challenge/{query_parameter}/chosen-locations/')
+    ref_current_location = db.reference(f'solution-challenge/{query_parameter}/chosen-locations/')
+    data_curr_location = ref_current_location.get()
+    
+    ref = db.reference(f'solution-challenge/{query_parameter}')
+    data = ref.get()
+    
+    decoded_curr_location = data_curr_location.values()
+    decoded = data
+    # city_ids = []
+    current_location = []
+    # print(len(decoded))
+    # print(decoded)
+    dict_places = {}
+    location = ""
+    # print(decoded_curr_location)
+    # print(decoded.keys())
+    for i in decoded_curr_location:
+        # print(i)
+        # city_ids.append(int(i['Id']))
+        # dict_places[int(i['Id'])] = (i['latitude'], i['longitude'])
+     
+            location = i['current_location']
+      
+    for i in decoded.keys():
+        # print(i)
+        # city_ids.append(int(i['Id']))
+        # print(type(decoded.keys()))
+        # for j in decoded.keys() :
+        if i not in ['chosen-locations', 'collected-garbage']:
+            dict_places[int(decoded[i]['Id'])] = (decoded[i]['latitude'], decoded[i]['longitude'])
+           
+                # print(decoded[i])
+                # break
+    # print("location is ", location)
+    # current_location.append(location)
+    # location = geolocator.geocode(current_location[0])
+    dict_places[0] = (location[0], location[1])
+    print(dict_places)
+    # print(city_ids)
+    # print(dict_places)
+    data = []
+    for i in range(len(dict_places)):
+        if(i != 0):
+            data.append((cal_dist_flask(dict_places[i], dict_places[0])))
+    # planned_route = route_optimize(dict_places, city_names=city_ids)
+    
+
+    
+        
+        
+    return jsonify({
+        "status": "success",
+        "distance": data[0],
+        # "duration": duration
+        # "confidence": str(classes[0][0][2]),
+        # "upload_time": datetime.now()
+    })
+
+
+def cal_dist_flask(place1, place2):
     return GD(place1,place2).km
 
 
@@ -369,9 +464,9 @@ def identifyGarbage():
     
 def counting(img_path):
     print(img_path)
-    model = YOLO('yolov8m.pt')
-    countings = model.predict('static/gloves/gloves_0.jpg')
-    return 0
+    model = YOLO('models/best.pt')
+    # countings = model.predict('img_path')
+    return 2
 
 
 def identifyImage_garbage(img_path):
