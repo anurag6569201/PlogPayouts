@@ -1,25 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Contributions</title>
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
     <style>
         #map {
-            height: 400px;
+            height: 30em;
             width: 100%;
         }
+        .redeem_storeimage{
+            background-image: url(../../static/assets/images/location.gif);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .content_head strong{
+            text-align: center;
+        }
     </style>
-</head>
-<body>
-    <h1>Show Contributions on Map</h1>
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-    {% else %}
-        {% if map_html %}
-            <div id="map">{{ map_html|safe }}</div>
-        {% endif %}
-    {% endif %}
-    <a href="{% url 'home' %}">Go back to Home</a>
-</body>
-</html>
+
+<section>
+
+    <div class="redeem_store" id="redeem_store">
+        <div class="content_head" style="margin-top: 6.5em;position: relative;text-align: center;">
+            <strong>Ma</strong><strong>p-Points</strong>
+        </div>
+        <div class="row revealUp">
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="redeem_storeimage">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="redeem_storetext">
+                        <div class="redeem_para">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis harum
+                                eos
+                                eaque, dolores perferendis. Nemo alias animi autem tempora quod, laborum fugit, cum
+                                nostrum odio consequatur aliquam dolorem quis. alias animi autem tempora quod,
+                                laborum
+                                fugit, cum nostrum odio consequatur aliquam dolorem quis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="redeem_store" id="redeem_store">
+    <div class="row revealUp">
+        
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="redeem_storetext">
+                    
+                    <div class="redeem_para" style="transform: translateY(0em);padding-top: 0em;">
+                        <div class="button" style="margin-bottom: 3em;">
+                            <a href="{% url 'show_full' %}">Plog Nearby...</a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis harum
+                            eos
+                            eaque, dolores perferendis. Nemo alias animi autem tempora quod, laborum fugit, cum
+                            nostrum odio consequatur aliquam dolorem quis. alias animi autem tempora quod,
+                            laborum
+                            fugit, cum nostrum odio consequatur aliquam dolorem quis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card">
+                
+                    {% if error_message %}
+                        <p>{{ error_message }}</p>
+                    {% else %}
+                        {% if map_html %}
+                            <div id="map" style="position: static;">{{ map_html|safe }}</div>
+                        {% endif %}
+                    {% endif %}
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+{% endblock content %}

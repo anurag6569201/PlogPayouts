@@ -2,9 +2,6 @@
 from django.shortcuts import render
 import folium
 
-def home(request):
-    return render(request, 'map_app/home.html')
-
 def draw_path_on_map(coordinates):
     m = folium.Map(location=coordinates[0], zoom_start=14)
     folium.Marker(location=coordinates[0], popup='Point 1', icon=folium.Icon(color='blue')).add_to(m)
@@ -58,3 +55,14 @@ def show_contributions(request):
         return render(request, 'map_app/show_contributions.html', {'map_html': map_html})
     else:
         return render(request, 'map_app/show_contributions.html', {'error_message': 'No contributions available.'})
+    
+    
+def show_full(request):
+    contributions = Contribution.objects.all()
+
+    if contributions:
+        map_html = draw_contributions_on_map(contributions)
+        return render(request, 'map_app/show_full.html', {'map_html': map_html})
+    else:
+        return render(request, 'map_app/show_full.html', {'error_message': 'No contributions available.'})
+    

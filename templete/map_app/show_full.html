@@ -1,0 +1,29 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    #map {
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+    }
+    
+</style>
+<div class="container-fluid" style="padding: 0;">
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    {% else %}
+    {% if map_html %}
+        <div id="map" style="position: static;">{{ map_html|safe }}</div>
+    {% endif %}
+    {% endif %}
+</div>
+<style>
+    .leaflet-left .leaflet-control{
+        margin-top: 6.5em;
+    }
+</style>
+
+{% endblock content %}
