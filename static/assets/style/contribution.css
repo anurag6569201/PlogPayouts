@@ -38,6 +38,9 @@
     font-size: 1.8em;
     font-weight: 600;
 }
+#id_Verify_latitude,
+#id_Verify_longitude,
+#id_Verify_image,
 #id_latitude,
 #id_longitude,
 #id_image{
@@ -46,7 +49,9 @@
     width: 100%;
     background-color: rgba(255, 255, 255, .2);
 }
-
+#id_Verify_latitude:focus,
+#id_Verify_longitude:focus,
+#id_Verify_image:focus,
 #id_latitude:focus,
 #id_longitude:focus,
 #id_image:focus{

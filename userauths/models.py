@@ -54,3 +54,9 @@ class Contribution(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     image = models.ImageField(upload_to='contributions/', null=True, blank=True)
+
+
+class Verify_Contribution(models.Model):
+    Verify_latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    Verify_longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    Verify_image = models.ImageField(upload_to='Verify_contributions/', null=True, blank=True)

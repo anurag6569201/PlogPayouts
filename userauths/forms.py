@@ -4,6 +4,7 @@ from userauths.models import User
 from .models import UserProfile
 from django.forms.widgets import ClearableFileInput
 from .models import Contribution
+from .models import Verify_Contribution
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -40,3 +41,8 @@ class ContributionForm(forms.ModelForm):
     class Meta:
         model = Contribution
         fields = ['latitude', 'longitude', 'image']
+
+class Verify_ContributionForm(forms.ModelForm):
+    class Meta:
+        model = Verify_Contribution
+        fields = ['Verify_latitude', 'Verify_longitude', 'Verify_image']

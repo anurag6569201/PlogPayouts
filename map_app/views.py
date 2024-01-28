@@ -1,5 +1,6 @@
-
-from django.shortcuts import render
+from userauths.forms import Verify_ContributionForm
+from userauths.models import UserProfile
+from django.shortcuts import render,redirect
 import folium
 
 def draw_path_on_map(coordinates):
@@ -66,3 +67,17 @@ def show_full(request):
     else:
         return render(request, 'map_app/show_full.html', {'error_message': 'No contributions available.'})
     
+def verify_contributions(request):
+    if request.method == 'POST':
+        form = Verify_ContributionForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('core:index')
+    else:
+        form = Verify_ContributionForm()
+    user_profile = UserProfile.objects.get(user=request.user)
+    context = {
+        "user_profile": user_profile,
+        'verify_contribution_form': form,
+    }
+    return render(request, 'map_app/verify_contributions.html',context)

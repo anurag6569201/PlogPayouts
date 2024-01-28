@@ -10,7 +10,33 @@
         </div>
     </div> -->
 
-
+<script>
+    let navbar = document.getElementById("navbar");
+    let hero_text = document.querySelector(".hero_text p");
+    window.addEventListener("scroll", () => {
+    const offset = window.pageYOffset;
+    console.log(offset);
+    if (offset >= 10) {
+        navbar.style.backdropFilter = "blur(10px)";
+    }
+    else {
+        navbar.style.backdropFilter = "blur(0px)";
+    }
+});
+</script>
+<style>
+    #navbar {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        position: fixed;
+        background: transparent!important;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        backdrop-filter: blur(0px);
+    }
+</style>
 <header class="index-header">
     <span>
         <li>

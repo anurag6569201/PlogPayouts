@@ -98,11 +98,11 @@
     align-items: center;
     justify-content: right;
     position: fixed;
-    background: transparent!important;
+    background: rgba(217, 229, 101,.3)!important;
     top: 0;
     width: 100%;
     z-index: 1000;
-    backdrop-filter: blur(0px);
+    backdrop-filter: blur(20px);
 }
 .li-container{
     display: flex;

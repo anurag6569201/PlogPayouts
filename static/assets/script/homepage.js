@@ -1,16 +1,4 @@
-let navbar = document.getElementById("navbar");
-let hero_text = document.querySelector(".hero_text p");
-window.addEventListener("scroll", () => {
-  const offset = window.pageYOffset;
-  console.log(offset);
-  if (offset >= 10) {
-    navbar.style.backdropFilter = "blur(10px)";
-  }
-  else {
-    navbar.style.backdropFilter = "blur(0px)";
-  }
 
-});
 
 //   text revealing js
 gsap.registerPlugin(ScrollTrigger);
