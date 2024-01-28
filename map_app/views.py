@@ -34,3 +34,27 @@ def show_path(request):
         return render(request, 'map_app/show_path.html', {'map_html': map_html})
     
     return render(request, 'map_app/show_path.html')
+
+from django.shortcuts import render
+import folium
+from userauths.models import Contribution
+
+def draw_contributions_on_map(contributions):
+    m = folium.Map(location=[contributions[0].latitude, contributions[0].longitude], zoom_start=14)
+
+    for contribution in contributions:
+        # Create a marker with a popup for each contribution
+        popup_html = f'<img src="{contribution.image.url}" alt="Contribution Image" style="max-width: 200px;">'
+        folium.Marker(location=[contribution.latitude, contribution.longitude], popup=folium.Popup(html=popup_html, max_width=300), icon=folium.Icon(color='blue')).add_to(m)
+
+    map_html = m.get_root().render()
+    return map_html
+
+def show_contributions(request):
+    contributions = Contribution.objects.all()
+
+    if contributions:
+        map_html = draw_contributions_on_map(contributions)
+        return render(request, 'map_app/show_contributions.html', {'map_html': map_html})
+    else:
+        return render(request, 'map_app/show_contributions.html', {'error_message': 'No contributions available.'})

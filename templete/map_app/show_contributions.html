@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Contributions</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show Contributions on Map</h1>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        {% if map_html %}
+            <div id="map">{{ map_html|safe }}</div>
+        {% endif %}
+    {% endif %}
+    <a href="{% url 'home' %}">Go back to Home</a>
+</body>
+</html>
