@@ -90,7 +90,7 @@ class _maskDetectorState extends State<maskDetector> {
       // 'email': _enteredEmail,
       'image_url_mask': _imageUrl
     });
-    final url = 'http://10.0.2.2:5000/mask?query=' + _imageUrl.toString();
+    final url = 'http://34.172.4.79:8080/mask?query=' + _imageUrl.toString();
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));

@@ -27,7 +27,7 @@ class _routesScreenState extends State<routesScreen> {
       // _isLoading = false;
       _isLoading = true;
     });
-    final url = 'http://10.0.2.2:5000/locations?query=${userUid}';
+    final url = 'http://34.172.4.79:8080/locations?query=${userUid}';
 
     final response = await http.get(Uri.parse(url));
     print(response.body);

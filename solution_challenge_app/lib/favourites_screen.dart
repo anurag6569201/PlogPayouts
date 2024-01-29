@@ -39,7 +39,7 @@ class _favouritesScreenState extends State<favouritesScreen> {
     print(response.body);
     final listData = json.decode(response.body);
 
-    final url_dist = 'http://10.0.2.2:5000/timeDistance?query=' + userUid;
+    final url_dist = 'http://34.172.4.79:8080/timeDistance?query=' + userUid;
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     // print("url is: ${Uri.parse(url_dist)}");
     final response_dist = await http.get(Uri.parse(url_dist));
