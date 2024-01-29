@@ -467,9 +467,22 @@ def identifyGarbage():
 #Needs re-training
 def counting(img_path):
     print(img_path)
-    model = YOLO('models/best.pt')
-    # countings = model.predict('img_path')
-    return 2
+    model = YOLO('yolov8m.pt')
+    results = model.predict(img_path)
+    
+    names = model.names
+
+    car_id = list(names)[list(names.values()).index('car')]
+
+    predicted_indices = results[0].boxes.cls.tolist()
+    # predicted_class_names = [list(names.keys())[list(names.values()).index(idx)] for idx in predicted_indices]
+    
+    # for i in predicted_class_names:
+    #  countings += results[0].boxes.cls.tolist().count(predicted_indices)
+    # print(car_id)
+    # print(results[0])
+    # print(results[0].boxes.cls.tolist())
+    return len(predicted_indices)
 
 
 def identifyImage_garbage(img_path):
