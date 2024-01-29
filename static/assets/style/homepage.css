@@ -396,7 +396,7 @@
 
 /* blogs */
 .blogs {
-    padding: 3em;
+    padding: 3em 0;
 }
 
 .blogs_head {
@@ -495,7 +495,7 @@
     background-image: url(../images/Writeblock-bro.png);
 }
 
-
+.contribution .button,
 .blogs .button {
     position: absolute;
     bottom: 2em;

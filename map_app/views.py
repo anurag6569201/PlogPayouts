@@ -49,21 +49,23 @@ def draw_contributions_on_map(contributions):
     return map_html
 
 def show_contributions(request):
+    user_profile = UserProfile.objects.get(user=request.user)
     contributions = Contribution.objects.all()
 
     if contributions:
         map_html = draw_contributions_on_map(contributions)
-        return render(request, 'map_app/show_contributions.html', {'map_html': map_html})
+        return render(request, 'map_app/show_contributions.html', {'map_html': map_html,"user_profile": user_profile})
     else:
         return render(request, 'map_app/show_contributions.html', {'error_message': 'No contributions available.'})
     
     
 def show_full(request):
+    user_profile = UserProfile.objects.get(user=request.user)
     contributions = Contribution.objects.all()
 
     if contributions:
         map_html = draw_contributions_on_map(contributions)
-        return render(request, 'map_app/show_full.html', {'map_html': map_html})
+        return render(request, 'map_app/show_full.html', {'map_html': map_html, "user_profile": user_profile})
     else:
         return render(request, 'map_app/show_full.html', {'error_message': 'No contributions available.'})
     

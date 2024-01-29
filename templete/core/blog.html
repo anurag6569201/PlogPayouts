@@ -5,12 +5,12 @@
 
 <section class="light">
     <div class="container py-4">
-        <div class="blogs_head" style="margin-top: 3em;">
+        <div class="blogs_head" style="margin-top: 7.5em;">
             <strong>Blogs</strong>
         </div>
 
         {% for p in posts %}
-        <article class="postcard light blue col-md-12" style="margin-top: 1em;height: 30em;">
+        <article class="postcard light blue col-md-12" style="margin-top: 1em;min-height: 30em;">
             <a class="postcard__img_link" href="#">
                 {% if p.blog_image.url %}
                     <img class="mt-5 postcard__img" src="{{ p.blog_image.url }}" alt="Blog Image">
@@ -31,7 +31,8 @@
                     </time>
                 </div>
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt">{{ p.content }}</div>
+                <div class="postcard__preview-txt" style="max-height: 5em;">{{ p.content }}</div>
+                <hr style="box-shadow: 0 0 20px 10px white;">
                 <ul class="postcard__tagbox">
                     <li class="tag__item">
                         <a href="{% url 'blog:like-post' pk=p.id %}">

@@ -15,7 +15,6 @@
     let hero_text = document.querySelector(".hero_text p");
     window.addEventListener("scroll", () => {
     const offset = window.pageYOffset;
-    console.log(offset);
     if (offset >= 10) {
         navbar.style.backdropFilter = "blur(10px)";
     }
@@ -237,16 +236,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="text-white text-center py-3">
-
-        <div class="container">
-            <p>&copy; 2023 PlogPayouts</p>
-            <p class="mb-0">Designed and crafted with <img width="48" height="48"
-                    src="https://img.icons8.com/color/48/hearts.png" alt="hearts" /> by <span
-                    class="text-primary">Anurag Singh </span>&<span class="text-primary"> Yuvraj Singh</span></p>
-        </div>
-    </footer>
 </section>
 {% endblock content %}

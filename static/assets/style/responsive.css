@@ -1,10 +1,15 @@
 @media (max-width:370px) {
     *{
-        font-size: 8px;
+        font-size: 7px;
     }
 }
 @media (max-width:460px) {
-
+    .be-comment-content{
+        font-size: 5px;
+    }
+    .be-comment-text{
+        font-size: 2.5em;
+    }
     .hero_text{
         font-size: .6em;
     }
@@ -12,7 +17,12 @@
         background-size: contain;
         background-position: left bottom;
     }
-    
+    .card-back .card-back-title{
+        font-size: .8em;
+    }
+    .contribution .card-back p{
+        display: none;
+    }
     .hero_text p{
         font-size: 2em;
         padding-left: 3em;

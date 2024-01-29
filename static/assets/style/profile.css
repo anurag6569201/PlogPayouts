@@ -5,7 +5,7 @@
     position: fixed;
     top: 6.5em;
     left: 3em;
-    z-index: 1000;
+    z-index: 10000;
     border-radius: 1em;
     border: 1px solid grey;
     box-shadow: 0 2px 4px 1px rgb(172, 172, 172);
@@ -16,6 +16,7 @@
 
 .profile_main {
     width: 100%;
+    align-items: center;
     height: 4.5em;
     display: flex;
     justify-content: space-between;
@@ -78,6 +79,8 @@
     overflow: hidden;
 }
 .profile_user_detail h2{
+    font-size: 2em;
+    margin: 0;
     color: grey;
 }
 .profile_user_detail p{

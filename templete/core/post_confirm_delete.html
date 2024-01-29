@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="container-fluid rounded bg-white mt-5 mb-5">
-    <form method="post" enctype="multipart/form-data" style="padding: 4em;">
+    <form method="post" enctype="multipart/form-data" style="padding: 2em;padding-top: 5.5em;">
     {% csrf_token %}
     <h1>Hello,<br>Are You Sure Wanna Delete Post : {{ object.title }}</h1> <br>
     <button type="submit" class="btn btn-primary profile-button col-md-3" style="padding: .5em;font-size: 1.8em;">Confirm Delete</button> 
@@ -27,7 +27,7 @@
                         </time>
                     </div>
                     <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">{{ object.content }}</div>
+                    <div class="postcard__preview-txt" style="max-height: 6em;">{{ object.content }}</div>
                     <ul class="postcard__tagbox">
                         <li class="tag__item">
                             <a>
