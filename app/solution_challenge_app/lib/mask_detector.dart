@@ -73,9 +73,12 @@ class _maskDetectorState extends State<maskDetector> {
     });
   }
 
+  bool ok = false;
   void _detectMask() async {
     // print(fetchedUid);
-
+    setState(() {
+      ok = true;
+    });
     final _storeImage = FirebaseStorage.instance
         .ref()
         .child('user-images')
@@ -90,7 +93,7 @@ class _maskDetectorState extends State<maskDetector> {
       // 'email': _enteredEmail,
       'image_url_mask': _imageUrl
     });
-    final url = 'http://34.172.4.79:8080/mask?query=' + _imageUrl.toString();
+    final url = 'http://34.171.172.163:8080/mask?query=' + _imageUrl.toString();
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));
@@ -122,9 +125,9 @@ class _maskDetectorState extends State<maskDetector> {
       ],
     });
 
-    // setState(() {
-    //   prediciton_mask = true;
-    // });
+    setState(() {
+      ok = false;
+    });
 
     ScaffoldMessenger.of(context).clearSnackBars();
     prediciton_mask == true
@@ -205,16 +208,18 @@ class _maskDetectorState extends State<maskDetector> {
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    _detectMask();
-                  },
-                  icon: const Icon(Icons.done),
-                  label: const Text('Check'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer),
-                ),
+                (ok == false)
+                    ? ElevatedButton.icon(
+                        onPressed: () {
+                          _detectMask();
+                        },
+                        icon: const Icon(Icons.done),
+                        label: const Text('Check'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primaryContainer),
+                      )
+                    : CircularProgressIndicator(),
                 // SnackBar(content: )
               ],
             ),

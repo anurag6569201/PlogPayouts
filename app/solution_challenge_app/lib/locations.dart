@@ -39,7 +39,7 @@ class _displayLocationsState extends State<displayLocations> {
         'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
         'solution-challenge/${userUid}.json');
 
-  final url_dist = 'http://34.172.4.79:8080/timeDistance?query=' + userUid;
+    final url_dist = 'http://34.171.172.163:8080/timeDistance?query=' + userUid;
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     // print("url is: ${Uri.parse(url_dist)}");
     final response_dist = await http.get(Uri.parse(url_dist));
@@ -98,6 +98,10 @@ class _displayLocationsState extends State<displayLocations> {
           // mainAxisAlignment: MainAxisAlignment.center
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset('assets/images/locations_logo.jpg'),
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton.icon(
               onPressed: _addItems,
               icon: const Icon(Icons.add_card),

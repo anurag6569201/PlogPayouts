@@ -54,6 +54,7 @@ class glovesDetectorState extends State<glovesDetector> {
     });
   }
 
+  bool ok = false;
   void _pickImageCamera() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
@@ -75,6 +76,9 @@ class glovesDetectorState extends State<glovesDetector> {
 
   void _detectGloves() async {
     // print(fetchedUid);
+    setState(() {
+      ok = true;
+    });
 
     final _storeImage = FirebaseStorage.instance
         .ref()
@@ -90,7 +94,8 @@ class glovesDetectorState extends State<glovesDetector> {
       // 'email': _enteredEmail,
       'image_url_gloves': _imageUrl
     });
-    final url = 'http://34.172.4.79:8080/gloves?query=' + _imageUrl.toString();
+    final url =
+        'http://34.171.172.163:8080/gloves?query=' + _imageUrl.toString();
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));
@@ -120,6 +125,9 @@ class glovesDetectorState extends State<glovesDetector> {
               content: Text('No gloves Detected'),
             ),
           );
+    setState(() {
+      ok = false;
+    });
   }
 
   @override
@@ -191,16 +199,18 @@ class glovesDetectorState extends State<glovesDetector> {
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    _detectGloves();
-                  },
-                  icon: const Icon(Icons.done),
-                  label: const Text('Check'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer),
-                ),
+                (ok == false)
+                    ? ElevatedButton.icon(
+                        onPressed: () {
+                          _detectGloves();
+                        },
+                        icon: const Icon(Icons.done),
+                        label: const Text('Check'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primaryContainer),
+                      )
+                    : CircularProgressIndicator(),
                 // SnackBar(content: )
               ],
             ),

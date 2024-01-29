@@ -40,31 +40,42 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return SplashScreen();
-          }
-          if (snapshot.hasData) {
-            final userUid = FirebaseAuth.instance.currentUser!.uid;
-            var userEmail = FirebaseAuth.instance.currentUser!.email;
+      home: Scaffold(
+        body: Builder(
+          builder: (context) => StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (ctx, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SplashScreen();
+              }
+              if (snapshot.hasData) {
+                final userUid = FirebaseAuth.instance.currentUser!.uid;
+                var userEmail = FirebaseAuth.instance.currentUser!.email;
+                final snackbar = SnackBar(
+                  content: Text('Success! Please restart the app'),
+                );
+                WidgetsBinding.instance?.addPostFrameCallback((_) {
+                  // ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  // });
+                });
+                if (isCompanyEmail(userEmail!)) {
+                  return homeAuthenticator(userUid);
+                } else {
+                  return TabsScreen(userUid);
+                }
+              }
+              // else {
+              //   return TabsScreen(username);
 
-            if (isCompanyEmail(userEmail!)) {
-              return homeAuthenticator(userUid);
-            } else {
-              return TabsScreen(userUid);
-            }
-          }
-          // else {
-          //   return TabsScreen(username);
-
-          // }
-          // else {
-          return previewScreen();
-          //   return previewScreen();
-          // }
-        },
+              // }
+              // else {
+              return previewScreen();
+              //   return previewScreen();
+              // }
+            },
+          ),
+        ),
       ),
     );
   }
