@@ -45,4 +45,4 @@ class ContributionForm(forms.ModelForm):
 class Verify_ContributionForm(forms.ModelForm):
     class Meta:
         model = Verify_Contribution
-        fields = ['Verify_latitude', 'Verify_longitude', 'Verify_image']
+        fields = ['Verify_image']
