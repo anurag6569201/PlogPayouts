@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'assets/style/global.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="{% static 'assets/style/homepage.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/style/redeem.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style/verifier.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style/contribution.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style/signup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/style/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/style/responsive.css' %}">
+    <script>
+        window.onload = function () {
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                {% if user_profile.profile_image.url is not null %}
+                    <img class="logo" src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="li-container">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'core:index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#Map-Points">Map-Points</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#blogs">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#redeem_store">Store</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contribution">Contribution</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% if messages %}
+        <div id="messages-container" style="position: absolute;top: 7em;left: 2em;">
+            {% for message in messages %}
+            <span
+                style="color: white; font-size: 1.4em; padding: .3em 1em; border-radius: .5em; margin-bottom: .5em;" class="bg-warning"
+                {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function () {
+                var messagesContainer = document.getElementById('messages-container');
+                if (messagesContainer) {
+                    messagesContainer.style.display = 'none';
+                }
+            }, 2000);
+        </script>
+        {% endif %}
+    </nav>
+
+    <div class="profile">
+        <div class="profile_main">
+            <div class="company">
+                {% if user_profile.profile_image.url is not null %}
+                    <img src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
+                <h1>Plog-Payouts</h1>
+            </div>
+            <div class="profile_button">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item"
+                    style="background-color: black; color:white;border-radius:10px;padding:2px 8px;font-size: 1.2em;">
+                    <a class="nav-link active" aria-current="page" href="{% url 'userauths:sign-out' %}"><span></span>Sign-out</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active"
+                        style="background-color: black; color:white;border-radius:10px;padding:2px 8px;font-size: 1.2em;"
+                        aria-current="page" href="{% url 'userauths:sign-in' %}"><span></span>Sign-in</a>
+                </li>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <div class="profile_hero">
+            <div class="profile_user">
+                {% if user_profile.profile_image.url is not null %}
+                    <img class="logo" src="{{ user_profile.profile_image.url }}" alt="User Profile Image">
+                {% else %}
+                    <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
+                {% endif %}
+            </div>
+            <div class="profile_user_detail">
+                <h2>{{ user_profile.name }} {{ user_profile.surname }}</h2>
+                <p>{{ user_profile.email }}<br><a href="{% url 'core:mainuser_profile' %}">Manage account</a></p>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+
+
+    {% endblock content %}
+    <!-- Footer -->
+    <footer class="text-white text-center py-3">
+
+        <div class="container">
+            <p style="font-size: 1.8em;">&copy; 2023 PlogPayouts</p>
+            <p style="font-size: 1.8em;" class="mb-0">Designed and crafted with <img width="30" height="30"
+                    src="https://img.icons8.com/color/30/hearts.png" alt="hearts" /> by <span
+                    style="font-size: 1em;font-weight: 700;"class="text-primary">Anurag Singh </span>&<span style="font-size: 1em;font-weight: 700;" class="text-primary"> Yuvraj Singh</span></p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<script src="{% static 'assets/script/homepage.js' %}"></script>
+
+</html>

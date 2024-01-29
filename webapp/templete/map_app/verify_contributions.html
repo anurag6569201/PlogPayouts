@@ -1,0 +1,90 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid contro-outer" style="padding-top: 7.5em;">
+
+    <div class="container image-contro">
+        <div class="money_head">
+            <strong>Verify Your Plog</strong>
+        </div><br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-4">Verify Your Waste Collection</h1><hr><br>
+                    <p class="lead">Thank you for participating in waste collection! Verify your waste collection by
+                        uploading images of the collected waste. Follow the simple steps below:</p>
+                </div>
+                <div class="col-md-4" style="display: flex;align-items: center;justify-content: center;">
+                    <img style="height: 25em;" src="{% static 'assets/images/waste-management-animate.svg' %}" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Verification Section -->
+        <div class="container"><br>
+            <h1>Image Verification</h1><hr><br>
+            <div class="row">
+                <div class="col-md-4" style="display: flex;align-items: center;justify-content: center;">
+                    <img style="height: 25em;" src="{% static 'assets/images/image-upload-animate.svg' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8" style="display: flex;align-items: center;justify-content: center;">
+                    <!-- Verification Form -->
+                    <div class="login-signup-form-content active-login-signup-content" id="login">
+                        {% if messages %}
+                        <div id="messages-container" style="opacity: .8;transition: 1s;">
+                            {% for message in messages %}
+                            <span style="color: white; font-size: 1.4em; padding: .3em 1em; border-radius: .5em; margin-bottom: .5em;"
+                                class="bg-warning" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+                            {% endfor %}
+                        </div>
+                        <script>
+                            setTimeout(function () {
+                                var messagesContainer = document.getElementById('messages-container');
+                                if (messagesContainer) {
+                                    messagesContainer.style.display = 'none';
+                                    messagesContainer.style.opacity = '0';
+                                }
+                            }, 3000);
+                        </script>
+                        {% endif %}
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p style="font-size: 1.6em;">Thank you for contributing to waste collection! Verify your
+                                contribution by uploading images of the collected waste.</p>
+
+                            <label class="login-signup-label">Image Upload:</label>
+                            {{ verify_contribution_form.Verify_image }}
+                            <button class="donate-btn" style="margin-top: 1em;display: flex;align-items: center;justify-content: center;"
+                                class="login-signup-button" type="submit"><span class="material-symbols-outlined"
+                                    style="margin-right: .4em;">volunteer_activism</span>Submit Verification</button>
+                        </form><br><br>
+                    </div>
+                    <!-- End Verification Form -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Notes Section -->
+        <div class="container" style="padding-bottom: 6.5em;">
+            <h1>Important Notes:</h1><hr><br>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>1- Valid Images:</strong>
+                    <ul>Ensure that the images clearly show the collected waste. Images should be in a valid format
+                        (JPEG, PNG, etc.).</ul>
+
+                </div>
+                <div class="col-md-6">
+                    <strong>2- One Submission per Collection:</strong>
+                    <ul>Submit images for a single waste collection. If you have multiple collections, please make
+                        separate submissions.</ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

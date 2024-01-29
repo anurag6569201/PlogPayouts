@@ -1,0 +1,63 @@
+{% extends 'partials/base-auths.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="storage" id="login-signup-form-container">
+    <div class="container-image">
+      <img src="{% static 'assets/images/registration_image.svg' %}" alt="">
+    </div>
+    <div class="contaning_forms">
+      <div class="login-signup-tab-container">
+        <a class="login-signup-tab active-login-signup-tab" href="{% url 'userauths:sign-in' %}">Login</a>
+        <a class="login-signup-tab" href="{% url 'userauths:sign-up' %}">Signup</a>
+    </div>
+      <div class="login-signup-form-content active-login-signup-content" id="login">
+        {% if messages %}
+        <div id="messages-container" style="opacity: .8;transition: 1s;">
+            {% for message in messages %}
+            <span
+                style="color: white; font-size: 1.4em; padding: .3em 1em; border-radius: .5em; margin-bottom: .5em;" class="bg-warning"
+                {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function () {
+                var messagesContainer = document.getElementById('messages-container');
+                if (messagesContainer) {
+                    messagesContainer.style.display = 'none';
+                    messagesContainer.style.opacity = '0';
+                }
+            }, 3000);
+        </script>
+        {% endif %}
+        <form action="" method="POST">
+          {% csrf_token %}
+            
+            <label class="login-signup-label" for="login_username">Email:</label>
+            <input class="login-signup-input" type="text" name="email" maxlength="100" required=""
+                id="login_username" placeholder="Enter Email">
+
+            <label class="login-signup-label" for="login_password">Password:</label>
+            <input class="login-signup-input" type="password" name="password"
+                autocomplete="current-password" required="" id="login_password" placeholder="Enter Password">
+
+              <div class="check-buttons">
+                <div class="form-check">
+                  <input class="form-check-btn" type="radio" name="radio-selection" id="user_radio" value="user-checked" checked>
+                  <span class="form-check-label" for="user_radio">User</span>
+              </div>
+          
+              <div class="form-check">
+                  <input class="form-check-btn" type="radio" name="radio-selection" id="verifier_radio" value="verifier-checked">
+                  <span class="form-check-label" for="verifier_radio">Verifier</span>
+              </div>
+              </div>
+
+            <button style="margin-top: 1em;" class="login-signup-button" type="submit">Login</button>
+        </form>
+    </div>
+
+    </div>
+  </div>
+
+{% endblock content %}

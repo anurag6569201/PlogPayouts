@@ -1,0 +1,146 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Content Section -->
+    <div class="container-fluid contro-outer" style="padding-top: 6.5em;">
+
+      <div class="container image-contro">
+        <div class="money_head">
+          <strong>Contribution</strong>
+      </div><br><br>
+          <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-4">Contribute Images and Location Data to the Green Plog</h1><hr><br>
+                    <p class="lead">Help make a positive impact on our environment by contributing images and location data to the
+                        Green Plog Project! Your contributions will assist in identifying areas that need attention for a cleaner
+                        and greener world. Follow the simple steps below to make your contribution:</p>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" style="border-radius: 30%;" src="{% static 'assets/images/waste2.svg' %}">
+                </div>
+            </div>
+          </div>
+          <!-- How to Contribute Section -->
+          <div class="container"><br>
+              <h1>How to Contribute?</h1><hr><br>
+              <div class="row">
+                  <div class="col-md-4">
+                      <strong>1- Enter Location Coordinates:</strong>
+                      <ul>Provide the latitude and longitude coordinates of the area you want to highlight. You can
+                          find these coordinates through various online tools or mobile apps.</ul>
+                  </div>
+                  <div class="col-md-4">
+                      <strong>2- Upload Images:</strong>
+                      <ul>Capture and upload images that showcase the current state of the chosen location. These
+                          images can be powerful tools to raise awareness about environmental concerns.</ul>
+                  </div>
+                  <div class="col-md-4">
+                      <strong>3- Submit Your Contribution:</strong>
+                      <ul>Click the "Submit Contribution" button to share your images and location data with the Green
+                          Plog Project.</ul>
+                  </div>
+              </div><br>
+
+              <!-- Image Section -->
+              <div class="row">
+                  <div class="col-md-6">
+                      <img src="{% static 'assets/images/charity-animate.svg' %}" alt=""
+                          class="img-fluid">
+                  </div>
+                  <div class="col-md-6" style="display: flex;align-items: center;justify-content: center;">
+                      <!-- Login/Signup Form -->
+                      <div class="login-signup-form-content active-login-signup-content" id="login">
+                          {% if messages %}
+                          <div id="messages-container" style="opacity: .8;transition: 1s;">
+                              {% for message in messages %}
+                              <span style="color: white; font-size: 1.4em; padding: .3em 1em; border-radius: .5em; margin-bottom: .5em;"
+                                  class="bg-warning" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+                              {% endfor %}
+                          </div>
+                          <script>
+                              setTimeout(function () {
+                                  var messagesContainer = document.getElementById('messages-container');
+                                  if (messagesContainer) {
+                                      messagesContainer.style.display = 'none';
+                                      messagesContainer.style.opacity = '0';
+                                  }
+                              }, 3000);
+                          </script>
+                          {% endif %}
+                          <form method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <p style="font-size: 1.6em;">Your donation will help us in our mission to promote a cleaner
+                                  and greener environment through plogging.</p>
+
+                              <label class="login-signup-label">Latitude:</label>
+                              {{ contribute_form.latitude }} <br><br>
+
+                              <label class="login-signup-label">Longitude:</label>
+                              {{ contribute_form.longitude }} <br><br>
+
+                              <label class="login-signup-label">Image Upload:</label>
+                              {{ contribute_form.image }}
+                              <button class="donate-btn" style="margin-top: 1em;display: flex;align-items: center;justify-content: center;"
+                                  class="login-signup-button" type="submit"><span class="material-symbols-outlined"
+                                      style="margin-right: .4em;">volunteer_activism</span>Submit Contribution</button>
+                          </form><br><br>
+                      </div>
+                      <!-- End Login/Signup Form -->
+                  </div>
+              </div>
+          </div>
+    <!-- Important Notes Section -->
+    <div class="container">
+      <h1>Important Notes:</h1><hr><br>
+      <div class="row">
+          <div class="col-md-6">
+              <strong>1- Privacy:</strong>
+              <ul>Ensure that you do not share private or sensitive information in your images. Focus on the
+                  environmental aspects that need attention.</ul>
+                  
+          </div>
+          <div class="col-md-6">
+              <strong>2- Responsible Contribution:</strong>
+              <ul>Only contribute images and data from public spaces or areas where you have permission to
+                  do so.</ul>
+          </div>
+          <div class="col-md-12" style="display: flex;align-items: center;justify-content: center;">
+            <img src="{% static 'assets/images/waste3.svg' %}" alt="" class="img-fluid" style="max-width: 45em;">
+          </div>
+      </div>
+  </div>
+
+          <!-- Why Contribute Section -->
+          <div class="container">
+              <h1>Why Contribute?</h1><hr><br>
+              <div class="row">
+                  <div class="col-md-4">
+                      <strong>1- Raise Awareness:</strong>
+                      <ul>Your contributions can raise awareness about environmental issues in specific areas.</ul>
+                  </div>
+                  <div class="col-md-4">
+                      <strong>2- Support Cleanup Efforts:</strong>
+                      <ul>By providing information about polluted or neglected locations, you contribute to ongoing
+                          cleanup and restoration efforts.</ul>
+                  </div>
+                  <div class="col-md-4">
+                      <strong>3- Inspire Action:</strong>
+                      <ul>Inspire others to take action and participate in the collective effort to create a cleaner
+                          and healthier planet.</ul>
+                  </div><hr>
+                  <div class="col-md-12">
+                    <br><br>
+                    <p style="font-weight: 600;font-size: 2.5em;color: black;">Together, we can create a significant impact on the environment. Thank you for being a part of the Green Plog Project!</p>
+                    <br><br>
+                </div>
+              </div>
+
+          
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}

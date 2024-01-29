@@ -1,0 +1,66 @@
+@media (max-width:370px) {
+    *{
+        font-size: 7px;
+    }
+}
+@media (max-width:460px) {
+    .be-comment-content{
+        font-size: 5px;
+    }
+    .be-comment-text{
+        font-size: 2.5em;
+    }
+    .hero_text{
+        font-size: .6em;
+    }
+    .verifier-header {
+        background-size: contain;
+        background-position: left bottom;
+    }
+    .card-back .card-back-title{
+        font-size: .8em;
+    }
+    .contribution .card-back p{
+        display: none;
+    }
+    .hero_text p{
+        font-size: 2em;
+        padding-left: 3em;
+    }
+    .contact_head ,
+    .blogs_head,
+    .money_head,
+    .redeem_head,
+    .content_head{
+        font-size: .7em;
+    }
+    .redeem_para,
+    .content_head_para{
+        font-size: .7em;
+    }
+    .content_frame_image, .content_frame_text{
+        height: 50vh;
+    }
+    .redeem_storetext,
+    .redeem_storeimage,
+    .location_back{
+        height: 25em;
+    }
+    .redeem_para {
+        transform: translateY(0em);
+        padding-top: 0em;
+    }
+    .redeem_head,
+    .money_head {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+    footer .container p{
+        font-size: 1.4em;
+    }
+}
+@media (max-width:768px) {
+    html,body{
+        font-size: 8px;
+    }
+}
