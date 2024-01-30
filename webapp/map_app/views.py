@@ -76,7 +76,7 @@ def verify_contributions(request):
         if form.is_valid():
             contribution=form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            api_call_url=f"http://34.171.172.163:8080/garbage?query={image_url}"
+            api_call_url=f"http://34.136.65.118:8080/garbage?query={image_url}"
             return HttpResponse(api_call_url)
     else:
         form = Verify_ContributionForm()
