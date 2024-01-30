@@ -1,8 +1,15 @@
+from userauths.models import Verify_Contribution
 from userauths.forms import Verify_ContributionForm
 from userauths.models import UserProfile
+from userauths.models import User
+
 from django.shortcuts import render,redirect,HttpResponse
 import folium
 import requests
+
+import requests
+from django.db import IntegrityError
+from map_app.models import PredictionModel
 
 def draw_path_on_map(coordinates):
     m = folium.Map(location=coordinates[0], zoom_start=14)
@@ -71,21 +78,42 @@ def show_full(request):
         return render(request, 'map_app/show_full.html', {'error_message': 'No contributions available.'})
     
 def verify_contributions(request):
+    api_call_url = None
+
     if request.method == 'POST':
         form = Verify_ContributionForm(request.POST, request.FILES)
         if form.is_valid():
-            contribution=form.save()
+            contribution = form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            api_call_url=f"http://34.136.65.118:8080/garbage?query={image_url}"
-            return HttpResponse(api_call_url)
+            api_call_url = f"http://34.42.197.94:8080/garbage?query=https://i5.walmartimages.com/asr/83568193-2418-40f0-8367-4fd80481e2f8_1.fc5284020d9e9b9bcd45d777a9e62bb5.jpeg"
+            response = requests.get(api_call_url)
+            if response.status_code == 200:
+                content = response.json()
+                try:
+                    prediction_instance = PredictionModel.objects.create(
+                        count=content['count'],
+                        prediction=content['prediction'],
+                        status=content['status']
+                    )
+                    print(f"Data saved: {prediction_instance}")
+                    return redirect("core:redeem")
+                except IntegrityError:
+                    print("Data already exists in the database.")
+            else:
+                print(f"Failed to retrieve content. Status code: {response.status_code}")
     else:
         form = Verify_ContributionForm()
+
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
-        "user_profile": user_profile,
+        'user_profile': user_profile,
         'verify_contribution_form': form,
     }
-    return render(request, 'map_app/verify_contributions.html',context)
+    return render(request, 'map_app/verify_contributions.html', context)
 
 def verifiying(request):
-    return render(request, 'map_app/verifying.html')
+    api_url = request.session.get('api_url', '')  # Retrieve the api_url from the session
+    context = {
+        'api_url': api_url,
+    }
+    return render(request, 'map_app/verifiying.html', context)

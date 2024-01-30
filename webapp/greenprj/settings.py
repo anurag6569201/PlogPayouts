@@ -155,3 +155,4 @@ JAZZMIN_SETTINGS = {
 
 
 AUTH_USER_MODEL='userauths.User'
+AUTH_PREDICT_MODEL='map_app.PredictionModel'
