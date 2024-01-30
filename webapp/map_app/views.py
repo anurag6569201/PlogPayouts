@@ -77,10 +77,7 @@ def verify_contributions(request):
             contribution=form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
             api_call_url=f"http://34.171.172.163:8080/garbage?query={image_url}"
-            response = requests.get(api_call_url)
-
-            if response.status_code == 200:
-                return HttpResponse("API call successful")
+            return HttpResponse(api_call_url)
     else:
         form = Verify_ContributionForm()
     user_profile = UserProfile.objects.get(user=request.user)
@@ -91,19 +88,4 @@ def verify_contributions(request):
     return render(request, 'map_app/verify_contributions.html',context)
 
 def verifiying(request):
-    image_url = request.session.get('image_url', None)
-    if image_url:
-        api_call_url = f"{image_url}"
-        response = requests.get(api_call_url)
-        if response.status_code == 200:
-            result_message = "API call successful"
-        else:
-            result_message = f"API call failed with status code {response.status_code}"
-    else:
-        result_message = "Image URL not found in session"
-
-    context = {
-        'result_message': result_message,
-    }
-
-    return render(request, 'map_app/verifying.html', context)
+    return render(request, 'map_app/verifying.html')
