@@ -93,7 +93,7 @@ def verify_contributions(request):
 def verifiying(request):
     image_url = request.session.get('image_url', None)
     if image_url:
-        api_call_url = f"http://34.136.93.101:8080/garbage?query={image_url}"
+        api_call_url = f"{image_url}"
         response = requests.get(api_call_url)
         if response.status_code == 200:
             result_message = "API call successful"
