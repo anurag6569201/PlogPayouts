@@ -55,6 +55,32 @@
         </div>
     </div>
     <br>
+    <div class="container-fluid score_of_image">
+        <div class="row" style="gap: 2em;justify-content: center;">
+            {% for score in score %}
+            <div class="col-md-2">
+                <div class="card-body score_body">
+                    <h1 class="score_h1">+{{ score.score_of_image }}</h1>
+                    <h3 class="score_status">
+                        {% if score.is_redeemed %}
+                        <span style="color: #99a33e; font-size: 1.3em;">Status=</span><span style="color: #99a33e;" class="material-symbols-outlined">check_circle</span>
+                        {% else %}
+                        <span style="font-size: 1.3em;">Status=</span><span class="material-symbols-outlined">schedule</span>
+                        {% endif %}
+                    </h3>
+                    <h3 class="check_status">
+                        {% if score.is_redeemed %}
+                        <a style="display: none;" href="#">Request Verify</a>
+                        {% else %}
+                        <a href="#">Request Verify</a>
+                        {% endif %}
+                    </h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <div class="container-fluid vouchers-contain">
         <div class="row">
             {% for voucher in vouchers %}

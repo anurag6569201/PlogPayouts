@@ -11,6 +11,7 @@ import requests
 from django.db import IntegrityError
 from map_app.models import PredictionModel
 
+import random
 def draw_path_on_map(coordinates):
     m = folium.Map(location=coordinates[0], zoom_start=14)
     folium.Marker(location=coordinates[0], popup='Point 1', icon=folium.Icon(color='blue')).add_to(m)
@@ -90,11 +91,33 @@ def verify_contributions(request):
             if response.status_code == 200:
                 content = response.json()
                 try:
+                    
+                    # calculating points
+
+                    score_of_image = 0
+
+                    if content['prediction'] == "plastic":
+                        score_of_image = 20 * content['count']
+
+                    elif content['prediction'] == "cardboard":
+                        score_of_image = 20 * content['count']
+
+                    elif content['prediction'] == "glass":
+                        score_of_image = 50 * content['count']
+
+                    elif content['prediction'] == "metal":
+                        score_of_image = 20 * content['count']
+
+                    elif content['prediction'] == "trash":
+                        score_of_image = random.randint(20, 50) * content['count']
+                    
                     prediction_instance = PredictionModel.objects.create(
                         count=content['count'],
                         prediction=content['prediction'],
-                        status=content['status']
+                        status=content['status'],
+                        score_of_image=score_of_image
                     )
+
                     print(f"Data saved: {prediction_instance}")
                     return redirect("core:redeem")
                 except IntegrityError:

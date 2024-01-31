@@ -17,7 +17,7 @@ from django.template.loader import render_to_string
 
 from django.shortcuts import render, redirect
 
-
+from map_app.models import PredictionModel
 
 @login_required(login_url='userauths:sign-in')
 def index(request):
@@ -60,12 +60,14 @@ def index(request):
 def user_redeem(request):
     user_profile = UserProfile.objects.get(user=request.user)
     vouchers = ScratchCard.objects.filter(user=request.user)
-    totalpoints = ScratchCard.objects.filter(user=request.user).aggregate(Sum('points'))['points__sum'] or 0
+    score = PredictionModel.objects.filter(user=request.user)
+    totalpoints = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
 
     context = {
         "user_profile": user_profile,
         "vouchers": vouchers,
-        "totalpoints": totalpoints
+        "totalpoints": totalpoints,
+        "score":score,
     }
     if not request.user.verified:
         return render(request, 'core/redeem.html', context)

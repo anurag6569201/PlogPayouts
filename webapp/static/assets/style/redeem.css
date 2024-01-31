@@ -52,3 +52,27 @@
     font-weight: 700;
     opacity: .8;
 }
+
+.score_body{
+    text-align: center;
+    background-color: rgba(223, 233, 135, 0.705);
+    border: 2px solid #99a33e;
+    border-radius: 2em;
+}
+.score_h1{
+    color: #99a33e;
+    font-weight: 700;
+}
+.score_status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.check_status a{
+    padding: .1em .6em;
+    border: 1px solid #99a33e;
+    border-radius: .3em;
+    background-color: #cad65a;
+    color: white;
+    font-size: .8em;
+}
