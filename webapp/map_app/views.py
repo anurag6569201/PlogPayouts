@@ -88,7 +88,7 @@ def verify_contributions(request):
         if form.is_valid():
             contribution = form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            api_call_url = f"http://34.28.156.229:8080/garbage?query=https://i5.walmartimages.com/asr/83568193-2418-40f0-8367-4fd80481e2f8_1.fc5284020d9e9b9bcd45d777a9e62bb5.jpeg"
+            api_call_url = f"http://34.28.156.229:8080/garbage?query={image_url}"
             response = requests.get(api_call_url)
             if response.status_code == 200:
                 content = response.json()
