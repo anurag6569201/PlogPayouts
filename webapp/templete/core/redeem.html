@@ -55,8 +55,13 @@
         </div>
     </div>
     <br>
-    <div class="container-fluid score_of_image">
+    <div class="container-fluid score_of_image" style="margin-bottom: 2em;">
         <div class="row" style="gap: 2em;justify-content: center;">
+            {% if score|length == 0 %}
+            <div class="col-md-12" style="text-align: center;">
+                    <h1 style="color: #99a33e;">You don't have any score yet...</h1>
+                </div>
+            {% else %}
             {% for score in score %}
             <div class="col-md-2">
                 <div class="card-body score_body">
@@ -78,6 +83,7 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
         </div>
     </div>
 

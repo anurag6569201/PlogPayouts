@@ -12,6 +12,8 @@ from django.db import IntegrityError
 from map_app.models import PredictionModel
 
 import random
+
+
 def draw_path_on_map(coordinates):
     m = folium.Map(location=coordinates[0], zoom_start=14)
     folium.Marker(location=coordinates[0], popup='Point 1', icon=folium.Icon(color='blue')).add_to(m)
@@ -86,7 +88,7 @@ def verify_contributions(request):
         if form.is_valid():
             contribution = form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            api_call_url = f"http://34.42.197.94:8080/garbage?query={image_url}"
+            api_call_url = f"http://34.28.156.229:8080/garbage?query={image_url}"
             response = requests.get(api_call_url)
             if response.status_code == 200:
                 content = response.json()
@@ -133,10 +135,3 @@ def verify_contributions(request):
         'verify_contribution_form': form,
     }
     return render(request, 'map_app/verify_contributions.html', context)
-
-def verifiying(request):
-    api_url = request.session.get('api_url', '')  # Retrieve the api_url from the session
-    context = {
-        'api_url': api_url,
-    }
-    return render(request, 'map_app/verifiying.html', context)

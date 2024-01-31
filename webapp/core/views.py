@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 
 from map_app.models import PredictionModel
+from django.http import Http404
 
 @login_required(login_url='userauths:sign-in')
 def index(request):
@@ -100,10 +101,12 @@ def verifier(request):
 
 @login_required
 def user_profile(request):
+    score = PredictionModel.objects.filter(is_redeemed=False)
     user_profile = UserProfile.objects.get(user=request.user)
     context = {
         "user_profile": user_profile,
         "edit_mode": False,
+        "score":score,
     }
     if request.user.verified:
         return render(request, 'core/verifier.html', context)
@@ -139,3 +142,11 @@ class UserProfileUpdateView(FormView):
             self.success_url = reverse_lazy('core:profile')
 
         return super(UserProfileUpdateView, self).dispatch(request, *args, **kwargs)
+
+def approve_prediction(request, prediction_id):
+    if not request.user.is_authenticated:
+        raise Http404("Page not found")
+    prediction = PredictionModel.objects.get(pk=prediction_id)
+    prediction.is_redeemed = True
+    prediction.save()
+    return redirect('core:profile')
