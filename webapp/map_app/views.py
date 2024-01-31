@@ -117,7 +117,7 @@ def verify_contributions(request):
                         count=content['count'],
                         prediction=content['prediction'],
                         status=content['status'],
-                        score_of_image=score_of_image
+                        score_of_image=score_of_image,
                     )
 
                     print(f"Data saved: {prediction_instance}")
