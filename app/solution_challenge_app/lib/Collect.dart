@@ -79,8 +79,12 @@ class _CollectState extends State<Collect> {
     });
   }
 
+  bool ok = true;
   void _saveGarbageImage() async {
     // print(fetchedUid);
+    setState(() {
+      ok = false;
+    });
     final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
     var uuid = Uuid().v6();
     final _storeImage = FirebaseStorage.instance
@@ -93,7 +97,8 @@ class _CollectState extends State<Collect> {
     await _storeImage.putFile(_pickedImageFile!);
     final _imageUrl = await _storeImage.getDownloadURL();
 
-    final url = 'http://34.172.4.79:8080/garbage?query=' + _imageUrl.toString();
+    final url =
+        'http://34.171.172.163:8080/garbage?query=' + _imageUrl.toString();
 
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));
@@ -132,7 +137,9 @@ class _CollectState extends State<Collect> {
               content: Text('Try again'),
             ),
           );
-
+    setState(() {
+      ok = true;
+    });
     // FirebaseFirestore.instance.collection('users').doc(userUid).update({
     //   // 'username': _enteredUserName,
     //   // 'email': _enteredEmail,
@@ -198,14 +205,16 @@ class _CollectState extends State<Collect> {
                       backgroundColor:
                           Theme.of(context).colorScheme.primaryContainer),
                 ),
-                ElevatedButton.icon(
-                  onPressed: _saveGarbageImage,
-                  icon: const Icon(Icons.save),
-                  label: const Text('Save'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer),
-                ),
+                (ok == true)
+                    ? ElevatedButton.icon(
+                        onPressed: _saveGarbageImage,
+                        icon: const Icon(Icons.save),
+                        label: const Text('Save'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primaryContainer),
+                      )
+                    : CircularProgressIndicator(),
               ],
             ),
             const SizedBox(
