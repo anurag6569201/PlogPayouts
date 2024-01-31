@@ -89,7 +89,7 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset('assets/images/logo_2.jpg'),
+            Image.asset('assets/images/workers_logo.jpg'),
             // ElevatedButton.icon(
             //   onPressed: () {},
             //   icon: const Icon(Icons.add_to_photos),
@@ -98,6 +98,10 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
             //       backgroundColor:
             //           Theme.of(context).colorScheme.primaryContainer),
             // ),
+            const SizedBox(
+              height: 20,
+            ),
+            Image.asset('assets/images/logo_2.jpg'),
           ],
         ),
       ),
