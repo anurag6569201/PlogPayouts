@@ -73,13 +73,7 @@
                         <span style="font-size: 1.3em;">Status=</span><span class="material-symbols-outlined">schedule</span>
                         {% endif %}
                     </h3>
-                    <h3 class="check_status">
-                        {% if score.is_redeemed %}
-                        <a style="display: none;" href="#">Request Verify</a>
-                        {% else %}
-                        <a href="#">Request Verify</a>
-                        {% endif %}
-                    </h3>
+                    
                 </div>
             </div>
             {% endfor %}
@@ -87,28 +81,7 @@
         </div>
     </div>
 
-    <div class="container-fluid vouchers-contain">
-        <div class="row">
-            {% for voucher in vouchers %}
-            <div class="col-md-4">
-                <div class="card mb-4" style="border: none;">
-                    <div class="card-body">
-                        <div id="voucher">
-                            <div style="backdrop-filter: blur(3px);">
-                                <h2 class="text-left">Scratch Card</h2>
-                                <p><span id="voucher-code">{{ voucher.points }}+</span></p>
-                                <div style="display: flex;align-items: center;justify-content: center;gap: 4em;">
-                                    <p style="font-size: 2em;">Expiration Date: <span style="font-size: 1em;" id="expiration-date">{{ voucher.expiration_date }}</span></p>
-                                    <p style="font-size: 2em;">Issued Date: <span style="font-size: 1em;" id="terms">{{ voucher.issued_date }}</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+   
 </div>
 
 {% endblock content %}
