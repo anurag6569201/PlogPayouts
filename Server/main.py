@@ -312,7 +312,7 @@ def route_optimize(dict_places, city_names, start=0):
         score = 0
         for ix, city_id in enumerate(guess[:-1]):
             # print(ix)
-            score += cal_dist(dict_places[city_id], dict_places[guess[ix+1]])
+            score += cal_dist(dict_places[city_id], dict_places[guess[ix]])
         return score
 
     def check_fitness(guesses):
