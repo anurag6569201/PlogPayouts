@@ -176,10 +176,9 @@ def location_data():
         # print(i)
         city_ids.append(int(i['Id']))
         dict_places[int(i['Id'])] = (i['latitude'], i['longitude'])
-        try:
-            location = i['current_location']
-        except:
-            pass
+
+        location = i['current_location']
+      
     current_location.append(location)
     location = geolocator.geocode(current_location[0])
     dict_places[0] = (location.latitude, location.longitude)
@@ -221,7 +220,7 @@ def time_and_distance() :
     
     # print(f'/chosen-locations')
     print(f'https://solution-challenge-app-409f6-default-rtdb.firebaseio.com/solution-challenge/{query_parameter}/chosen-locations/')
-    ref_current_location = db.reference(f'solution-challenge/{query_parameter}/chosen-locations/')
+    ref_current_location = db.reference(f'solution-challenge/{query_parameter}/current-location/')
     data_curr_location = ref_current_location.get()
     
     ref = db.reference(f'solution-challenge/{query_parameter}')
@@ -249,7 +248,7 @@ def time_and_distance() :
         # city_ids.append(int(i['Id']))
         # print(type(decoded.keys()))
         # for j in decoded.keys() :
-        if i not in ['chosen-locations', 'collected-garbage']:
+        if i not in ['chosen-locations', 'collected-garbage', 'current-location']:
             dict_places[int(decoded[i]['Id'])] = (decoded[i]['latitude'], decoded[i]['longitude'])
            
                 # print(decoded[i])
@@ -285,7 +284,7 @@ def cal_dist_flask(place1, place2):
 
 
 def route_optimize(dict_places, city_names, start=0):
-    
+    # print("Places are: ",dict_places)
     def create_guess(cities, start):
 
         guess = copy(cities)
@@ -293,6 +292,7 @@ def route_optimize(dict_places, city_names, start=0):
         np.random.shuffle(guess)
         guess.append(start)
         guess.insert(0,start)
+        # print("guess is", guess)
         return list(guess)
 
     create_guess(city_names, start)
@@ -302,6 +302,7 @@ def route_optimize(dict_places, city_names, start=0):
     def create_generation(cities, population=100):
 
         generation = [create_guess(cities, start) for _ in range(population)]
+        # print("Generation is ", generation)
         return generation
 
     test_generation = create_generation(city_names, population=10)
@@ -310,8 +311,9 @@ def route_optimize(dict_places, city_names, start=0):
     def fitness_score(guess):
 
         score = 0
+        # print("Guess in fitness is:",guess)
         for ix, city_id in enumerate(guess[:-1]):
-            # print(ix)
+            # print(city_id)
             score += cal_dist(dict_places[city_id], dict_places[guess[ix]])
         return score
 
@@ -349,7 +351,7 @@ def route_optimize(dict_places, city_names, start=0):
 
     def make_child(parent1, parent2):
 
-        list_of_ids_for_parent1 = list(np.random.choice(parent1, replace=False, size=len(parent1)//2))
+        list_of_ids_for_parent1 = list(np.random.choice(parent1, replace=False, size=len(parent1)))
         child = [-99 for _ in parent1]
         
         for ix in list_of_ids_for_parent1:
@@ -374,6 +376,7 @@ def route_optimize(dict_places, city_names, start=0):
         for ix, parent in enumerate(old_generation[:mid_point]):
             for _ in range(children_per_couple):
                 next_generation.append(make_child(parent, old_generation[-ix-1]))
+        print("next generation is ", next_generation)
         return next_generation
 
 
@@ -391,6 +394,7 @@ def route_optimize(dict_places, city_names, start=0):
         breeders, best_guess = get_breeders_from_generation(current_generation, 
                                                             take_best_N=250, take_random_N=100, 
                                                             verbose=is_verbose)
+        # print("breeders are", breeders)
         current_generation = make_children(breeders, children_per_couple=3)
 
 
@@ -416,6 +420,7 @@ def route_optimize(dict_places, city_names, start=0):
         return fitness_tracking, best_guess
 
     current_generation = create_generation(city_names,population=100)
+    print("Current students ", current_generation)
     fitness_tracking, best_guess = evolve_to_solve(current_generation, 100, 150, 70, 0.5, 3, 5, verbose=False)
 
     print("Route is: ", best_guess)
