@@ -142,5 +142,16 @@
           </div>
       </div>
   </div>
-
+  <script>
+    window.onload = function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          document.getElementById("id_latitude").value = position.coords.latitude;
+          document.getElementById("id_longitude").value = position.coords.longitude;
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    };
+  </script>
 {% endblock content %}

@@ -17,11 +17,13 @@
 .redeem-points {
     margin-left: auto;
 }
-.redeem-points a{
+
+.redeem-points a {
     display: flex;
     align-items: center;
     font-size: 2em;
 }
+
 .redeem-score {
     font-size: 2em;
     font-weight: 700;
@@ -47,32 +49,81 @@
     font-weight: 600;
     font-size: 4em;
 }
-#voucher-code{
+
+#voucher-code {
     font-size: 5em;
     font-weight: 700;
     opacity: .8;
 }
 
-.score_body{
+.score_body {
     text-align: center;
     background-color: rgba(223, 233, 135, 0.705);
     border: 2px solid #99a33e;
     border-radius: 2em;
 }
-.score_h1{
+
+.score_h1 {
     color: #99a33e;
     font-weight: 700;
 }
-.score_status{
+
+.score_status {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.check_status a{
+
+.check_status a {
     padding: .1em .6em;
     border: 1px solid #99a33e;
     border-radius: .3em;
     background-color: #cad65a;
     color: white;
     font-size: .8em;
+}
+.coupancards .card {
+    width: 240px;
+    border: none;
+    max-height: 260px;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: rgba(223, 233, 135, 0.705);
+    border: 2px solid #99a33e;
+}
+.coupancards .percent {
+    font-size: 40px;
+    color: #99a33e;
+}
+.coupancards .discount {
+    font-size: 1.8em;
+    color: #99a33e;
+}
+.coupancards .line {
+    color: #99a33e;
+}
+.modal-footer button,
+.coupancards button{
+    font-size: 1.4em;
+    padding: .2em 1em;
+    border-radius: .3em;
+    border: 1px solid #99a33e;
+    color: #99a33e;
+    background-color: transparent;
+}
+.modal-footer button:hover,
+.coupancards button:hover{
+    background-color: rgba(223, 233, 135, 0.705);
+    color: #99a33e;
+}
+.coupancards .tempbtn{
+    pointer-events: none;
+    opacity: .6;
+}
+
+.rc_score,
+.rc_price,
+.rc_idcard{
+    font-size: 1.8em;
+    color: #99a33e;
 }

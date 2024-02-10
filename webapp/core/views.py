@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from core.models import ScratchCard
+from core.models import ScratchCard,redeemCards,total_pts
 from django.db.models import Sum
 
 from userauths.models import UserProfile
@@ -63,12 +63,18 @@ def user_redeem(request):
     vouchers = ScratchCard.objects.filter(user=request.user)
     score = PredictionModel.objects.filter(user=request.user)
     totalpoints = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
-
+    
+    total_pts_instance, created = total_pts.objects.get_or_create()
+    total_pts_instance.totalpts = totalpoints
+    total_pts_instance.save()
+    
+    redeemcard=redeemCards.objects.all()
     context = {
         "user_profile": user_profile,
         "vouchers": vouchers,
         "totalpoints": totalpoints,
         "score":score,
+        "redeemcard":redeemcard,
     }
     if not request.user.verified:
         return render(request, 'core/redeem.html', context)
@@ -150,3 +156,4 @@ def approve_prediction(request, prediction_id):
     prediction.is_redeemed = True
     prediction.save()
     return redirect('core:profile')
+
