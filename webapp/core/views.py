@@ -61,26 +61,46 @@ def index(request):
 def user_redeem(request):
     user_profile = UserProfile.objects.get(user=request.user)
     vouchers = ScratchCard.objects.filter(user=request.user)
-    score = PredictionModel.objects.filter(user=request.user)
+    scoreee = PredictionModel.objects.filter(user=request.user)
     totalpoints = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
-    
+
+    redeem_card_pk = None
+    totalpoin = 0
+
+    if request.method == 'POST':
+        total_pts_instance, created = total_pts.objects.get_or_create()
+        redeem_card_pk = request.POST.get('redeem_card_pk')
+        try:
+            clicked_redeem_card_instance = redeemCards.objects.get(pk=redeem_card_pk)
+        except redeemCards.DoesNotExist:
+            pass
+        else:
+            scr = clicked_redeem_card_instance.score
+            total_pts_instance.totalpts -= scr
+            totalpoin=totalpoints
+            totalpoin -= scr
+            clicked_redeem_card_instance.is_redeemed = True
+            total_pts_instance.save()
+            clicked_redeem_card_instance.save()
+
     total_pts_instance, created = total_pts.objects.get_or_create()
-    total_pts_instance.totalpts = totalpoints
-    total_pts_instance.save()
-    
-    redeemcard=redeemCards.objects.all()
+    ttp_pts = total_pts_instance.totalpts
+
+    redeemcard = redeemCards.objects.all()
     context = {
         "user_profile": user_profile,
         "vouchers": vouchers,
-        "totalpoints": totalpoints,
-        "score":score,
-        "redeemcard":redeemcard,
+        "ttp_pts": ttp_pts,
+        "score": scoreee,
+        "totalpoints": totalpoin,
+        "redeemcard": redeemcard,
     }
+    print(ttp_pts)
     if not request.user.verified:
         return render(request, 'core/redeem.html', context)
     else:
         raise Http404("Page not found")
-
+    
 @login_required
 def mainuser_profile(request):
     user_profile = UserProfile.objects.get(user=request.user)

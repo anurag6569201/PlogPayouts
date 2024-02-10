@@ -78,9 +78,9 @@
             {% endfor %}
             {% endif %} <hr>
         </div>
-        <div class="row" style="margin-top: 2em;">
+        <div class="row" style="margin-top: 2em;justify-content: center;">
             {% for rc in redeemcard %}
-            <div class="coupancards">
+            <div class="coupancards col-md-3">
                 <div class="card">
                     <div class="text-center">
                         <div class="d-flex text-center" style="justify-content: center;gap: 1em;">
@@ -95,30 +95,55 @@
                     <br>
                     <span class="discount">Score : {{ rc.score }}</span>
                     <span style="font-size: 1.4em;color: #99a33e;">{{ rc.desc }}</span>
+                    {% if rc.is_redeemed %}
+                    <span style="font-size: 1.4em;color: #99a33e;">code : {{ rc.code }}</span>
+                    {% endif %}
                     <input type="hidden" value="{{ rc.rcid }}" style="font-size: 1.4em;color: #99a33e;">
                     <div class="d-flex justify-content-between align-items-center mt-4">
-                        {% if totalpoints >= rc.score %}
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Buy Now
+                        {% if rc.is_redeemed %}
+                        <button type="button" class="btn btn-primary tempbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Purchased
                         </button>
                         {% else %}
-                        <button type="button" class="btn btn-primary tempbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Buy Now
-                        </button>
+                            {% if totalpoints >= rc.score %}
+                            <button type="button" class="btn btn-primary buy-now-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-redeem-card-pk="{{ rc.pk }}">
+                                Buy Now
+                            </button>
+                            {% else %}
+                            <button type="button" class="btn btn-primary tempbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Buy Now
+                            </button>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </div>
             {% endfor %}
-            
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('.buy-now-btn').click(function() {
+                        var redeemCardPk = $(this).data('redeem-card-pk');
+                        $.ajax({
+                            type: 'POST',
+                            url: 'redeem',
+                            data: {
+                                redeem_card_pk: redeemCardPk,
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                            success: function(response) {
+                            },
+                            error: function(xhr, errmsg, err) {
+                            }
+                        });
+                    });
+                });
+            </script>
         </div>
     </div>
    
 </div>
-<!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -133,22 +158,20 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn">Confirm Buy</button>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn">Confirm Buy</button>
+        </form>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Wait for the document to be ready
     document.addEventListener("DOMContentLoaded", function() {
-        // Get all Buy Now buttons
         const buyNowButtons = document.querySelectorAll('.btn-primary[data-bs-toggle="modal"]');
-        
-        // Add click event listener to each Buy Now button
         buyNowButtons.forEach(function(button) {
             button.addEventListener('click', function() {
-                // Extract information about the clicked redeem card
                 const redeemCard = {
                     image: button.closest('.coupancards').querySelector('img').src,
                     money: button.closest('.coupancards').querySelector('.percent').textContent,
@@ -156,8 +179,6 @@
                     desc: button.closest('.coupancards').querySelector('span').textContent,
                     idcard: button.closest('.coupancards').querySelector('input').value
                 };
-                
-                // Populate modal with redeem card information
                 const modalBody = document.querySelector('.modal-body');
                 modalBody.innerHTML = `
                     <img class="rc_image" src="${redeemCard.image}" width="100" />
@@ -165,27 +186,6 @@
                     <p class="rc_score">Score required: ${redeemCard.score}</p>
                     <p class="rc_idcard">Id : ${redeemCard.idcard}</p>
                 `;
-                
-                // When Confirm Buy button is clicked
-                const confirmButton = document.querySelector('.modal-footer .btn:last-of-type');
-                confirmButton.addEventListener('click', function() {
-                    // Here you can send an AJAX request to your Django backend to deduct the score
-                    // For simplicity, let's just simulate the deduction
-                    const totalPointsElement = document.querySelector('.redeem-points .redeem-score');
-                    const totalPoints = parseInt(totalPointsElement.textContent);
-                    const scoreRequired = parseInt(redeemCard.score);
-                    if (totalPoints >= scoreRequired) {
-                        // Deduct score and update UI
-                        totalPointsElement.textContent = totalPoints - scoreRequired;
-                        // Here you can also mark the redeem card as purchased
-                        // For simplicity, let's just close the modal
-                        const modal = document.querySelector('#exampleModal');
-                        const modalInstance = bootstrap.Modal.getInstance(modal);
-                        modalInstance.hide();
-                    } else {
-                        alert('Insufficient score to purchase this redeem card.');
-                    }
-                });
             });
         });
     });
