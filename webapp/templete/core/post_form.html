@@ -89,6 +89,7 @@
                                 overflow-y: auto;
                                 border-radius: .2em;
                                 padding: .3em;
+                                background-color: #cbd477;
                             }
                         </style>
                     </div>
@@ -102,6 +103,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12">
+                            {% if userposts %}
                             {% for p in userposts %}
                             <article class="postcard light col-md-12" style="margin-top: 1em;">
                                 <a class="postcard__img_link" href="#">
@@ -144,6 +146,9 @@
                                 </div>
                             </article>
                             {% endfor %}
+                            {% else %}
+                            <h1>No Post yet made by you !!</h1>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

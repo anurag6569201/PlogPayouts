@@ -25,3 +25,18 @@ class ScratchCard(models.Model):
             self.save()
             return True
         return False
+
+
+class redeemCards(models.Model):
+    rcid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    money=models.IntegerField()
+    score=models.IntegerField()
+    image=models.ImageField(upload_to='blog_images/', null=True, blank=True)
+    code = models.CharField(unique=True,max_length=100)
+    is_redeemed = models.BooleanField(default=False)
+    desc=models.CharField(max_length=100)
+
+class total_pts(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    totalpts=models.IntegerField(default=0)
