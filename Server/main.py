@@ -63,7 +63,12 @@ firebase_admin.initialize_app(cred, {'databaseURL': 'https://solution-challenge-
     # print(db_ref._data)
 
 
+from flask_cors import CORS
+
+
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def home():
@@ -219,10 +224,10 @@ def time_and_distance() :
     print(query_parameter)
     
     # print(f'/chosen-locations')
-    print(f'https://solution-challenge-app-409f6-default-rtdb.firebaseio.com/solution-challenge/{query_parameter}/chosen-locations/')
-    ref_current_location = db.reference(f'solution-challenge/{query_parameter}/current-location/')
+    # print(f'https://solution-challenge-app-409f6-default-rtdb.firebaseio.com/solution-challenge/{query_parameter}/chosen-locations/')
+    ref_current_location = db.reference(f'solution-challenge/{query_parameter}/current_location/')
     data_curr_location = ref_current_location.get()
-    
+    print("location is", data_curr_location)
     ref = db.reference(f'solution-challenge/{query_parameter}')
     data = ref.get()
     
@@ -241,14 +246,14 @@ def time_and_distance() :
         # city_ids.append(int(i['Id']))
         # dict_places[int(i['Id'])] = (i['latitude'], i['longitude'])
      
-            location = i['current_location']
-      
+            location = i
+    print("decoded is", decoded)
     for i in decoded.keys():
         # print(i)
         # city_ids.append(int(i['Id']))
         # print(type(decoded.keys()))
         # for j in decoded.keys() :
-        if i not in ['chosen-locations', 'collected-garbage', 'current-location']:
+        if i not in ['chosen-locations', 'collected-garbage', 'current_location', 'central-database']:
             dict_places[int(decoded[i]['Id'])] = (decoded[i]['latitude'], decoded[i]['longitude'])
            
                 # print(decoded[i])
@@ -265,14 +270,14 @@ def time_and_distance() :
         if(i != 0):
             data.append((cal_dist_flask(dict_places[i], dict_places[0])))
     # planned_route = route_optimize(dict_places, city_names=city_ids)
-    
+    print("data is", data)
 
     
         
         
     return jsonify({
         "status": "success",
-        "distance": data[0],
+        "distance": data,
         # "duration": duration
         # "confidence": str(classes[0][0][2]),
         # "upload_time": datetime.now()
