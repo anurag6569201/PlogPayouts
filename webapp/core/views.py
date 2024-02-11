@@ -60,12 +60,17 @@ def index(request):
 @login_required
 def user_redeem(request):
     user_profile = UserProfile.objects.get(user=request.user)
+    redeem_card_instances = redeemCards.objects.all()
     vouchers = ScratchCard.objects.filter(user=request.user)
     scoreee = PredictionModel.objects.filter(user=request.user)
     totalpoints = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
 
     redeem_card_pk = None
-    totalpoin = 0
+    totalpoin = totalpoints
+
+    for crci in redeem_card_instances:
+        if crci.is_redeemed:
+            totalpoin-=crci.score
 
     if request.method == 'POST':
         total_pts_instance, created = total_pts.objects.get_or_create()
