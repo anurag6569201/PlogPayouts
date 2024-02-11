@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:solution_challenge_app/data/location_categories.dart';
@@ -30,7 +31,7 @@ class _locationDetailsState extends State<locationDetails> {
   List<double> currentLatLng = [];
   var lat;
   var lng;
-
+  var favourites = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -45,7 +46,7 @@ class _locationDetailsState extends State<locationDetails> {
           // backgroundColor: Theme.of(context).colorScheme.onBackground,
           title: const Text("IMPORTANT!"),
           content: const Text(
-              "Detecting your current location...Please Wait for a few seconds"),
+              "Detecting your current location...Please Wait for 10 seconds"),
           actions: [
             ElevatedButton(
               child: const Text("OK"),
@@ -57,6 +58,7 @@ class _locationDetailsState extends State<locationDetails> {
         ),
       );
     });
+    favourites = [];
   }
 
   void fetchCurrentLocation() async {
@@ -91,28 +93,99 @@ class _locationDetailsState extends State<locationDetails> {
     currentLatLng.add(lng);
   }
 
-  void _markFavourite(Category category) async {
-    // if (_isExisting) {
+  Future<bool> checkIfExistsOrNot(Category category) async {
     final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
     print(userUid);
     final url = Uri.https(
         'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
         'solution-challenge/${userUid}/chosen-locations.json');
-    // var v6 = uuid.v6();
+    // final response = await http.get(url);
 
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(_userCredentials.user!.uid)
-    //     .set({
-    //   'username': _enteredUserName,
-    //   'email': _enteredEmail,
-    //   'image_url': _imageUrl
-    // });
-    print("Curent location is: ${currentLatLng}");
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(
+    // DatabaseReference ref = FirebaseDatabase.instance
+    //     .ref("solution-challenge/${userUid}/chosen-locations");
+
+    // final url = Uri.https(
+    //     'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+    //     'solution-challenge/${userUid}/current-location.json');
+
+    // final url_dist = 'http://34.170.198.187:8080/timeDistance?query=' + userUid;/
+    // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
+    // print("url is: ${Uri.parse(url_dist)}");
+    final response = await http.get(url);
+    var body = response.body;
+    var decoded = jsonDecode(body);
+    var fetchedData = [];
+    // print("body is ${body}");
+    // print(response.body == null);
+    // print(response.body);
+    // print(body);
+    // return true;
+    print(decoded);
+    if (decoded != null) {
+      // var bodyMap = body as Map<String, dynamic>;
+      for (final data in decoded.entries) {
+        fetchedData.add(data.value['Id']);
+        // // print(data.value['Id']);
+        // // print(data.value);
+        // print(body['Id']);
+        // }
+        // print(data);
+        //     print(data);
+      }
+      // print(fetchedData.length);
+      if (fetchedData.contains(category.Id) || fetchedData.length >= 3) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    // } else {
+    //   return false;
+    //   //   print(body);
+    //   return false;
+    //   for (final data in body) {
+    //     fetchedData.add(body['Id']);
+    //     // print(data.value['Id']);
+    //     // print(data.value);
+    //     print(body['Id']);
+    //   }
+    //   if (fetchedData.contains(category.Id)) {
+    //     return true;
+    //   } else {
+    //     return false;
+    // }
+    else {
+      return false;
+    }
+  }
+
+  void _markFavourite(Category category) async {
+    var _isExisting = false;
+
+    _isExisting = await checkIfExistsOrNot(category);
+    // print("Exusting value is ${_isExisting}");
+    if (_isExisting == false) {
+      final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
+      // print(userUid);
+      // final url = Uri.https(
+      //     'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+      //     'solution-challenge/${userUid}/chosen-locations.json');
+
+      DatabaseReference ref = FirebaseDatabase.instance
+          .ref("solution-challenge/${userUid}/chosen-locations");
+      // var v6 = uuid.v6();
+
+      // FirebaseFirestore.instance
+      //     .collection('users')
+      //     .doc(_userCredentials.user!.uid)
+      //     .set({
+      //   'username': _enteredUserName,
+      //   'email': _enteredEmail,
+      //   'image_url': _imageUrl
+      // });
+
+      print("Curent location is: ${currentLatLng}");
+      await ref.push().set(
         {
           'name': category.title,
           'latitude': category.coordinates[0],
@@ -123,8 +196,12 @@ class _locationDetailsState extends State<locationDetails> {
           'uuid': category.uuid,
           'current_location': currentLatLng,
         },
-      ),
-    );
+      );
+      _alertFavouriteAdded();
+    } else {
+      _alertFavouriteAlreadyThere();
+    }
+
     // setState(() {
     //   _isExisting = !_isExisting;
     // });
@@ -141,19 +218,40 @@ class _locationDetailsState extends State<locationDetails> {
     // });
   }
 
-  bool onPressed = false;
-  void deleteILocation(Category category) {
-    if (onPressed) {
-      final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
-      print(userUid);
-      final url = Uri.https(
-          'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
-          'solution-challenge/${userUid}/chosen-locations/${category.uuid}.json');
-      http.delete(url);
-    }
-    setState(() {
-      onPressed = !onPressed;
-    });
+  // bool onPressed = false;
+  // void deleteILocation(Category category) {
+  //   if (onPressed) {
+  //     final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
+  //     print(userUid);
+  //     final url = Uri.https(
+  //         'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+  //         'solution-challenge/${userUid}/chosen-locations/${category.uuid}.json');
+  //     http.delete(url);
+  //   }
+  //   setState(() {
+  //     onPressed = !onPressed;
+  //   });
+  // }
+
+  void _alertFavouriteAdded() {
+    final snackbar = SnackBar(
+      content: Text('Success!'),
+    );
+
+    // ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    // });
+  }
+
+  void _alertFavouriteAlreadyThere() {
+    final snackbar = SnackBar(
+      content: Text(
+          'Already marked as favourite! ||  Cannot favourite more than three places!'),
+    );
+
+    // ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    // });
   }
 
   @override
@@ -164,13 +262,15 @@ class _locationDetailsState extends State<locationDetails> {
         title: Text(widget.category.title),
         actions: [
           IconButton(
+            splashColor: Colors.greenAccent,
             onPressed: () {
               // (onPressed == false)
               //     ? _markFavourite(widget.category)
               //     : deleteILocation(widget.category);
               _markFavourite(widget.category);
+              // _alertFavouriteAdded();
             },
-            icon: const Icon(Icons.star),
+            icon: const Icon(Icons.star, color: Colors.green),
           ),
         ],
         // actions: [

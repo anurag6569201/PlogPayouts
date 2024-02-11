@@ -36,18 +36,21 @@ class _favouritesScreenState extends State<favouritesScreen> {
         'solution-challenge/${userUid}/chosen-locations.json');
 
     final response = await http.get(url);
-    print(response.body);
+    // print(response.body);
     final listData = json.decode(response.body);
 
-    final url_dist = 'http://34.171.172.163:8080/timeDistance?query=' + userUid;
+    final url_dist = 'http://10.0.2.2:8080/timeDistance?query=' + userUid;
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     // print("url is: ${Uri.parse(url_dist)}");
     final response_dist = await http.get(Uri.parse(url_dist));
-    print(response_dist.body);
+    // print(response_dist.body);
     // final response = await http.get(url);
     var fetchedDistance = jsonDecode(response_dist.body)['distance'];
-
+    int i = 0;
+    print("Favourites si ${listData}");
+    print(fetchedDistance);
     for (final data in listData.entries) {
+      print("key is ${data.key.toString()}");
       double lat = data.value['latitude'];
       double lng = data.value['longitude'];
       List<double> coordinates = [];
@@ -61,9 +64,10 @@ class _favouritesScreenState extends State<favouritesScreen> {
             coordinates: coordinates,
             imageUrl: data.value['image_url'].toString(),
             uuid: data.key.toString(),
-            distance: fetchedDistance),
+            distance: fetchedDistance[i]),
       );
-      // print(data.value['name']);
+      i += 1;
+      // print(data.value);
     }
     setState(() {
       _chosenLocations = fetchedItem;

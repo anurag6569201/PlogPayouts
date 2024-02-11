@@ -35,7 +35,7 @@ class _locationDetailsFavouriteState extends State<locationDetailsFavourite> {
   void initState() {
     // TODO: implement initState
     super.initState();
- 
+
     // _loadItems();
     // fetchCurrentLocation();
   }
@@ -74,6 +74,8 @@ class _locationDetailsFavouriteState extends State<locationDetailsFavourite> {
     final url = Uri.https(
         'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
         'solution-challenge/${userUid}/chosen-locations/${category.uuid}.json');
+    print(url);
+    print(category.uuid);
     http.delete(url);
     Navigator.of(context).pop();
     // setState(() {

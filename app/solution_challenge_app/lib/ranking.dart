@@ -309,9 +309,10 @@ class _rankingState extends State<ranking> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Please Wait...",
+                    '''Please Wait...,
+                    (PS.S  Health Checkup done?)''',
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 6, 134, 72)),
                   ),
