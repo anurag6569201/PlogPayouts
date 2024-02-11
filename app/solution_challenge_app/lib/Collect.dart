@@ -98,7 +98,7 @@ class _CollectState extends State<Collect> {
     final _imageUrl = await _storeImage.getDownloadURL();
 
     final url =
-        'http://34.171.172.163:8080/garbage?query=' + _imageUrl.toString();
+        'http://10.0.2.2:8080/garbage?query=' + _imageUrl.toString();
 
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));

@@ -63,7 +63,7 @@ class _newItemsState extends State<newItems> {
       print(userUid);
       final url = Uri.https(
           'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
-          'solution-challenge/${userUid}.json');
+          'solution-challenge/${userUid}/central-database.json');
       var v6 = uuid.v6();
 
       final _storeImage = FirebaseStorage.instance
@@ -76,7 +76,16 @@ class _newItemsState extends State<newItems> {
 
       final _imageUrl = await _storeImage.getDownloadURL();
 
- 
+      final responseLocations = await http.get(url);
+      // print(response.body);
+      final listDataLocations = json.decode(responseLocations.body);
+
+      List<int> lengthOfData = [];
+      int i = 0;
+      for (final data in listDataLocations.entries) {
+        lengthOfData.add(i + 1);
+        i += 1;
+      }
 
       final response = await http.post(
         url,
@@ -88,7 +97,7 @@ class _newItemsState extends State<newItems> {
             'longitude': _enteredLongitude,
             'image_url': _imageUrl,
             'color': Colors.orange.value,
-            'Id': Id,
+            'Id': (lengthOfData.length - 3) + 1,
           },
         ),
       );
@@ -97,7 +106,6 @@ class _newItemsState extends State<newItems> {
         return;
       }
       Navigator.of(context).pop();
-
     }
   }
 
@@ -138,28 +146,28 @@ class _newItemsState extends State<newItems> {
                   _enteredName = value!;
                 },
               ),
-              TextFormField(
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  label: Text(
-                    'Id',
-                  ),
-                ),
-                keyboardType: TextInputType.number,
-                initialValue: _enteredLatitude.toString(),
-                validator: (value) {
-                  if (value == null ||
-                      value.isEmpty ||
-                      int.tryParse(value) == null) {
-                    return 'Id must not be empty';
-                  } else {
-                    return null;
-                  }
-                },
-                onSaved: (value) {
-                  Id = int.parse(value!);
-                },
-              ),
+              // TextFormField(
+              //   style: const TextStyle(color: Colors.black),
+              //   decoration: const InputDecoration(
+              //     label: Text(
+              //       'Id',
+              //     ),
+              //   ),
+              //   keyboardType: TextInputType.number,
+              //   initialValue: _enteredLatitude.toString(),
+              //   validator: (value) {
+              //     if (value == null ||
+              //         value.isEmpty ||
+              //         int.tryParse(value) == null) {
+              //       return 'Id must not be empty';
+              //     } else {
+              //       return null;
+              //     }
+              //   },
+              //   onSaved: (value) {
+              //     Id = int.parse(value!);
+              //   },
+              // ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
