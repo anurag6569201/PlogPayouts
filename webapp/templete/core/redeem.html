@@ -47,7 +47,6 @@
             {% else %}
                 <img class="logo" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
             {% endif %}
-            
         </a>
         <h1 class="redeem-username">{{ user_profile.name }} {{ user_profile.surname }}</h1>
         <div class="redeem-points">
@@ -78,9 +77,14 @@
             {% endfor %}
             {% endif %} <hr>
         </div>
-        <div class="row" style="margin-top: 2em;justify-content: center;">
+        <style>
+            .redeemed{
+                opacity: .7;
+            }
+        </style>
+        <div class="row" style="margin-top: 2em;justify-content: center;gap: 2em;">
             {% for rc in redeemcard %}
-            <div class="coupancards col-md-3">
+            <div class="coupancards col-md-3 {% if rc.is_redeemed %}redeemed{% endif %}" style="justify-content: center;display: flex;align-items: center;">
                 <div class="card">
                     <div class="text-center">
                         <div class="d-flex text-center" style="justify-content: center;gap: 1em;">
