@@ -11,13 +11,7 @@
 
         {% for p in posts %}
         <article class="postcard light blue col-md-12" style="margin-top: 1em;min-height: 30em;">
-            <a class="postcard__img_link" href="#">
-                {% if p.blog_image.url %}
-                    <img class="mt-5 postcard__img" src="{{ p.blog_image.url }}" alt="Blog Image">
-                {% else %}
-                    <img class="mt-5 postcard__img" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
-                {% endif %}
-            </a>
+            
             <div class="postcard__text">
                 <h1 class="postcard__title blue">
                     <a href="{% url 'blog:blog-detail' p.id %}">
@@ -31,8 +25,8 @@
                     </time>
                 </div>
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt" style="max-height: 5em;">{{ p.content }}</div>
-                <hr style="box-shadow: 0 0 20px 10px white;">
+                <div class="postcard__preview-txt ck ck-content" style="max-height: 5em;">{{ p.content|safe }}</div>
+                <span style="box-shadow: 0 0 20px 10px #aeb94c;"></span>
                 <ul class="postcard__tagbox">
                     <li class="tag__item">
                         <a href="{% url 'blog:like-post' pk=p.id %}">
