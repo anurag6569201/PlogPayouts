@@ -196,6 +196,6 @@ flutter run
 
 ## Authors
 
-- [@AnuragSingh](https://www.github.com/octokatherine)
-- [@YuvrajSingh](https://github.com/anurag6569201)
+- [@AnuragSingh](https://github.com/anurag6569201)
+- [@YuvrajSingh](https://github.com/YuvrajSingh-mist)
 
