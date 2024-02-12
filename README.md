@@ -6,11 +6,19 @@
 Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
 
 Our solution integrates an every days activity which keeps one fit  jogging while contributing little bit to a healthy environement by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
+<<<<<<< HEAD
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
 
 
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
 
+=======
+
+<p align="center" width="100%">
+  <img flaot="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814" width="300" />
+  <img float="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1" width="300" /> 
+</p>
+>>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
 
 
 
@@ -58,6 +66,7 @@ Used Transfer Learning on VGG19 model alongwith a custom dataset combined with a
 -> Redeem points in the 'Store' for gift cards.
 
 -> The categorization of garbage is intended for smoothing out the process of post garbage collected by already organizing the garbage as much as possible.
+<<<<<<< HEAD
 
 
 
@@ -98,6 +107,65 @@ Flutter SDK
 ## Run Locally
 
 
+=======
+
+
+
+3. **Map Location**
+
+Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (upto 3 max).
+
+4. **Blog System**
+
+Share plogging experiences, environmental tips, and success stories through the integrated blog system, brining in the community together and breaking the social stigma how 'garbage collector' are perceived.
+
+## Requirements
+
+
+Please install the following requirements before proceeding with the next steps
+#### Server
+
+```bash
+Docker
+```
+    
+
+
+
+
+#### App
+
+
+```bash
+Android Studio
+Flutter SDK
+```
+    
+    
+1. Ensure that you are able to run Flutter apps locally by  installing the following packages
+2. Run the following command to ensure your system meets the requirements to run the app. All requirements must be met to run the app.
+
+        flutter doctor 
+
+
+3. **Map Location:**
+   - AI algorithms analyze user data to predict areas with higher litter accumulation.
+
+4. **Blog System:**
+   - Share plogging achievements, tips, and environmental insights through the integrated blog system.
+
+
+
+
+## Run Locally
+
+- HTML, CSS, JavaScript,Bootstrap for the frontend.
+- Django and Python for the backend.
+- TensorFlow and PyTorch for image recognition and classification.
+
+
+
+>>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
 ### Website
 
 Pull the server image from DockerHub
@@ -179,6 +247,11 @@ flutter run
 
 ## Authors
 
+<<<<<<< HEAD
 - [@AnuragSingh](https://www.github.com/octokatherine)
 - [@YuvrajSingh](https://github.com/anurag6569201)
+=======
+- [@AnuragSingh](https://github.com/anurag6569201)
+- [@YuvrajSingh](https://github.com/YuvrajSingh-mist)
+>>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
 

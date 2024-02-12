@@ -12,6 +12,8 @@ from django.db import IntegrityError
 from map_app.models import PredictionModel
 
 import random
+
+
 def draw_path_on_map(coordinates):
     m = folium.Map(location=coordinates[0], zoom_start=14)
     folium.Marker(location=coordinates[0], popup='Point 1', icon=folium.Icon(color='blue')).add_to(m)
@@ -78,6 +80,27 @@ def show_full(request):
     else:
         return render(request, 'map_app/show_full.html', {'error_message': 'No contributions available.'})
     
+import pyrebase
+
+config={
+    "apiKey": "",
+    "authDomain": "plogpayout-1706330970331.firebaseapp.com",
+    "databaseURL": "https://plogpayout-1706330970331-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "projectId": "plogpayout-1706330970331",
+    "storageBucket": "plogpayout-1706330970331.appspot.com",
+    "messagingSenderId": "566403681310",
+    "appId": "1:566403681310:web:67e9600e054b52b7e8f20f",
+}
+
+firebase=pyrebase.initialize_app(config)
+authe=firebase.auth()
+database=firebase.database()
+storage = firebase.storage()
+
+def upload_image_to_firebase_storage(image_file):
+    filename = image_file.name
+    storage.child(filename).put(image_file)
+
 def verify_contributions(request):
     api_call_url = None
 
@@ -85,9 +108,9 @@ def verify_contributions(request):
         form = Verify_ContributionForm(request.POST, request.FILES)
         if form.is_valid():
             contribution = form.save()
-            image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            # api_call_url = f"http://34.28.156.229:8080/garbage?query={image_url}"
-            api_call_url = f"http://34.28.156.229:8080/garbage?query=https://th.bing.com/th/id/R.e79720926ccdc5041f45ccbb94a84433?rik=Ha2x32OCDOnAsA&riu=http%3a%2f%2fwww.hat.net%2falbum%2fmiddle_east%2f004_egypt%2fday_44_bahariyya%2f033_garbage_of_plastic_bottle.jpg&ehk=QtKzcQ7K%2fi86QIZz17GZc5OUWGKWgP9%2b4j1qN0E74T4%3d&risl=&pid=ImgRaw&r=0"
+            # image_url = upload_image_to_firebase_storage(contribution.Verify_image)
+            image_url= upload_image_to_firebase_storage(contribution.Verify_image)
+            api_call_url = f"http://34.68.243.180:8080/garbage?query={image_url}"
             response = requests.get(api_call_url)
 
             if response.status_code == 200:
