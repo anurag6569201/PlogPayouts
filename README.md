@@ -1,57 +1,201 @@
-# Green Plog Platform
+# PlogPayouts  
 
-![Green Plog Logo](https://github.com/anurag6569201/PlogPayouts/blob/master/webapp/static/assets/images/logo.png)
+*GDSC Soltuion Challenge 2023*
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/GreenPlog.svg)](https://github.com/yourusername/GreenPlog/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/GreenPlog.svg)](https://github.com/yourusername/GreenPlog/issues)
 
-## Overview
+Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
 
-Green Plog is a revolutionary platform that combines fitness, environmental awareness, and technology to create a cleaner, greener world. Users can actively contribute to the environment by engaging in "plogging," an activity that involves jogging while picking up litter. The platform leverages cutting-edge technologies such as AI, ML, and NLP to enhance user experiences and make a positive impact.
+Our solution integrates an every days activity which keeps one fit  jogging while contributing little bit to a healthy environement by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
+![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
+
+
+![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
+
+
+
+
+## Demo
+
+#### Website (Preview of Features)
+
+[Website](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temps%2FDocument%20-%20Google%20Chrome%202024-02-13%2001-28-28.mp4?alt=media&token=f9f162b8-9bd9-41a1-ad81-fcfbdd687942)
+
+
+###
+#### App
+
+[App](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Fapp_gif.gif?alt=media&token=c96f7551-af08-463e-9ba3-18b27ccfb755)
+
+
+###
+
+### YouTube
+
+[Youtube Video Link](https://youtu.be/KV4nU_APFjQ)
+
+
+
+## Tech Stack
+
+**Client:** Flutter, HTML, CSS JavaScript, Bootstrap
+
+**Backend:** Flask, Python , Keras, OpenCV, YOLOv8
+
+**Storage:** Django, Firebase Firestore, Realtime Database, Storage
+
+**Other Tools:** GCP APIs, Mapbox, Render, Docker
 
 ## Features
 
-### 1. Reward System
-   - Earn points for each piece of litter collected during plogging.
-   - Redeem points for eco-friendly products, discounts, or contribute to charitable causes.
+1. **Categorization of Trash w/ Deep Learning**
 
-### 2. Map Location
-   - AI and ML dynamically highlight areas with higher concentrations of litter on the map.
-   - Users can plan their plogging routes based on real-time data and historical patterns.
+Used Transfer Learning on VGG19 model alongwith a custom dataset combined with an open-sourced and hand labelled ones.
 
-### 3. Blog System
-   - Share plogging experiences, environmental tips, and success stories through the integrated blog system.
-   - AI-driven content recommendations ensure personalized and relevant blog suggestions.
+2. **Reward System**
 
-## How It Works
+-> Earn points for each **category** and **count** (using YOLOv8) of litter collected during plogging and once the garbage collected has been verified by the Garbage Collector on-site (so the garbage collected does reach to a factory through the worker), points are sent.
 
-1. **Plogging:**
-   - Users engage in plogging activities, collecting litter during their jogging sessions.
-   - The platform uses image recognition to classify the type of trash collected, providing insights into the composition of waste.
+-> Redeem points in the 'Store' for gift cards.
 
-2. **Reward System:**
-   - Points are awarded for each item picked up.
-   - ML algorithms incentivize proper sorting and recycling, rewarding users for environmentally friendly practices.
+-> The categorization of garbage is intended for smoothing out the process of post garbage collected by already organizing the garbage as much as possible.
 
+
+
+3. **Map Location**
+
+Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (upto 3 max).
+
+4. **Blog System**
+
+Share plogging experiences, environmental tips, and success stories through the integrated blog system, brining in the community together and breaking the social stigma how 'garbage collector' are perceived.
+
+## Requirements
+
+
+Please install the following requirements before proceeding with the next steps
+#### Server
+
+```bash
+Docker
+```
+    
+=======
+
+
+
+#### App
+
+
+```bash
+Android Studio
+Flutter SDK
+```
+    
+    
+1. Ensure that you are able to run Flutter apps locally by  installing the following packages
+2. Run the following command to ensure your system meets the requirements to run the app. All requirements must be met to run the app.
+
+        flutter doctor 
+
+=======
 3. **Map Location:**
    - AI algorithms analyze user data to predict areas with higher litter accumulation.
 
 4. **Blog System:**
    - Share plogging achievements, tips, and environmental insights through the integrated blog system.
 
-## Technologies Used
 
+
+
+## Run Locally
+=======
 - HTML, CSS, JavaScript,Bootstrap for the frontend.
 - Django and Python for the backend.
 - TensorFlow and PyTorch for image recognition and classification.
 
-## Feedback and Contributions
 
-We welcome feedback and contributions to make Green Plog even more impactful. Feel free to submit issues, feature requests, or contribute to the development.
 
-Let's make our world cleaner, one plog at a time! 🌍💚
+### Website
+
+Pull the server image from DockerHub
+
+```bash
+  docker pull yuvrajsingh9886/plogging-payouts-flask-server:v1.0
+```
+
+Run the server image
+
+```bash
+  docker container run -d -p 8080:8080 yuvrajsingh9886/plogging-payouts-flask-server:v1.0
+```
+
+### Website
+
+Clone the project
+
+```bash
+  git clone https://github.com/anurag6569201/PlogPayouts.git
+```
+
+Go to the project directory
+
+```bash
+  cd webapp
+```
+
+Create a virtual environment
+
+```bash
+  virtualenv envname
+```
+
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+Activate virtualenv
+
+```bash
+  workon envname
+```
+
+Run the website Locally
+
+```bash
+  python manage.py runserver
+```
+
+
+
+
+
+
+
+### App
+
+1. Run the following commands to download all required dependancies.
+
+```bash
+flutter clean
+flutter pub get
+```
+
+2. Run the following command to run the app on emulator/real device
+
+```bash
+flutter run
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Authors
+
+- [@AnuragSingh](https://www.github.com/octokatherine)
+- [@YuvrajSingh](https://github.com/anurag6569201)
+
