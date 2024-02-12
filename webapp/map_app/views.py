@@ -86,8 +86,8 @@ def verify_contributions(request):
         if form.is_valid():
             contribution = form.save()
             image_url = request.build_absolute_uri(contribution.Verify_image.url)
-            # api_call_url = f"http://34.28.156.229:8080/garbage?query={image_url}"
-            api_call_url = f"http://34.68.243.180:8080/garbage?query=https://th.bing.com/th/id/R.e79720926ccdc5041f45ccbb94a84433?rik=Ha2x32OCDOnAsA&riu=http%3a%2f%2fwww.hat.net%2falbum%2fmiddle_east%2f004_egypt%2fday_44_bahariyya%2f033_garbage_of_plastic_bottle.jpg&ehk=QtKzcQ7K%2fi86QIZz17GZc5OUWGKWgP9%2b4j1qN0E74T4%3d&risl=&pid=ImgRaw&r=0"
+            api_call_url = f"http://34.68.243.180:8080/garbage?query={image_url}"
+            # api_call_url = f"http://34.68.243.180:8080/garbage?query=https://th.bing.com/th/id/R.e79720926ccdc5041f45ccbb94a84433?rik=Ha2x32OCDOnAsA&riu=http%3a%2f%2fwww.hat.net%2falbum%2fmiddle_east%2f004_egypt%2fday_44_bahariyya%2f033_garbage_of_plastic_bottle.jpg&ehk=QtKzcQ7K%2fi86QIZz17GZc5OUWGKWgP9%2b4j1qN0E74T4%3d&risl=&pid=ImgRaw&r=0"
             response = requests.get(api_call_url)
 
             if response.status_code == 200:
