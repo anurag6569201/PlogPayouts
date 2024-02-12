@@ -27,6 +27,33 @@ class _CollectState extends State<Collect> {
     super.initState();
 
     saved = false;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // backgroundColor: Theme.of(context).colorScheme.onBackground,
+          title: const Text("How to use!"),
+          content: const Text(
+            '''
+          1. Please click a landscape picture of the trash collected, all itmes of same category together. (For eg. coke cans + fanta cans, cardboard + paper)
+          2. Click on the 'Save' button to process it.
+          3. Click on 'Analyse' to see the results!
+          4. Place the categorized garbage in their respective bags which you have carried.
+''',
+            textAlign: TextAlign.start,
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   // bool _loading = true;
@@ -97,8 +124,7 @@ class _CollectState extends State<Collect> {
     await _storeImage.putFile(_pickedImageFile!);
     final _imageUrl = await _storeImage.getDownloadURL();
 
-    final url =
-        'http://10.0.2.2:8080/garbage?query=' + _imageUrl.toString();
+    final url = 'http://34.68.243.180:8080/garbage?query=' + _imageUrl.toString();
 
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));
