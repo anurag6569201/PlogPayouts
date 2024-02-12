@@ -6,11 +6,11 @@
 Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
 
 Our solution integrates an every days activity which keeps one fit  jogging while contributing little bit to a healthy environement by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
 
-
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
-
+<p align="center" width="100%">
+  <img flaot="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814" width="300" />
+  <img float="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1" width="300" /> 
+</p>
 
 
 
@@ -97,7 +97,7 @@ Flutter SDK
 
         flutter doctor 
 
-=======
+
 3. **Map Location:**
    - AI algorithms analyze user data to predict areas with higher litter accumulation.
 
@@ -108,7 +108,7 @@ Flutter SDK
 
 
 ## Run Locally
-=======
+
 - HTML, CSS, JavaScript,Bootstrap for the frontend.
 - Django and Python for the backend.
 - TensorFlow and PyTorch for image recognition and classification.
