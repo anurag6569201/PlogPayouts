@@ -71,6 +71,7 @@ Share plogging experiences, environmental tips, and success stories through the 
 
 ## Requirements
 
+
 Please install the following requirements before proceeding with the next steps
 #### Server
 
@@ -78,9 +79,12 @@ Please install the following requirements before proceeding with the next steps
 Docker
 ```
     
+=======
+
 
 
 #### App
+
 
 ```bash
 Android Studio
@@ -93,9 +97,22 @@ Flutter SDK
 
         flutter doctor 
 
+=======
+3. **Map Location:**
+   - AI algorithms analyze user data to predict areas with higher litter accumulation.
+
+4. **Blog System:**
+   - Share plogging achievements, tips, and environmental insights through the integrated blog system.
+
+
 
 
 ## Run Locally
+=======
+- HTML, CSS, JavaScript,Bootstrap for the frontend.
+- Django and Python for the backend.
+- TensorFlow and PyTorch for image recognition and classification.
+
 
 
 ### Website
