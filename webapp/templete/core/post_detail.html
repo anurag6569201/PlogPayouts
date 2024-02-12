@@ -4,18 +4,11 @@
 {% block content %}
 
 <section class="light">
-    <div class="container py-4">
+    <div class="container-fluid py-4">
         <div class="blogs_head" style="margin-top: 7.5em;">
             <strong>Blogs</strong>
         </div>
         <article class="postcard light blue" style="margin-top: 1em;">
-            <a class="postcard__img_link" href="#">
-                {% if post.blog_image.url is not null %}
-                    <img class="mt-5 postcard__img" src="{{ post.blog_image.url }}" alt="User Profile Image">
-                {% else %}
-                    <img class="mt-5 postcard__img" src="{% static 'assets/images/profile/avtar.jpeg' %}" alt="Default Image">
-                {% endif %}
-            </a>
             <div class="postcard__text">
                 <h1 class="postcard__title blue"><a><img src="{{ post.authorProfile.profile_image.url }}" style="width: 50px;height: 50px;border-radius: 50%;border: 1px solid #9aa62d;"> {{ post.title }}</a></h1>
                 <div class="postcard__subtitle small">
@@ -24,7 +17,7 @@
                     </time>
                 </div>
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt">{{ post.content }}</div>
+                <div class="ck ck-content">{{ post.content|safe }}</div>
                 <ul class="postcard__tagbox">
                     <li class="tag__item">
                         <a>
