@@ -24,10 +24,6 @@ Green Plog is a revolutionary platform that combines fitness, environmental awar
    - Share plogging experiences, environmental tips, and success stories through the integrated blog system.
    - AI-driven content recommendations ensure personalized and relevant blog suggestions.
 
-### 4. NLP for Reporting
-   - Report trash-related issues using natural language input.
-   - NLP algorithms analyze feedback, providing valuable insights for local authorities and organizations.
-
 ## How It Works
 
 1. **Plogging:**
@@ -40,23 +36,15 @@ Green Plog is a revolutionary platform that combines fitness, environmental awar
 
 3. **Map Location:**
    - AI algorithms analyze user data to predict areas with higher litter accumulation.
-   - Users receive route suggestions based on these predictions, optimizing their plogging experience.
 
 4. **Blog System:**
    - Share plogging achievements, tips, and environmental insights through the integrated blog system.
-   - Personalized content recommendations enhance user engagement.
-
-5. **NLP for Reporting:**
-   - Users can report issues using natural language.
-   - NLP processes feedback, helping identify common concerns and contributing to community improvement.
 
 ## Technologies Used
 
-- HTML, CSS, JavaScript for the frontend.
+- HTML, CSS, JavaScript,Bootstrap for the frontend.
 - Django and Python for the backend.
 - TensorFlow and PyTorch for image recognition and classification.
-- Natural Language Processing (NLP) for feedback analysis.
-- Machine Learning (ML) for route optimization and user engagement.
 
 ## Feedback and Contributions
 
