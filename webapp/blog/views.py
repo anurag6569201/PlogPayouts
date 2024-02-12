@@ -45,7 +45,7 @@ class PostDetailView(LoginRequiredMixin,DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'blog_image']
+    fields = ['title', 'content']
     template_name = 'core/post_form.html'
     
 
@@ -72,7 +72,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Post
-    fields = ['title', 'content', 'blog_image']
+    fields = ['title', 'content']
     template_name = 'core/post_form.html'
 
     def form_valid(self, form):
