@@ -24,6 +24,26 @@ class _locationGridViewState extends State<locationGridView> {
     // TODO: implement initState
     super.initState();
     _loadItems();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // backgroundColor: Theme.of(context).colorScheme.onBackground,
+          title: const Text("IMPORTANT!"),
+          content: const Text(
+              "In case nothing is shown, plaese go back to previous Screen and come back. "),
+          actions: [
+            ElevatedButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   // List<Category> _colectedData = [];

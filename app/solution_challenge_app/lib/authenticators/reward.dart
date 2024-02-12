@@ -95,6 +95,22 @@ void _calculate(String uuid, BuildContext context) async {
     await item.delete();
   }
 
+  //deleting all the places user visited
+
+  Reference storageReference_chosenLocations = FirebaseStorage.instance
+      .ref()
+      .child('user-images')
+      .child('garbage-images-all')
+      .child(uuid);
+
+  ListResult resultChosenLocations = await storageReference_chosenLocations.listAll();
+
+  for (Reference item in resultChosenLocations.items) {
+    await item.delete();
+  }
+
+  
+
   const snackbar = SnackBar(
     content: Text('Success'),
   );
