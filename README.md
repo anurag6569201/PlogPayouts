@@ -6,19 +6,11 @@
 Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
 
 Our solution integrates an every days activity which keeps one fit  jogging while contributing little bit to a healthy environement by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
-<<<<<<< HEAD
+
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
 
 
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
-
-=======
-
-<p align="center" width="100%">
-  <img flaot="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814" width="300" />
-  <img float="left" src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1" width="300" /> 
-</p>
->>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
 
 
 
@@ -66,7 +58,7 @@ Used Transfer Learning on VGG19 model alongwith a custom dataset combined with a
 -> Redeem points in the 'Store' for gift cards.
 
 -> The categorization of garbage is intended for smoothing out the process of post garbage collected by already organizing the garbage as much as possible.
-<<<<<<< HEAD
+
 
 
 
@@ -107,7 +99,7 @@ Flutter SDK
 ## Run Locally
 
 
-=======
+
 
 
 
@@ -165,7 +157,6 @@ Flutter SDK
 
 
 
->>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
 ### Website
 
 Pull the server image from DockerHub
@@ -247,11 +238,8 @@ flutter run
 
 ## Authors
 
-<<<<<<< HEAD
-- [@AnuragSingh](https://www.github.com/octokatherine)
-- [@YuvrajSingh](https://github.com/anurag6569201)
-=======
+
 - [@AnuragSingh](https://github.com/anurag6569201)
 - [@YuvrajSingh](https://github.com/YuvrajSingh-mist)
->>>>>>> e451a6dfbbfeb4e39b82ab3176715276ea828a34
+
 
