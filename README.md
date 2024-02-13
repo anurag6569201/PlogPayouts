@@ -70,46 +70,7 @@ Genetic Algorithm automatically finds the best route for the locations of trash 
 
 Share plogging experiences, environmental tips, and success stories through the integrated blog system, brining in the community together and breaking the social stigma how 'garbage collector' are perceived.
 
-## Requirements
 
-Please install the following requirements before proceeding with the next steps
-#### Server
-
-```bash
-Docker
-```
-    
-
-
-#### App
-
-```bash
-Android Studio
-Flutter SDK
-```
-    
-    
-1. Ensure that you are able to run Flutter apps locally by  installing the following packages
-2. Run the following command to ensure your system meets the requirements to run the app. All requirements must be met to run the app.
-
-        flutter doctor 
-
-
-
-## Run Locally
-
-
-
-
-
-
-3. **Map Location**
-
-Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (upto 3 max).
-
-4. **Blog System**
-
-Share plogging experiences, environmental tips, and success stories through the integrated blog system, brining in the community together and breaking the social stigma how 'garbage collector' are perceived.
 
 ## Requirements
 
