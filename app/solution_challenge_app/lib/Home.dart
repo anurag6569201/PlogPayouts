@@ -23,6 +23,28 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // backgroundColor: Theme.of(context).colorScheme.onBackground,
+          title: const Text("IMPORTANT!"),
+          content: const Text(
+            "Please carry atleast 3 green bags and 1 large green bag for efficient garbage collection process!",
+            textAlign: TextAlign.start,
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
+
     // temp();
 
     // fetchedUid = widget._uid;
