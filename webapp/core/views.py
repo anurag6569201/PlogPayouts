@@ -62,7 +62,8 @@ def user_redeem(request):
     user_profile = UserProfile.objects.get(user=request.user)
     redeem_card_instances = redeemCards.objects.all()
     vouchers = ScratchCard.objects.filter(user=request.user)
-    scoreee = PredictionModel.objects.filter(user=request.user)
+    tpscore = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
+    scoree = PredictionModel.objects.filter(user=request.user)
     totalpoints = PredictionModel.objects.filter(user=request.user, is_redeemed=True).aggregate(Sum('score_of_image'))['score_of_image__sum'] or 0
 
     redeem_card_pk = None
@@ -70,10 +71,10 @@ def user_redeem(request):
 
     for crci in redeem_card_instances:
         if crci.is_redeemed:
-            totalpoin-=crci.score
+            totalpoin -= crci.score
 
     if request.method == 'POST':
-        total_pts_instance, created = total_pts.objects.get_or_create()
+        total_pts_instance, created = total_pts.objects.get_or_create(user=request.user)
         redeem_card_pk = request.POST.get('redeem_card_pk')
         try:
             clicked_redeem_card_instance = redeemCards.objects.get(pk=redeem_card_pk)
@@ -82,25 +83,31 @@ def user_redeem(request):
         else:
             scr = clicked_redeem_card_instance.score
             total_pts_instance.totalpts -= scr
-            totalpoin=totalpoints
+            totalpoin = totalpoints
             totalpoin -= scr
             clicked_redeem_card_instance.is_redeemed = True
+            clicked_redeem_card_instance.user = request.user  # Assigning the current user
             total_pts_instance.save()
             clicked_redeem_card_instance.save()
 
-    total_pts_instance, created = total_pts.objects.get_or_create()
+    total_pts_instance, created = total_pts.objects.get_or_create(user=request.user)
     ttp_pts = total_pts_instance.totalpts
 
     redeemcard = redeemCards.objects.all()
+    print("Redeem Cards:", redeemcard)  # Debugging print
+
+    calculated_score=tpscore+ttp_pts
     context = {
         "user_profile": user_profile,
         "vouchers": vouchers,
         "ttp_pts": ttp_pts,
-        "score": scoreee,
+        "tpscore": calculated_score,
+        "score": scoree,
         "totalpoints": totalpoin,
         "redeemcard": redeemcard,
     }
-    print(ttp_pts)
+
+    print(ttp_pts)  # Debugging print
     if not request.user.verified:
         return render(request, 'core/redeem.html', context)
     else:

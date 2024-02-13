@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from userauths.models import User
 import uuid
+from django.conf import settings
 
 class ScratchCard(models.Model):
     cid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)   
@@ -29,13 +30,13 @@ class ScratchCard(models.Model):
 
 class redeemCards(models.Model):
     rcid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    money=models.IntegerField()
-    score=models.IntegerField()
-    image=models.ImageField(upload_to='blog_images/', null=True, blank=True)
-    code = models.CharField(unique=True,max_length=100)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Reference to the user who purchased the coupon
+    money = models.IntegerField()
+    score = models.IntegerField()
+    image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
+    code = models.CharField(unique=True, max_length=100)
     is_redeemed = models.BooleanField(default=False)
-    desc=models.CharField(max_length=100)
+    desc = models.CharField(max_length=100)
 
 class total_pts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
