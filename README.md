@@ -1,6 +1,6 @@
 # PlogPayouts  
 
-*GDSC Soltuion Challenge 2023*
+*GDSC Soltuion Challenge 2024*
 
 
 Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
@@ -123,13 +123,13 @@ Flutter SDK
 Pull the server image from DockerHub
 
 ```bash
-  docker pull yuvrajsingh9886/plogging-payouts-flask-server:v1.0
+  docker pull yuvrajsingh9886/plogpayouts-flask-gunicorn-server:v1.0
 ```
 
 Run the server image
 
 ```bash
-  docker container run -d -p 8080:8080 yuvrajsingh9886/plogging-payouts-flask-server:v1.0
+  docker container run -d -p 8080:8080 yuvrajsingh9886/plogpayouts-flask-gunicorn-server
 ```
 
 ### Website
