@@ -1,6 +1,6 @@
 # PlogPayouts  
 
-*GDSC Soltuion Challenge 2023*
+*GDSC Soltuion Challenge 2024*
 
 
 Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
