@@ -55,7 +55,7 @@ def index(request):
     if not request.user.verified:
         return render(request, 'core/index.html', context)
     else:
-        raise Http404("Page not found")
+        return redirect("core:verifier")
 
 @login_required
 def user_redeem(request):
