@@ -100,6 +100,8 @@ storage = firebase.storage()
 def upload_image_to_firebase_storage(image_file):
     filename = image_file.name
     storage.child(filename).put(image_file)
+    image_url = storage.child(filename).get_url(None)
+    return image_url
 
 def verify_contributions(request):
     api_call_url = None
@@ -108,7 +110,6 @@ def verify_contributions(request):
         form = Verify_ContributionForm(request.POST, request.FILES)
         if form.is_valid():
             contribution = form.save()
-            # image_url = upload_image_to_firebase_storage(contribution.Verify_image)
             image_url= upload_image_to_firebase_storage(contribution.Verify_image)
             api_call_url = f"http://34.68.243.180:8080/garbage?query={image_url}"
             response = requests.get(api_call_url)
