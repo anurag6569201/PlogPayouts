@@ -31,7 +31,7 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 
 ### YouTube
 
-[Youtube Video Link](https://youtu.be/KV4nU_APFjQ)
+[Youtube Video Link](https://youtu.be/fU7S5YPEcQk)
 
 
 
