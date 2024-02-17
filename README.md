@@ -39,9 +39,9 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 
 **Client:** Flutter, HTML, CSS JavaScript, Bootstrap
 
-**Backend:** Flask, Python , Keras, OpenCV, YOLOv8
+**Backend:** Flask, Python ,Django , eras, OpenCV, YOLOv8
 
-**Storage:** Django, Firebase Firestore, Realtime Database, Storage
+**Storage:** Firebase Firestore, Realtime Database, Storage
 
 **Other Tools:** GCP APIs, Mapbox, Render, Docker
 
@@ -149,20 +149,19 @@ Go to the project directory
 Create a virtual environment
 
 ```bash
-  virtualenv envname
-```
-
-
-Install dependencies
-
-```bash
-  pip install -r requirements.txt
+  mkvirtualenv envname
 ```
 
 Activate virtualenv
 
 ```bash
   workon envname
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
 ```
 
 Run the website Locally
