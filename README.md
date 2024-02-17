@@ -24,7 +24,7 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 ###
 #### App
 
-[App](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Fapp_gif.gif?alt=media&token=c96f7551-af08-463e-9ba3-18b27ccfb755)
+[App](https://www.youtube.com/watch?v=Dn2QWmRpGrs)
 
 
 ###
