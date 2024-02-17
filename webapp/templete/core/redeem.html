@@ -45,7 +45,7 @@
         </a>
         <h1 class="redeem-username">{{ user_profile.name }} {{ user_profile.surname }}</h1>
         <div class="redeem-points">
-            <a href=""><span class="material-symbols-outlined" style="font-size: 1.8em;">redeem</span><span class="redeem-score">{{ totalpoints }}</span></a>
+            <a href=""><span class="material-symbols-outlined" style="font-size: 1.8em;">redeem</span><span class="redeem-score">{{ tpscore }}</span></a>
         </div>
     </div>
     <br>
@@ -79,7 +79,7 @@
         </style>
         <div class="row" style="margin-top: 2em;justify-content: center;gap: 2em;">
             {% for rc in redeemcard %}
-            <div class="coupancards col-md-3 {% if rc.is_redeemed %}redeemed{% endif %}" style="justify-content: center;display: flex;align-items: center;">
+            <div class="coupancards container col-md-2 {% if rc.is_redeemed %}redeemed{% endif %}" style="justify-content: center;display: flex;align-items: center;">
                 <div class="card">
                     <div class="text-center">
                         <div class="d-flex text-center" style="justify-content: center;gap: 1em;">
@@ -95,16 +95,23 @@
                     <span class="discount">Score : {{ rc.score }}</span>
                     <span style="font-size: 1.4em;color: #99a33e;">{{ rc.desc }}</span>
                     {% if rc.is_redeemed %}
-                    <span style="font-size: 1.4em;color: #99a33e;">code : {{ rc.code }}</span>
+                        {% if rc.user == request.user %}
+                        <span style="font-size: 1.4em;color: #99a33e;">code : {{ rc.code }}</span>
+                        {% else %}
+                        <span style="font-size: 1.4em;color: #e73333;font-weight: 600;">Sold-Out</span>
+                        {% endif %}
                     {% endif %}
                     <input type="hidden" value="{{ rc.rcid }}" style="font-size: 1.4em;color: #99a33e;">
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         {% if rc.is_redeemed %}
+                        {% if rc.user == request.user %}
                         <button type="button" class="btn btn-primary tempbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Purchased
                         </button>
+                        {% endif %}
                         {% else %}
-                            {% if totalpoints >= rc.score %}
+                        
+                            {% if tpscore >= rc.score %}
                             <button type="button" class="btn btn-primary buy-now-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-redeem-card-pk="{{ rc.pk }}">
                                 Buy Now
                             </button>
