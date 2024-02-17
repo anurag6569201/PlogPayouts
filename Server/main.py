@@ -228,7 +228,7 @@ def time_and_distance() :
     ref_current_location = db.reference(f'solution-challenge/{query_parameter}/current_location/')
     data_curr_location = ref_current_location.get()
     print("location is", data_curr_location)
-    ref = db.reference(f'solution-challenge/{query_parameter}')
+    ref = db.reference(f'solution-challenge/tRx3M26AsIasYWVQl7tqxpvdVqz1/central-database/')
     data = ref.get()
     
     decoded_curr_location = data_curr_location.values()
