@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/authenticators/status_screen.dart';
+import 'package:http/http.dart' as http;
 
 class Status extends StatefulWidget {
   const Status({super.key});
@@ -31,6 +34,15 @@ void checkStatus(BuildContext context) async {
     // Find the nearest Scaffold and show the SnackBar
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   } else {
+    final userUid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+    final url_db = Uri.https(
+        'solution-challenge-app-409f6-default-rtdb.firebaseio.com',
+        'solution-challenge/${userUid}/collected-garbage.json');
+
+    final response = await http.delete(url_db);
+    // print(response.body);
+
     final results = Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => statusScreen(fetchedData!['points']),
@@ -70,7 +82,7 @@ class _StatusState extends State<Status> {
               // padding: EdgeInsets.all(20),
               // margin: EdgeInsets.all(10),
               width: double.infinity,
-              height: 400,
+              height: 300,
               // foregroundDecoration: BoxDecoration(
               //     border: Border.all(color: Colors.greenAccent)),
               child:

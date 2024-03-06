@@ -21,11 +21,14 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
     userName = 'Welcome';
 
     profileImageUrl = '';
+    resultMakandGloves();
+    ok = false;
   }
 
   var userName;
 
   var profileImageUrl;
+  var ok;
 
   Future<String> _getUserName(String uid) async {
     var _userData = await FirebaseFirestore.instance
@@ -48,6 +51,36 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
     // gloves_ok = _userData.data()!['gloves_ok'];
     return profileImageUrl;
     // print(userName);
+  }
+
+  void resultMakandGloves() async {
+    var isOk = false;
+    var maskresult;
+    var glovesresult;
+    var uuid = FirebaseAuth.instance.currentUser!.uid;
+
+    var _userData = await FirebaseFirestore.instance
+        .collection('authenticators')
+        .doc(uuid)
+        .get();
+
+    maskresult = _userData.data()!['mask_ok'];
+    glovesresult = _userData.data()!['gloves_ok'];
+    if (maskresult == true && glovesresult == true) {
+      isOk = true;
+    }
+    setState(() {
+      ok = isOk;
+    });
+  }
+
+  void showPopUp(BuildContext context, message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2), // Optional duration
+      ),
+    );
   }
 
   @override
@@ -134,7 +167,10 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
             onTap: () {
               //function here
 
-              widget.selectedScreen('Scan QR Code');
+              (ok == true)
+                  ? widget.selectedScreen('Scan QR Code')
+                  : showPopUp(
+                      context, "Please go through Health Check-Up first!");
             },
           ),
           ListTile(
@@ -153,7 +189,30 @@ class _MainDrawerAuthenticatorState extends State<MainDrawerAuthneticator> {
             onTap: () {
               //function here
 
-              widget.selectedScreen('Rewards Calculation');
+              (ok == true)
+                  ? widget.selectedScreen('Rewards Calculation')
+                  : showPopUp(
+                      context, "Please go through Health Check-Up first!");
+            },
+          ),
+
+          ListTile(
+            leading: Icon(
+              Icons.location_city,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Demostration Videos',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {
+              //function here
+
+              widget.selectedScreen('Videos');
             },
           ),
         ],

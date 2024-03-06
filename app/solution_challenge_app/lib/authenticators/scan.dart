@@ -19,6 +19,35 @@ class _QRScreenState extends State<QRScreen> {
   String? _scanCode;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // backgroundColor: Theme.of(context).colorScheme.onBackground,
+          title: const Text("Help"),
+          content: const Text(
+            '''
+          Use the "Scan" button to scan the QR Code present on the particpant's App under "QR Code" tab.
+          ''',
+            textAlign: TextAlign.start,
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

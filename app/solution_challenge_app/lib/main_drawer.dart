@@ -135,7 +135,7 @@ class _MainDrawerState extends State<MainDrawer> {
               color: Theme.of(context).colorScheme.onBackground,
             ),
             title: Text(
-              'Instructions',
+              'Demonstrations',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 24,

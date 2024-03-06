@@ -123,13 +123,13 @@ Flutter SDK
 Pull the server image from DockerHub
 
 ```bash
-  docker pull yuvrajsingh9886/plogpayouts-server-gunicorn-flask:v1.0
+  docker pull yuvrajsingh9886/plogpayouts-server:v1.0
 ```
 
 Run the server image
 
 ```bash
-  docker container run -d -p 8080:8080 yuvrajsingh9886/plogpayouts-server-gunicorn-flask:v1.0
+  docker container run -d -p 8080:8080 yuvrajsingh9886/plogpayouts-server:v1.0
 ```
 
 ### Website

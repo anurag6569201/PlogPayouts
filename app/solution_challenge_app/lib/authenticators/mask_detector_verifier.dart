@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
-class maskDetector extends StatefulWidget {
-  maskDetector(this._uid, {super.key});
+class maskDetectorVerifier extends StatefulWidget {
+  maskDetectorVerifier(this._uid, {super.key});
   String _uid;
   @override
-  State<maskDetector> createState() => _maskDetectorState();
+  State<maskDetectorVerifier> createState() => _maskDetectorVerifierState();
 }
 
-class _maskDetectorState extends State<maskDetector> {
+class _maskDetectorVerifierState extends State<maskDetectorVerifier> {
   var fetchedUid;
   var prediciton_mask;
   var finalPredMask;
@@ -81,14 +81,17 @@ class _maskDetectorState extends State<maskDetector> {
     });
     final _storeImage = FirebaseStorage.instance
         .ref()
-        .child('user-images')
+        .child('authenticator-images')
         .child('masks')
         .child('${fetchedUid}.jpg');
 
     await _storeImage.putFile(_pickedImageFile!);
     final _imageUrl = await _storeImage.getDownloadURL();
 
-    FirebaseFirestore.instance.collection('users').doc(fetchedUid).update({
+    FirebaseFirestore.instance
+        .collection('authenticators')
+        .doc(fetchedUid)
+        .update({
       // 'username': _enteredUserName,
       // 'email': _enteredEmail,
       'image_url_mask': _imageUrl
@@ -103,26 +106,13 @@ class _maskDetectorState extends State<maskDetector> {
     print(temp);
     if (temp == 1) prediciton_mask = true;
 
-    FirebaseFirestore.instance.collection('users').doc(fetchedUid).update({
+    FirebaseFirestore.instance
+        .collection('authenticators')
+        .doc(fetchedUid)
+        .update({
       // 'username': _enteredUserName,
       // 'email': _enteredEmail,
       'mask_ok': prediciton_mask,
-      'points': 0,
-      'taps_remaining': 0
-    });
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(fetchedUid)
-        .collection('redeemed_codes')
-        .doc('List')
-        .set({
-      'codes': [
-        "Welcome Gift Card",
-        10,
-        10,
-        "https://ci3.googleusercontent.com/meips/ADKq_NZwgOwFTkB0kNGuIYR60_wFbJmuBx43tdyr-MPFeBkeP4_TsyvBiBQVcTN6U0BJNkRSDLeI6RIRdbZx67CD_--8rVHKz5SKaOwaJJpp4UQ8s4huhHhb8Q8ibtkDf-UERm-fXRPdUOSssAJqYgRWkCpzVlj9-VwoyhMZ=s0-d-e1-ft#https://m.media-amazon.com/images/G/31/gc/designs/livepreview/a_generic_orange_in_noto_email_in-main",
-        "Already Added",
-      ],
     });
 
     setState(() {

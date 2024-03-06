@@ -95,7 +95,7 @@ class glovesDetectorState extends State<glovesDetector> {
       'image_url_gloves': _imageUrl
     });
     final url =
-        'http://34.68.243.180:8080/gloves?query=' + _imageUrl.toString();
+        'http://10.0.2.2:8080/gloves?query=' + _imageUrl.toString();
     // final url = Uri.https('127.0.0.1:5000', '/mask', {'query': _imageUrl});
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));

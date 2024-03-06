@@ -56,7 +56,7 @@ void _calculate(String uuid, BuildContext context) async {
     var category = data.value['name'];
     int count = data.value['count'];
 
-    if (category == 'glass') {
+    if (category == 'white-glass') {
       var price = 50 * count;
       res.add(price);
     } else if (category == 'plastic') {
@@ -68,7 +68,28 @@ void _calculate(String uuid, BuildContext context) async {
     } else if (category == 'paper') {
       var price = 30 * count;
       res.add(price);
-    } else if (category == 'glass') {
+    } else if (category == 'green-glass') {
+      var price = 50 * count;
+      res.add(price);
+    } else if (category == 'brown-glass') {
+      var price = 50 * count;
+      res.add(price);
+    } else if (category == 'battery') {
+      var price = 80 * count;
+      res.add(price);
+    } else if (category == 'biological') {
+      var price = 60 * count;
+      res.add(price);
+    } else if (category == 'cardboard') {
+      var price = 20 * count;
+      res.add(price);
+    } else if (category == 'clothes') {
+      var price = 50 * count;
+      res.add(price);
+    } else if (category == 'shoes') {
+      var price = 80 * count;
+      res.add(price);
+    } else if (category == 'trash') {
       var price = (Random().nextInt(30) + 20) * count;
       res.add(price);
     }
@@ -103,13 +124,12 @@ void _calculate(String uuid, BuildContext context) async {
       .child('garbage-images-all')
       .child(uuid);
 
-  ListResult resultChosenLocations = await storageReference_chosenLocations.listAll();
+  ListResult resultChosenLocations =
+      await storageReference_chosenLocations.listAll();
 
   for (Reference item in resultChosenLocations.items) {
     await item.delete();
   }
-
-  
 
   const snackbar = SnackBar(
     content: Text('Success'),
@@ -121,13 +141,44 @@ void _calculate(String uuid, BuildContext context) async {
 
 class _rewardState extends State<reward> {
   var text = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // backgroundColor: Theme.of(context).colorScheme.onBackground,
+          title: const Text("How to use: "),
+          content: const Text(
+            '''
+          1. Please click on the "All Good" button if the items fetched by the participant is ALL CORRECT"
+          2. If not please use the "Delete" icon if there are duplicate items / worongly categorized items and fill the form that comes up.
+          3.Use the "Show Data' button to see all the trash data collected so far by the participant on that day.
+          
+''',
+            textAlign: TextAlign.start,
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Welcome to the Rewards System!',
+          'Rewards Confirmation Page',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,

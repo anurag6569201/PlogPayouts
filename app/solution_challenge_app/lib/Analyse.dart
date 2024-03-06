@@ -46,8 +46,10 @@ class _AnalyseState extends State<Analyse> {
       var cnt = data.value['count'];
       var category = data.value['name'];
       var imgUrl = data.value['image_url'];
+      var uuid = data.key;
+      print("Key is : ${data.key}");
       collectedData.add(
-        garbageData(name: category, count: cnt, image_url: imgUrl),
+        garbageData(name: category, count: cnt, image_url: imgUrl, uuid: uuid),
       );
       // print(data.value);
     }
