@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_challenge_app/authenticators/authenticator_drawer.dart';
+import 'package:solution_challenge_app/authenticators/gloves_detector_verifier.dart';
+import 'package:solution_challenge_app/authenticators/mask_detector_verifier.dart';
 import 'package:solution_challenge_app/authenticators/reward.dart';
 import 'package:solution_challenge_app/authenticators/scan.dart';
+import 'package:solution_challenge_app/authenticators/videos.dart';
 
 import 'package:solution_challenge_app/data/display_location_cards_data.dart';
 import 'package:solution_challenge_app/gloves_detector.dart';
@@ -54,9 +57,34 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
         ),
       );
     }
+
+    if (identifier == 'Videos') {
+      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => videosScreen(),
+        ),
+      );
+    }
   }
 
   final fetchedUid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  void _MaskandGloveScreen() async {
+    // if (identifier == 'filters') {
+    // Navigator.of(context).pop();
+    final mask_result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => maskDetectorVerifier(fetchedUid),
+      ),
+    );
+
+    final gloves_result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => glovesDetectorVerifier(fetchedUid),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +127,22 @@ class _homeAuthenticatorState extends State<homeAuthenticator> {
               //       backgroundColor:
               //           Theme.of(context).colorScheme.primaryContainer),
               // ),
+
               const SizedBox(
                 height: 20,
               ),
+              ElevatedButton.icon(
+                onPressed: _MaskandGloveScreen,
+                icon: const Icon(Icons.add_to_photos),
+                label: const Text('Health Check First!'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+
               Image.asset('assets/images/logo_2.jpg'),
               const SizedBox(
                 height: 20,

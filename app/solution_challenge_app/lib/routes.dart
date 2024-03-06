@@ -27,7 +27,15 @@ class _routesScreenState extends State<routesScreen> {
       // _isLoading = false;
       _isLoading = true;
     });
-    final url = 'http://34.68.243.180:8080/locations?query=${userUid}';
+    final url = 'http://10.0.2.2:8080/locations?query=${userUid}';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+            'Please wait for about 30 seconds. Don not leave the screen! Warm yourself up!'),
+        duration: Duration(
+            seconds: 30), // Optional, how long SnackBar will be displayed
+      ),
+    );
 
     final response = await http.get(Uri.parse(url));
     print(response.body);

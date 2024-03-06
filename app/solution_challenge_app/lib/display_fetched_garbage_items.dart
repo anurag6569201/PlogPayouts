@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:solution_challenge_app/garbage_class.dart';
 import 'package:solution_challenge_app/garbage_items_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:http/http.dart' as http;
 
 class garbageItems extends StatelessWidget {
   garbageItems(this.fetchedGarbageData, {super.key});
@@ -20,6 +23,26 @@ class garbageItems extends StatelessWidget {
   // }
 
   // void Function(BuildContext context, Meal meal) _onSelectMeal;
+  void deleteItems(BuildContext context, fetchedGarbageData) {
+    // print(fetchedGarbageData.uuid);
+    Navigator.of(context).pop();
+    var useruid = FirebaseAuth.instance.currentUser!.uid;
+    var uuid = fetchedGarbageData.uuid;
+    var url =
+        'https://solution-challenge-app-409f6-default-rtdb.firebaseio.com/solution-challenge/${useruid}/collected-garbage/${uuid}.json';
+    print(Uri.parse(url));
+    http.delete(Uri.parse(url));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        "Deleted!",
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,21 +84,66 @@ class garbageItems extends StatelessWidget {
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 2,
                     ),
                     Row(
                       children: [
                         garbageItemTrait(
                             Icons.countertops, '${fetchedGarbageData.count}'),
-                        const SizedBox(
-                          width: 17,
-                        ),
+                        // const SizedBox(
+                        //   width: 17,
+                        // ),
+                        const Spacer(),
+                        TextButton.icon(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      child: AlertDialog(
+                                        title: Text(
+                                          "Delete item?",
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              deleteItems(
+                                                  context, fetchedGarbageData);
+                                            },
+                                            child: Text(
+                                              "Confirm",
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            icon: Icon(Icons.edit),
+                            label: Text(
+                              "Edit",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ))
                         // mealItemTrait(Icons.work, complexityText),
                         // const SizedBox(
                         //   width: 17,

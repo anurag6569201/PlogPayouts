@@ -124,7 +124,8 @@ class _CollectState extends State<Collect> {
     await _storeImage.putFile(_pickedImageFile!);
     final _imageUrl = await _storeImage.getDownloadURL();
 
-    final url = 'http://34.68.243.180:8080/garbage?query=' + _imageUrl.toString();
+    final url =
+        'http://10.0.2.2:8080/garbage?query=' + _imageUrl.toString();
 
     print("url is: ${Uri.parse(url)}");
     http.Response response = await http.get(Uri.parse(url));
@@ -224,9 +225,9 @@ class _CollectState extends State<Collect> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
-                  onPressed: _pickImageGallery,
+                  onPressed: _pickImageCamera,
                   icon: const Icon(Icons.add_to_photos),
-                  label: const Text('Gallery'),
+                  label: const Text('Camera'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.primaryContainer),
