@@ -111,7 +111,7 @@ def verify_contributions(request):
         if form.is_valid():
             contribution = form.save()
             image_url= upload_image_to_firebase_storage(contribution.Verify_image)
-            api_call_url = f"http://34.68.243.180:8080/garbage?query={image_url}"
+            api_call_url = f"http://34.30.5.160:8080/garbage?query={image_url}"
             response = requests.get(api_call_url)
 
             if response.status_code == 200:
