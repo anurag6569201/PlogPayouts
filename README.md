@@ -60,8 +60,6 @@ Used Transfer Learning on VGG19 model alongwith a custom dataset combined with a
 -> The categorization of garbage is intended for smoothing out the process of post garbage collected by already organizing the garbage as much as possible.
 
 
-
-
 3. **Map Location**
 
 Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (upto 3 max).
@@ -99,13 +97,6 @@ Flutter SDK
 2. Run the following command to ensure your system meets the requirements to run the app. All requirements must be met to run the app.
 
         flutter doctor 
-
-
-3. **Map Location:**
-   - AI algorithms analyze user data to predict areas with higher litter accumulation.
-
-4. **Blog System:**
-   - Share plogging achievements, tips, and environmental insights through the integrated blog system.
 
 
 
