@@ -103,12 +103,6 @@ Flutter SDK
 
 ## Run Locally
 
-- HTML, CSS, JavaScript,Bootstrap for the frontend.
-- Django and Python for the backend.
-- TensorFlow and PyTorch for image recognition and classification.
-
-
-
 ### Website
 
 Pull the server image from DockerHub
