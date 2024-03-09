@@ -103,7 +103,7 @@ Flutter SDK
 
 ## Run Locally
 
-### Website
+### Server
 
 Pull the server image from DockerHub
 
