@@ -39,7 +39,7 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 
 **Client:** Flutter, HTML, CSS JavaScript, Bootstrap
 
-**Backend:** Flask, Python ,Django , eras, OpenCV, YOLOv8
+**Backend:** Flask, Python ,Django , Keras, OpenCV, YOLOv8
 
 **Storage:** Firebase Firestore, Realtime Database, Storage
 
