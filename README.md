@@ -2,10 +2,7 @@
 
 *GDSC Soltuion Challenge 2024*
 
-
-Our product (**website** + **app**) provides a solution to ever-growing concerns about a **healthy environment** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
-
-Our solution integrates an every days activity that keeps one fit  jogging while contributing a little bit to a healthy environment by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
+To bring about an effective change in the garbage collection process and also tackle the social stigma regarding the position and work of garbage collectors to harbour a cleaner and greener environment, working together without any social differences.
 
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
 
