@@ -6,9 +6,10 @@ To bring about an effective change in the garbage collection process and also ta
 
 
 
-<img src="[https://your-image-url.type](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)" width="300" height="200">
+<img src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814" width="400" height="300">  <img src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1" width="270" height="270">
 
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
+
+
 
 
 
@@ -19,15 +20,12 @@ To bring about an effective change in the garbage collection process and also ta
 [Website](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temps%2FDocument%20-%20Google%20Chrome%202024-02-13%2001-28-28.mp4?alt=media&token=f9f162b8-9bd9-41a1-ad81-fcfbdd687942)
 
 
-###
-#### App
+#### App (Preview of Features)
 
 [App](https://www.youtube.com/watch?v=Dn2QWmRpGrs)
 
 
-###
-
-### YouTube
+#### YouTube (Project Demo)
 
 [Youtube Video Link](https://youtu.be/fU7S5YPEcQk)
 
@@ -39,9 +37,9 @@ To bring about an effective change in the garbage collection process and also ta
 
 **Backend:** Flask, Python, Django, Keras, OpenCV, YOLOv8
 
-**Storage:** Firebase Firestore, Realtime Database, Storage
+**Storage:** Firebase Firestore, Realtime Database, SQLite
 
-**Other Tools:** GCP APIs, Mapbox, Render, Docker
+**Other Tools:** GCP VM Instances, Mapbox, Render, Docker
 
 ## Features
 
