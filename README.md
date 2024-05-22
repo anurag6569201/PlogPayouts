@@ -4,8 +4,9 @@
 
 To bring about an effective change in the garbage collection process and also tackle the social stigma regarding the position and work of garbage collectors to harbour a cleaner and greener environment, working together without any social differences.
 
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
 
+
+<img src="[https://your-image-url.type](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)" width="300" height="200">
 
 ![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
 
