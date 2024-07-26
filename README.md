@@ -2,15 +2,14 @@
 
 *GDSC Soltuion Challenge 2024*
 
-
-Our product (**website** + **app**) provides a solution to ever-growing concern about a **healthy environement** and **cleanliness** altogether, especially in places where there is **scarcity** of any **garbage collectors**.
-
-Our solution integrates an every days activity which keeps one fit  jogging while contributing little bit to a healthy environement by **collecting litter** from manageable **trash sites**, leading to our solution - *PlogPayouts*.
-
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814)
+To bring about an effective change in the garbage collection process and also tackle the social stigma regarding the position and work of garbage collectors to harbour a cleaner and greener environment, working together without any social differences.
 
 
-![Logo](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1)
+
+<img src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_1.png?alt=media&token=13098b57-3f6a-4dc3-9d1e-2bd35613b814" width="400" height="300">  <img src="https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temp%2Flogo_2.png?alt=media&token=a45c4618-9b64-45e3-8491-896d06329af1" width="270" height="270">
+
+
+
 
 
 
@@ -21,15 +20,12 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 [Website](https://firebasestorage.googleapis.com/v0/b/fashionx-ebe6c.appspot.com/o/temps%2FDocument%20-%20Google%20Chrome%202024-02-13%2001-28-28.mp4?alt=media&token=f9f162b8-9bd9-41a1-ad81-fcfbdd687942)
 
 
-###
-#### App
+#### App (Preview of Features)
 
 [App](https://www.youtube.com/watch?v=Dn2QWmRpGrs)
 
 
-###
-
-### YouTube
+#### YouTube (Project Demo)
 
 [Youtube Video Link](https://youtu.be/fU7S5YPEcQk)
 
@@ -39,17 +35,17 @@ Our solution integrates an every days activity which keeps one fit  jogging whil
 
 **Client:** Flutter, HTML, CSS JavaScript, Bootstrap
 
-**Backend:** Flask, Python ,Django , Keras, OpenCV, YOLOv8
+**Backend:** Flask, Python, Django, Keras, OpenCV, YOLOv8
 
-**Storage:** Firebase Firestore, Realtime Database, Storage
+**Storage:** Firebase Firestore, Realtime Database, SQLite
 
-**Other Tools:** GCP APIs, Mapbox, Render, Docker
+**Other Tools:** GCP VM Instances, Mapbox, Render, Docker
 
 ## Features
 
 1. **Categorization of Trash w/ Deep Learning**
 
-Used Transfer Learning on VGG19 model alongwith a custom dataset combined with an open-sourced and hand labelled ones.
+Used Transfer Learning on the VGG19 model along with a custom dataset combined with open-sourced and hand-labelled ones.
 
 2. **Reward System**
 
@@ -57,16 +53,16 @@ Used Transfer Learning on VGG19 model alongwith a custom dataset combined with a
 
 -> Redeem points in the 'Store' for gift cards.
 
--> The categorization of garbage is intended for smoothing out the process of post garbage collected by already organizing the garbage as much as possible.
+-> The categorization of garbage is intended for smoothing out the process of post-garbage collected by already organizing the garbage as much as possible.
 
 
 3. **Map Location**
 
-Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (upto 3 max).
+Genetic Algorithm automatically finds the best route for the locations of trash sites marked as 'Favourite' so as to cater to their jogging times (up to 3 max).
 
 4. **Blog System**
 
-Share plogging experiences, environmental tips, and success stories through the integrated blog system, brining in the community together and breaking the social stigma how 'garbage collector' are perceived.
+Share plogging experiences, environmental tips, and success stories through the integrated blog system, bringing the community together and breaking the social stigma of how 'garbage collectors' are perceived.
 
 
 
@@ -170,7 +166,7 @@ flutter clean
 flutter pub get
 ```
 
-2. Run the following command to run the app on emulator/real device
+2. Run the following command to run the app on an emulator/real device
 
 ```bash
 flutter run
